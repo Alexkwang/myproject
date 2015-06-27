@@ -1,4 +1,4 @@
-
+(function () {
      var zoom_flag = 1;
     function zoomout() {
    
@@ -173,4 +173,7 @@ $('.main_body_right_part_right_line1_right').on('mouseover','img',function(){
 
 
  });
+
+
+}).call(this);
 
