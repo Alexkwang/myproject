@@ -26,5 +26,13 @@
     "gulp-notify":"^2.1.0",
     "gulp-autoprefixer": "^2.0.0",
     "gulp-rev": "^1.1.0" 
+  },
+  "devDependencies":{
+    "mongoose": "latest",
+    "colors": "latest",
+    "mongodb": "latest",
+    "connect-mongo": "latest",
+    "connect-flash": "latest",
+    "requirejs": "latest"
   }
 }

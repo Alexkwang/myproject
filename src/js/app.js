@@ -2,6 +2,7 @@
 'use strict';
  angular.module('scotchApp', ['ngRoute'])
 .config(["$routeProvider",function($routeProvider) {
+  
     $routeProvider
         .when('/', {
             templateUrl : 'pages/homes/home.html',
