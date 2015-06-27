@@ -1,0 +1,27 @@
+{
+  "name": "nine-urban",
+  "version": "0.1.0",
+  "authors": [
+    "Alex.K.Wang <wind.kaiable@gmail.com>"
+  ],
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node",
+    "yui"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.1",
+    "bootstrap":"~3.3.5"
+  }
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html ng-app="scotchApp">
+  <head>
+    <title><%= title %></title>
+     <base href="/">
+      <meta charset="utf-8">
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title ng-bind="pageTitle"></title>
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width">
+      <meta name="keywords" content="">
+      <meta name="description" content="九创联合 建筑设计 景观设计 城市规划 商业综合体 高级住宅 公园 建筑设计公司 ">
+      <meta id="description" name="description" content="九创联合">
+
+<!--
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/stylesheets/bootstrap-theme.min.css" rel="stylesheet"/>  
+    <link href="/stylesheets/themes/theme-1.css" rel="stylesheet"  id="skin_color">
+    <link href="/stylesheets/styles.css" rel="stylesheet"/>
+    <link href="/stylesheets/plugins.css" rel="stylesheet"/>
+    <link href="/stylesheets/main.css" rel="stylesheet"/>
+  -->
+
+  @@gulp.css
+
+  </head>
+  <body ng-controller="mainController">
+
+    <div class="app-content">
+      <!--begin logo-->
+       <div class="row">
+         <div class="col-md-12">
+              
+               <div class="col-md-8"> 
+                    <span>
+                      <a href="#/">
+                        <img style="width:200px; hight:40px; margin-top:10px; margin-left:135px;"  src="./images/system/logo.png">
+                      </a>
+                    </span> 
+                </div>
+          </div>
+        </div>
+      <!--end logo-->
+      
+      <!--begin Menu-->
+       <div class="row">
+         <div class="col-md-10">
+            <nav id="cl-effect-3" class="links cl-effect-3">
+                <a href="#/">首页</a>
+                <a href="#/company">公司理念</a>
+                <a href="#/news">新闻资讯</a>
+                <a href="#/plan">规划项目</a>
+                <a href="#/build">建筑项目</a>
+                <a href="#/team">团队信息</a>
+                <a href="#/about">关于我们</a>
+            </nav>
+          </div>
+       </div>
+      <!--end Menu-->
+
+      <!--begin content-->
+      <div class="wrap-content container" id="container">
+         <div ng-view></div>
+      </div>
+      <!--end content-->
+      <!-- start: FOOTER -->
+      <div class="col-md-12 margin-bottom-10 margin-top-30">
+      <div class="col-md-2"></div>
+          <div class="col-md-5">
+            &copy; <span class="current-year"></span><span class="text-bold text-uppercase">nine-urbanplanning and design co.ltd</span>. <span>All rights reserved</span>
+          </div>
+      </div>
+      <!-- end: FOOTER -->
+    </div>
+
+    <script src="/js/systems/jquery.min.js"></script>
+    <script src="/js/systems/bootstrap.min.js"></script>
+      
+     <script src="/js/systems/angular.js"></script>
+     <script src="/js/systems/angular-route.js"></script>
+
+      <script src="/js/app.js"></script>
+
+
+  </body>
+</html>
