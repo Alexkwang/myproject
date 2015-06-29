@@ -1,5 +1,13 @@
 (function () {
 'use strict';
+
+//var mongoose = require("mongoose");
+//var global;
+//global.dbHelper = require( './common/dbHelper' );
+
+//global.db = mongoose.connect("mongodb://127.0.0.1:27017/test1");
+
+
  angular.module('scotchApp', ['ngRoute'])
 .config(["$routeProvider",function($routeProvider) {
   

@@ -44,6 +44,7 @@ gulp.task('copy_system_js', function() {
   "./src/js/systems/angular-route.js",
   "./src/js/systems/bootstrap.min.js",
   "./src/js/systems/jquery.min.js",
+   "./src/js/systems/Chart.min.js",
   
   ])
     .pipe(gulp.dest('./dist/js/'));
@@ -103,7 +104,7 @@ gulp.task('serve', function() {
       baseDir: './dist/',
       middleware: []
     },
-    port: 5000
+    port: 5800
   })
 });
 
