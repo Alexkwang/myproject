@@ -9,8 +9,14 @@
 
 
  angular.module('scotchApp', ['ngRoute'])
-.config(["$routeProvider",function($routeProvider) {
+.config(["$routeProvider","$httpProvider",function($routeProvider,$httpProvider) {
   
+        //$httpProvider.defaults.useXDomain = true;
+       // $httpProvider.defaults.headers.common = 'Content-Type: application/json';
+        //$httpProvider.defaults.withCredentials = true;
+        
+
+
     $routeProvider
         .when('/', {
             templateUrl : 'pages/homes/home.html',

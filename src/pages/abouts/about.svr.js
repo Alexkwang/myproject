@@ -5,12 +5,8 @@ angular.module('scotchApp').factory('aboutService',
 
 	return{
 			getmessage:function(callback){
-				
-				// http://127.0.0.1:8080
-debugger;
-				$http.get("http://127.0.0.1:8080/user").success(function(data){
 
-debugger;
+				$http.get("http://127.0.0.1:5900/user/5591ee7eaef61aec259d8450").success(function(data){
 					callback(data);
 				});
 				 //var Commodity = global.dbHelper.getModel('commodity');
