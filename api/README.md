@@ -1,6 +1,5 @@
 nodes-restful-api
+RESTful API with NodeJS and Restify and mongodb
 =================
-
-Simple Blogging RESTful API with NodeJS and Restify
-
-Set MONGO_URL as your MongoDB URL
+修改 MONGO_URL 地址。\app\core\mongoose.js
+命令窗口：node  server
