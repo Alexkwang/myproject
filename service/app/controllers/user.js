@@ -1,10 +1,11 @@
-var mongoose = require('mongoose'),
-    User = mongoose.model("User")
-ObjectId = mongoose.Types.ObjectId
+var mongoose = require('mongoose');
+var User = mongoose.model("User");
+var header = require('./../core/header');
+var ObjectId = mongoose.Types.ObjectId;
 
 exports.createUser = function(req, res, next) {
-  
-   res.header('Access-Control-Allow-Credentials', true);
+  header.set(req,res);
+  // res.header('Access-Control-Allow-Credentials', true);
     var UserModel = new User(req.body);
     UserModel.save(function(err, User) {
         if (err) {
@@ -23,8 +24,8 @@ exports.createUser = function(req, res, next) {
 }
 
 exports.viewUser = function(req, res) {
-    //res.setHeader('Access-Control-Allow-Origin','*');
-    res.header('Access-Control-Allow-Credentials', true);
+    header.set(req,res);
+    //res.header('Access-Control-Allow-Credentials', true);
 
     User.findById(new ObjectId(req.params.id), function(err, User) {
         if (err) {
