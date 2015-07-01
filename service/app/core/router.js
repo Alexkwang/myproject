@@ -24,6 +24,10 @@ server.del("/user/:id", controllers.user.deleteUser)
 server.get({path: "/user/:id", version: "1.0.0"}, controllers.user.viewUser)
 //user end
 
+ app.post('/upload/img', upload.uploadImg);
+
+
+ 
 // Article Start
 server.post("/articles", controllers.article.createArticle)
 server.put("/articles/:id", controllers.article.updateArticle)
