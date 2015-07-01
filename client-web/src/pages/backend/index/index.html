@@ -3,6 +3,14 @@
          <h1>backend index content goes here...</h1>
 
           <p>{{ message }}</p>
-          
+          <p> templateView : {{ templateView.ShowPage }}</p>
+           	<div ng-if="templateView.ShowPage=='template1'">
+           		<div class="col-sm-12" ng-include="templateUrls.mainPage"></div>
+			</div>
+
+				<div ng-if="templateView.ShowPage=='template2'">
+           		<div class="col-sm-12" ng-include="templateUrls.subPage"></div>
+			</div>
+
      </div>
 </div>
