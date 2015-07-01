@@ -1,13 +1,6 @@
 (function () {
 'use strict';
 
-//var mongoose = require("mongoose");
-//var global;
-//global.dbHelper = require( './common/dbHelper' );
-
-//global.db = mongoose.connect("mongodb://127.0.0.1:27017/test1");
-
-
  angular.module('scotchApp', ['ngRoute'])
 .config(["$routeProvider","$httpProvider",function($routeProvider,$httpProvider) {
   
@@ -54,6 +47,10 @@
             templateUrl : 'pages/abouts/about.html',
             controller  : 'aboutController'
         }) 
+            .when('/login',{
+                templateUrl:'pages/backend/index/index.html',
+                controller:'indexController'
+            })
         .otherwise({redirectTo:'/'});
 }]);
 

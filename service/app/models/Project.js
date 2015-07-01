@@ -4,12 +4,12 @@ var ProjectType = require("./ProjectType");
 var ProductImage = require("./ProductImage");
 
 var ProjectSchema = new Schema({
-    projectname: {type:String},
-    projectposition: {type:String},
-    projecttype:[ProjectType.schema],
-    projectImages:[ProductImage.schema],
-    projectarea:{type:String},
-    projectdate:{type:Date},
-    projectOrder:{type:Number}
+    name: {type:String},
+    position: {type:String},
+    yype:[ProjectType.schema],
+    images:[ProductImage.schema],
+    area:{type:String},
+    date:{type:Date},
+    number:{type:Number}
 });
 mongoose.model('Project', ProjectSchema);
