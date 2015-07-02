@@ -1,0 +1,10 @@
+node_modules/
+.idea/
+debug/
+dist/
+debug/
+/*.njspro
+/*.sln
+/*.suo
+*.orig
+*.zip

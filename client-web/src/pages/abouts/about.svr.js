@@ -5,15 +5,16 @@ angular.module('scotchApp').factory('aboutService',
 
 	return{
 			getmessage:function(callback){
+				//http://127.0.0.1:8201/user/5591ee7eaef61aec259d8450
+				$http.get("http://127.0.0.1:8201/api/v1/users?email=testuser1@newegg.com").success(function(data){
 
-				$http.get("http://127.0.0.1:5900/user/5591ee7eaef61aec259d8450").success(function(data){
 					callback(data);
 				});
 				 //var Commodity = global.dbHelper.getModel('commodity');
             //Commodity.find({}, function (error, data) {
                // callback(data);
             //});
-callback("alex test");
+//callback("alex test");
 			}	
 	};
 	}]);
