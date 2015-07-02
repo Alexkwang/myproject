@@ -1,10 +1,7 @@
 (function() {
-  var cluster, http, i, logger, numCPUs;
+  var cluster, i, logger, numCPUs;
 
   cluster = require("cluster");
-
-  http = require("http");
-
   logger = require("./common/logger");
 
   numCPUs = require("os").cpus().length;

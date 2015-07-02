@@ -18,9 +18,7 @@
     cwd: __dirname
   });
 
-  process.on("uncaughtException", function(err) {
-    return logger.error("[uncaught-error] exception: " + err + "\r\nstack: " + err.stack);
-  });
+
 
   mongoose.connect(config.mongodbAddress,{server:{auto_reconnect:true}});
 
@@ -30,14 +28,14 @@ db.on('error', function (err) {
     logger.error('MongoDB connection error:', err);
 });
 db.once('open', function callback() {
-    logger.log('MongoDB connection is established');
+   return logger.log('MongoDB connection is established');
 });
 db.on('disconnected', function() {
     logger.error('MongoDB disconnected!');
     mongoose.connect(config.mongodbAddress, {server:{auto_reconnect:true}});
 });
 db.on('reconnected', function () {
-    logger.log('MongoDB reconnected!');
+    return logger.log('MongoDB reconnected!');
 });
 /*
   mongoose.connection.on("error", function(err) {
@@ -47,8 +45,12 @@ db.on('reconnected', function () {
   app = require("./config/bootstrap")(__dirname);
 
   app.listen(port, function() {
-   return  logger.log(" listening at:"+ port);
-    //return logger.log("Begin listening on port " + port);
+  //  console.log("%s listening at %s", app.name, app.url);
+    return logger.log("Begin listening on port " + port);
+  });
+
+  process.on("uncaughtException", function(err) {
+    return logger.error("[uncaught-error] exception: " + err + "\r\nstack: " + err.stack);
   });
 
 }).call(this);
