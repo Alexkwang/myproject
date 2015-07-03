@@ -15,7 +15,8 @@
       i++;
     }
     cluster.on("exit", function(worker, code, signal) {
-      logger.error("worker " + worker.process.pid + " died");
+      //logger.error("worker " + worker.process.pid + " died");
+      console.log("worker %s died",  worker.process.pid);
       return cluster.fork();
     });
   } else {

@@ -24,14 +24,10 @@ gulp.task('clean', function (cb) {
  */
 gulp.task('Js', ['clean'], function () {
     var env = argv.e || "GDEV";
-    var gulpStream= gulp.src('./src/**/*.js')
-      .pipe(replace("[replace_env]", env));
-  // if(env=="PRD")
-  //   {
-  //     gulpStream =gulpStream.pipe(uglify());
-  //   }
-      gulpStream.pipe(gulp.dest('./dist/'))
-                .pipe(notify({ message: "Compiler js complete." }));
+    return gulp.src('./src/**/*.js')
+      .pipe(replace("[replace_env]", env))
+      .pipe(gulp.dest('./dist/'))
+      .pipe(notify({ message: "Compiler js complete." }));
 
 });
 
@@ -41,7 +37,7 @@ gulp.task('Js', ['clean'], function () {
 gulp.task('copy', ['clean'], function () {
     return gulp.src(['./src/log4js_configuration.json'])
       .pipe(gulp.dest('./dist/'))
-      .pipe(notify({ message: "Copy file complete." }));
+      .pipe(notify({ message: "Copy loger file complete." }));
 });
 
 /**

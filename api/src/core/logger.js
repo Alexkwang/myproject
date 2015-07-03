@@ -9,7 +9,7 @@
 
   defaultLogger = log4js.getLogger();
 
-  exports.logInfo = function(args) {
+  exports.log = function(args) {
     return infoLogger.info(args);
   };
 

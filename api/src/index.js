@@ -28,21 +28,21 @@ db.on('error', function (err) {
     logger.error('MongoDB connection error:', err);
 });
 db.once('open', function callback() {
-   return logger.logInfo('MongoDB connection is established');
+   return logger.log('MongoDB connection is established');
 });
 db.on('disconnected', function() {
     logger.error('MongoDB disconnected!');
     mongoose.connect(config.mongodbAddress, {server:{auto_reconnect:true}});
 });
 db.on('reconnected', function () {
-    return logger.logInfo('MongoDB reconnected!');
+    return logger.log('MongoDB reconnected!');
 });
 
  
 
   app.listen(port, function() {
 
-    return logger.logInfo("Begin listening on port " + port);
+    return logger.log("Begin listening on port " + port);
   });
 
   process.on("uncaughtException", function(err) {
