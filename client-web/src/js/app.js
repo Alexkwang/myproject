@@ -1,14 +1,19 @@
 (function () {
 'use strict';
-
- angular.module('scotchApp', ['ngRoute'])
-.config(["$routeProvider","$httpProvider",function($routeProvider,$httpProvider) {
+  var url = 'http://127.0.0.1:8201/upload/image';
+ angular.module('scotchApp', ['ngRoute','blueimp.fileupload'])
+.config(["$routeProvider","$httpProvider",'fileUploadProvider',function($routeProvider,$httpProvider,fileUploadProvider) {
   
         //$httpProvider.defaults.useXDomain = true;
        // $httpProvider.defaults.headers.common = 'Content-Type: application/json';
         //$httpProvider.defaults.withCredentials = true;
         
-
+  delete $httpProvider.defaults.headers.common['X-Requested-With'];
+  fileUploadProvider.defaults.redirect = window.location.href.replace(
+                    /\/[^\/]*$/,
+                    '/pages/cors/result.html?%s'
+                );
+         
 
     $routeProvider
         .when('/', {
@@ -52,7 +57,59 @@
                 controller:'indexController'
             })
         .otherwise({redirectTo:'/'});
-}]);
+}]) .controller('DemoFileUploadController', [
+            '$scope', '$http', '$filter', '$window',
+            function ($scope, $http) {
+                $scope.options = {
+                    url: url
+                };
+              
+                    $scope.loadingFiles = true;
+                    $http.get(url)
+                        .then(
+                            function (response) {
+                                $scope.loadingFiles = false;
+                                $scope.queue = response.data.files || [];
+                            },
+                            function () {
+                                $scope.loadingFiles = false;
+                            }
+                        );
+                
+            }
+        ])
+
+        .controller('FileDestroyController', [
+            '$scope', '$http',
+            function ($scope, $http) {
+                var file = $scope.file,
+                    state;
+                if (file.url) {
+                    file.$state = function () {
+                        return state;
+                    };
+                    file.$destroy = function () {
+                        state = 'pending';
+                        return $http({
+                            url: file.deleteUrl,
+                            method: file.deleteType
+                        }).then(
+                            function () {
+                                state = 'resolved';
+                                $scope.clear(file);
+                            },
+                            function () {
+                                state = 'rejected';
+                            }
+                        );
+                    };
+                } else if (!file.$cancel && !file._index) {
+                    file.$cancel = function () {
+                        $scope.clear(file);
+                    };
+                }
+            }
+        ]);
 
 }).call(this);
  

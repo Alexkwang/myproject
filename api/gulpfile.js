@@ -11,7 +11,7 @@ var argv = require('yargs').argv;
 var replace = require('gulp-replace');
 var nodemon = require('gulp-nodemon');
 var uglify = require('gulp-uglify');
-
+var runSequence = require('run-sequence');
 /**
  * Clean dist folder
  */
@@ -22,23 +22,23 @@ gulp.task('clean', function (cb) {
 /**
  * compile js script
  */
-gulp.task('Js', ['clean'], function () {
+gulp.task('Js', function () {
     var env = argv.e || "GDEV";
-    var gulpStream= gulp.src('./src/**/*.js')
-      .pipe(replace("[replace_env]", env));
+    return gulp.src('./src/**/*.js')
+      .pipe(replace("[replace_env]", env))
   // if(env=="PRD")
   //   {
   //     gulpStream =gulpStream.pipe(uglify());
   //   }
-      gulpStream.pipe(gulp.dest('./dist/'))
-                .pipe(notify({ message: "Compiler js complete." }));
+      .pipe(gulp.dest('./dist/'))
+      .pipe(notify({ message: "Compiler js complete." }));
 
 });
 
 /**
  * copy some project file
  */
-gulp.task('copy', ['clean'], function () {
+gulp.task('copy', function () {
     return gulp.src(['./src/log4js_configuration.json'])
       .pipe(gulp.dest('./dist/'))
       .pipe(notify({ message: "Copy file complete." }));
@@ -47,7 +47,9 @@ gulp.task('copy', ['clean'], function () {
 /**
  * prepare task before start program
  */
-gulp.task('build', ['clean', 'Js', 'copy']);
+gulp.task('build', function(callback) {
+  return runSequence(['clean'],[ 'Js', 'copy'], callback);
+});
 
 /**
  * start server

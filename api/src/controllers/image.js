@@ -13,7 +13,11 @@
 
   mime = require("mime");
 
+var header = require('./../core/header'); 
+
   exports.upload = function(req, res, next) {
+     header.set(req, res);
+     
     var filename, imageData, matches, requestOption, url;
     matches = req.body.file.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
     imageData = {};

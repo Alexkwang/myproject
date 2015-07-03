@@ -40,12 +40,24 @@ gulp.task('copy_Html', function() {
 /**/
 gulp.task('copy_system_js', function() {
   return gulp.src([
-  "./src/js/systems/angular.js",
-  "./src/js/systems/angular-route.js",
-  "./src/js/systems/bootstrap.min.js",
-  "./src/js/systems/jquery.min.js",
-   "./src/js/systems/Chart.min.js",
-  
+    "./src/js/systems/angular.js",
+    "./src/js/systems/angular-route.js",
+    "./src/js/systems/bootstrap.min.js",
+    "./src/js/systems/jquery.min.js",
+    "./src/js/systems/Chart.min.js",
+    "./src/js/systems/app.js",
+    "./src/js/systems/jquery.fileupload.js",
+    "./src/js/systems/jquery.fileupload-process.js",
+    "./src/js/systems/jquery.fileupload-image.js",
+    "./src/js/systems/jquery.fileupload-validate.js",
+    "./src/js/systems/jquery.fileupload-angular.js",
+    "./src/js/systems/jquery.fileupload-video.js",
+    "./src/js/systems/jquery.fileupload-audio.js",
+    "./src/js/systems/jquery.iframe-transport.js",
+    "./src/js/systems/jquery.ui.widget.js",
+    "./src/js/systems/load-image.all.min.js",
+    "./src/js/systems/canvas-to-blob.min.js",
+    "./src/js/systems/jquery.blueimp-gallery.min.js"
   ])
     .pipe(gulp.dest('./dist/js/'));
 });
@@ -60,8 +72,20 @@ gulp.task('copy_system_css', function() {
     .pipe(gulp.dest('./dist/css/'));
 });
 
+gulp.task('copy_system_fonts', function() {
+  return gulp.src([
+  "./bower_components/bootstrap/fonts/*.*",
 
-gulp.task('copy',['copy_images','copy_Html','copy_system_css','copy_system_js']);
+  ])
+    .pipe(gulp.dest('./dist/fonts/'));
+});
+
+
+
+
+
+
+gulp.task('copy',['copy_images','copy_Html','copy_system_css','copy_system_js','copy_system_fonts']);
 
 
 

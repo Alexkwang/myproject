@@ -10,9 +10,16 @@ angular.module('scotchApp').controller('aboutController', ['$scope','aboutServic
 
      aboutService.getmessage(function(resultData){
 
+     	if(resultData.data.length>0)
+     	{
+          $scope.message = 'about pages.' +resultData.data[0].email;
+     	}
+     	else
+     	{
+     		$scope.message = 'about pages. no data!' 
+     	}
 
- 	debugger;
-    	$scope.message = 'about pages.' +resultData.data[0].email;
+    	
     });
  };
   
