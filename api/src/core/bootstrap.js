@@ -46,7 +46,11 @@ module.exports = function(appPath){
       app.use(restify.queryParser());
       app.use(restify.jsonp());
       app.use(restify.gzipResponse());
-      app.use(restify.bodyParser());
+      app.use(restify.bodyParser({
+         keepExtensions:true,
+          limit:10000000,// 10M limit
+          defer:true//enable event 
+      }));
 
 
 
