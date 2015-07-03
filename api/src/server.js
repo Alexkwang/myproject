@@ -2,7 +2,7 @@
   var cluster, i, logger, numCPUs;
 
   cluster = require("cluster");
-  logger = require("./common/logger");
+  logger = require("./core/logger");
 
   numCPUs = require("os").cpus().length;
 

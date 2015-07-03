@@ -8,11 +8,11 @@ angular.module('scotchApp').controller('aboutController', ['$scope','aboutServic
  $scope.refresh = function () {
 
 
-     aboutService.getmessage(function(data){
+     aboutService.getmessage(function(resultData){
 
 
  	debugger;
-    	$scope.message = 'about pages.' +data.email;
+    	$scope.message = 'about pages.' +resultData.data[0].email;
     });
  };
   

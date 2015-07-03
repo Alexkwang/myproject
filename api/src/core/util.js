@@ -1,10 +1,5 @@
 (function() {
-  var config, crypto;
-
-  crypto = require("crypto");
-
-  config = require("../config/config");
-
+  var crypto = require("crypto");
   exports.getHash = function(data) {
     return crypto.createHash("md5").update(data).digest("hex");
   };

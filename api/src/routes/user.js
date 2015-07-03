@@ -1,20 +1,12 @@
 (function() {
-
   var config, user;
-
   user = require("../controllers/user");
-  config = require("../config/config");
-var logger = require("../common/logger");
-  
+  config = require("../core/config");
+
  module.exports = function(app) {
-  // logger.log("22222");
-  
-return app.get("/users", user.viewUser);
-
-
-      //  returnapp.get({path: "/users", version: "1.0.0"}, users.viewUser);
-  
- //return app.get({path: "/users/:id", version: "1.0.0"}, users.viewUserbyId);
+ 	app.get("/users", user.viewUser);
+  	app.get({path: "/users/:id", version: "1.0.0"}, user.viewUserbyId);
+ 	return app;
   };
 
 }).call(this);
