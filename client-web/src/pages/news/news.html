@@ -1,8 +1,49 @@
 <div>
-     <div>
-         <h1>news content goes here...</h1>
 
-          <p>{{ message }}</p>
-          
-     </div>
+  
+
+
+	<form name="form" class="form-horizontal">
+	
+	  <!--Item Image Review-->
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col-sm-12">
+            <span style="font-weight: bold; padding: 0px 20px;">项目图片预览</span>
+            <span>拖动图片以改变图片展示的顺序</span>
+        </div>
+    </div>
+	<!--view list-->
+	 <div class="row">
+	    <div class="col-sm-12 text-center" style="overflow-x: auto;">
+	        <table align="center">
+	            <tr id="tr_imagelist" style="height: 120px;">
+	            </tr>
+	        </table>
+	    </div>
+	  </div>
+    <!-- Upload Image -->
+	 <div class="row" id="div_uploadImage">
+	        <div class="col-sm-10">
+	            <div class="widget-body">
+	                <my-upload refresh-key="itemImageploadRefresh" ng-options="itemImageUploadOptions"></my-upload>
+	            </div>
+	        </div>
+	 </div>
+
+
+	 <!--Open View Image-->
+        <div id="item_image_view_modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content" style="width: 680px;">
+                    <div class="modal-header" style="height: 32px;">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel"></h4>
+                    </div>
+                    <div id="divViewImage" class="modal-body" style="text-align: center;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+	</form>
 </div>

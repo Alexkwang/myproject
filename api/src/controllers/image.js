@@ -23,7 +23,7 @@
     }
     imageData.type = matches[1];
     imageData.data = new Buffer(matches[2], "base64");
-    filename = "screen_" + uuid.v1() + "." + mime.extension(imageData.type);
+    filename = "product_" + uuid.v1() + "." + mime.extension(imageData.type);
     url = util.getDFISUrl(filename, true);
     requestOption = {
       url: url,
@@ -33,6 +33,10 @@
       },
       body: imageData.data
     };
+
+    //fs.renameSync(req.files.image.path,'public/files/img'+ new_name);
+
+
     // return request.post(requestOption, function(error, response, body) {
     //   if (error != null) {
     //     return next(error);

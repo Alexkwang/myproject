@@ -1,0 +1,721 @@
+angular.module('system.sellerportal')
+.controller("itemImagesManagementCtrl", ["$scope", "$element", "$translate", "$fileUploader", "$sce", "messager", "authorize", "itemImagesManagementSvr", function ($scope, $element, $translate, $fileUploader, $sce, messager, authorize, svr) {
+    var model = $scope.model = {
+        LoginSellerInfo: authorize.userSellerInfo,             //当前登录的Seller  
+        ActionMode: $scope.$parent.model.ActionMode,
+        UploadImgList: $scope.$parent.model.UploadImgList,
+        SellerOwnerUploadedImgList: $scope.$parent.model.SellerOwnerUploadedImgList,
+        UploadCloudImgList: $scope.$parent.model.UploadCloudImgList,
+        SelectCloudList: null,
+        DragStart: null,             //切换图片位置时，要切换的图片对象  
+        CustomerCanSetPrimary: true,
+        CloudHelpUrlGetCloudDriver: "",
+        CloudHelpUrlHowToUse: "",
+        IsCloudImageEnabled: false,
+    };
+    $scope.appendImageInCloundDiv = function (temp) {
+        var liObj = $("<li number=\"" + temp.Number + "\" class=\"select2-search-choice\">");
+        liObj.append($("<div title=\"" + temp.Name + "\">").html(temp.Name));
+        liObj.append($("<a href=\"javascript:void(0);\" class=\"select2-search-choice-close\" tabindex=\"-1\">")
+                      .bind("click", { Node: temp }, function (e) {
+                          var data = e.data.Node,
+                              delIndex = -1;
+                          jQuery.each(model.UploadCloudImgList, function (i1, e1) {
+                              if (e1.Number == data.Number && e1.Name == data.Name) {
+                                  delIndex = i1;
+                                  return false;
+                              }
+                          });
+                          if (delIndex > -1) {
+                              model.UploadCloudImgList.splice(delIndex, 1);
+                              jQuery.each($element.find("#ul_showCloudImgList").find("li"), function (i1, e1) {
+                                  if ($(e1).attr("number") == data.Number)
+                                      $(e1).remove();
+                              });
+                          }
+                      }));
+        $element.find("#ul_showCloudImgList").append(liObj);
+    };
+    $scope.setPrimaryImage = function (curimg) {
+        var trContainer = $element.find("#tr_imagelist");
+        //去掉已设置的Primary样式
+        if (!!$scope.$parent.model.PrimaryImageNo &&
+            $scope.$parent.model.PrimaryImageNo > 0) {
+            var oldTdPrimary = trContainer.find("td[number=" + $scope.$parent.model.PrimaryImageNo + "]");
+            if (oldTdPrimary.length > 0) {
+                oldTdPrimary.find("div[name='imgdiv']").attr("class", "item_image_review_normal");
+                oldTdPrimary.find("a[name='primarylink']").css({ "display": "" });
+            }
+        }
+        //设置当前图片为Primary 
+        jQuery.each(model.UploadImgList, function (index, node) {
+            if (!!$scope.$parent.model.PrimaryImageNo &&
+                node.Number == $scope.$parent.model.PrimaryImageNo)//去掉上一次设置的Primary
+                node.IsPrimary = false;
+            if (node.Number == curimg.Number)//设置当前为Primary
+                node.IsPrimary = true;
+        });
+        if (!!$scope.$parent.model.PrimaryImageObj)
+            $scope.$parent.model.PrimaryImageObj.attr("src", curimg.Url);
+        $scope.$parent.model.PrimaryImageNo = curimg.Number;
+        var newTdPrimary = trContainer.find("td[number=" + curimg.Number + "]");
+        if (newTdPrimary.length > 0) {
+            newTdPrimary.find("div[name='imgdiv']").attr("class", "item_image_review_primary");
+            newTdPrimary.find("a[name='primarylink']").css({ "display": "none" });
+        }
+    };
+    $scope.deleteImage = function (curimg) {
+        var trContainer = $element.find("#tr_imagelist"),
+            index = -1;
+        angular.forEach(model.UploadImgList, function (item, i) {
+            if (item.Number == curimg.Number) {
+                index = i;
+                return false;
+            }
+        });
+        if (index > -1) {
+            if (curimg.IsPrimary) {
+                if (!!$scope.$parent.model.PrimaryImageObj)
+                    $scope.$parent.model.PrimaryImageObj.attr("src", "/modules/system-sellerportal/images/Item/defautlNoImage.png");
+                $scope.$parent.model.PrimaryImageNo = null;
+            }
+
+            sellerOwnerIndex = -1;
+            angular.forEach(model.SellerOwnerUploadedImgList, function (item, i) {
+                if (item.Name == model.UploadImgList[index].Name) {
+                    sellerOwnerIndex = i;
+                    return false;
+                }
+            });
+            if (sellerOwnerIndex > -1) {
+                model.SellerOwnerUploadedImgList.splice(sellerOwnerIndex, 1);
+            }
+
+            model.UploadImgList.splice(index, 1);
+            var deleteTd = trContainer.find("td[number=" + curimg.Number + "]");
+            deleteTd.remove();
+            //重新设置Number
+            angular.forEach(model.UploadImgList, function (item, i) {
+                item.Number = i + 1;
+                if (item.IsPrimary) {
+                    $scope.$parent.model.PrimaryImageNo = i + 1;
+                }
+            });
+            angular.forEach(trContainer.find("td"), function (tdNode, i) {
+                $(tdNode).attr("number", i + 1);
+            });
+        }
+    };
+    $scope.viewImage = function (curimg) {
+        var viewhtml = "<img style=\"max-height:480px; max-width:640px;\" src=\"" + curimg.Url + "\" onerror=\"javascript:this.src='/modules/system-sellerportal/images/Item/coming soon.jpg'\"/>";
+        $scope.openViewImageModal(viewhtml);
+    };
+    //Image View中插入图片
+    $scope.insertImgObj = function (imgData) {
+        model.DragStart = null;
+        var trContainer = $element.find("#tr_imagelist"),
+           imgObj = $("<img style=\"width:102px; height:105px; margin: 4px 0px;\" src=\"" + imgData.Url + "\" onerror=\"javascript:this.src='/modules/system-sellerportal/images/Item/coming soon.jpg'\"/>"),
+           imgObjDiv = $("<div name=\"imgdiv\" class=\"" + (imgData.IsPrimary ? "item_image_review_primary" : "item_image_review_normal") + "\">").append(imgObj),
+           hidePrimary = ((imgData.CanSetPrimary != undefined && !imgData.CanSetPrimary) || imgData.IsPrimary) ? true : false,
+           link_primary = $("<a href=\"javascript:void(0);\" name=\"primarylink\" style=\"" + (hidePrimary ? "display:none;" : "") + "margin-right: 5px;\">")
+                            .html($translate("itemCreation.lbl_Primary"))
+                            .bind('click', { curImg: imgData }, function (e) {//set Primary
+                                $scope.setPrimaryImage(e.data.curImg);
+                            }),
+           hideDelete = (imgData.CanDelete != undefined && !imgData.CanDelete) ? true : false,
+           link_delete = $("<a href=\"javascript:void(0);\" name=\"deletelink\" style=\"margin-right: 5px;" + (hideDelete ? "display:none;" : "") + "\">")
+                           .html($translate("itemCreation.lbl_Delete"))
+                           .bind('click', { curImg: imgData }, function (e) {//delete
+                               $scope.deleteImage(e.data.curImg);
+                           }),
+           link_view = $("<a href=\"javascript:void(0);\" name=\"viewlink\">")
+                        .html($translate("itemCreation.lbl_View"))
+                        .bind('click', { curImg: imgData }, function (e) {//view
+                            $scope.viewImage(e.data.curImg);
+                        }),
+           linkDiv = $("<div style=\"margin-top: 10px;text-decoration: underline;font-size: 10px;\">").append(link_primary).append(link_delete).append(link_view),
+           dragStyle = imgData.CanDragAndDrop ? "cursor: pointer;" : "",
+           imgItemObj = $("<div style=\"margin-right: 10px; " + dragStyle + "\" draggable=\"" + imgData.CanDragAndDrop + "\">")
+                          .bind('dragstart', function (e) {
+                              model.DragStart = $(e.target).parents("td:first");
+                          })
+                          .append(imgObjDiv).append(linkDiv),
+            tdTemp = $("<td number=\"" + imgData.Number + "\">")
+                           .bind('dragover', function (e) {
+                               if (window.navigator.userAgent.indexOf("Firefox") != -1) {
+                                   e.preventDefault();
+                               } else {
+                                   window.event.preventDefault();
+                               }
+                           })
+                           .bind('drop', { curImg: imgData }, function (e) {
+                               if (window.navigator.userAgent.indexOf("Firefox") != -1) {
+                                   e.preventDefault();
+                               } else {
+                                   window.event.preventDefault();
+                               }
+                               var curimg = e.data.curImg;
+                               if (curimg.CanDragAndDrop && model.DragStart.children().attr("draggable") == "true") {
+                                   var startDiv = model.DragStart.html(),            //被拖拽的元素
+                                       endTd = $(e.target).parents("td:first"),  //目标元素容器
+                                       endDiv = endTd.html(),                        //目标元素
+                                       startNo = parseInt(model.DragStart.attr("number")),
+                                       endNo = parseInt(endTd.attr("number"));
+                                   if (startNo != endNo) {
+                                       var indexStart = -1,
+                                           indexEnd = -1;
+                                       jQuery.each(model.UploadImgList, function (i1, n1) {
+                                           if (n1.Number == startNo)
+                                               indexStart = i1;
+                                           if (n1.Number == endNo)
+                                               indexEnd = i1;
+                                       });
+
+                                       if (indexStart >= 0 && indexEnd >= 0) {
+                                           //切换显示 
+                                           var tempStartObj = angular.copy(model.UploadImgList[indexStart]),
+                                               tempEndObj = angular.copy(model.UploadImgList[indexEnd]);
+                                           endTd.find("img").attr("src", tempStartObj.Url);
+                                           model.DragStart.find("img").attr("src", tempEndObj.Url);
+                                           if (tempStartObj.IsPrimary) {
+                                               model.DragStart.find("div[name='imgdiv']").attr("class", "item_image_review_normal");
+                                               model.DragStart.find("a[name='primarylink']").show();
+                                               endTd.find("div[name='imgdiv']").attr("class", "item_image_review_primary");
+                                               endTd.find("a[name='primarylink']").hide();
+                                               $scope.$parent.model.PrimaryImageNo = model.UploadImgList[indexEnd].Number;
+                                           }
+                                           if (tempEndObj.IsPrimary) {
+                                               model.DragStart.find("div[name='imgdiv']").attr("class", "item_image_review_primary");
+                                               model.DragStart.find("a[name='primarylink']").hide();
+                                               endTd.find("div[name='imgdiv']").attr("class", "item_image_review_normal");
+                                               endTd.find("a[name='primarylink']").show();
+                                               $scope.$parent.model.PrimaryImageNo = model.UploadImgList[indexStart].Number;
+                                           }
+                                           //切换数据
+                                           model.UploadImgList[indexStart].CanDelete = tempEndObj.CanDelete;
+                                           model.UploadImgList[indexStart].CanDragAndDrop = tempEndObj.CanDragAndDrop;
+                                           model.UploadImgList[indexStart].CanSetPrimary = tempEndObj.CanSetPrimary;
+                                           model.UploadImgList[indexStart].IsPrimary = tempEndObj.IsPrimary;
+                                           model.UploadImgList[indexStart].Name = tempEndObj.Name;
+                                           model.UploadImgList[indexStart].Url = tempEndObj.Url;
+
+                                           model.UploadImgList[indexEnd].CanDelete = tempStartObj.CanDelete;
+                                           model.UploadImgList[indexEnd].CanDragAndDrop = tempStartObj.CanDragAndDrop;
+                                           model.UploadImgList[indexEnd].CanSetPrimary = tempStartObj.CanSetPrimary;
+                                           model.UploadImgList[indexEnd].IsPrimary = tempStartObj.IsPrimary;
+                                           model.UploadImgList[indexEnd].Name = tempStartObj.Name;
+                                           model.UploadImgList[indexEnd].Url = tempStartObj.Url;
+                                       }
+                                       //重新绑定draggable元素的dragstart事件(重新绘制元素后，bind的方法丢失，需要重新bind)
+                                       angular.forEach(trContainer.find("td"), function (tdOjb, index) {
+                                           var dragDiv = $(tdOjb.children);
+                                           if (dragDiv.length > 0) {
+                                               dragDiv.unbind();
+                                               dragDiv.bind('dragstart', function (e) {
+                                                   model.DragStart = $(e.target).parents("td:first");
+                                               });
+                                           };
+                                       });
+                                   }
+                               }
+                           })
+                           .append(imgItemObj);
+        trContainer.append(tdTemp);
+    };
+
+    $scope.pageLoad = function () {
+        $element.find("#tr_imagelist").html("");
+        if ($scope.$parent.model.LoadingImages && model.UploadImgList.length > 0) {
+            var canDelete = true,
+                canSetPrimary = true,
+                canDragAndDrop = true;
+            if (model.ActionMode == "LinkItem") {
+                if (!model.LoginSellerInfo.IsInternalAdmin) {//normalseller登录
+                    canDelete = false;
+                    canSetPrimary = false;
+                    canDragAndDrop = false;
+                    jQuery.each(model.UploadImgList, function (index, node) {
+                        if (node.IsPrimary) {
+                            model.CustomerCanSetPrimary = false;
+                            return false;
+                        }
+                    });
+                }
+            }
+            angular.forEach(model.UploadImgList, function (item, index) {
+                if (item.IsPrimary) {
+                    if (!!$scope.$parent.model.PrimaryImageObj)
+                        $scope.$parent.model.PrimaryImageObj.attr("src", item.Url);
+                    $scope.$parent.model.PrimaryImageNo = item.Number;
+                }
+                if (model.ActionMode == "LinkItem") {
+                    item.CanDelete = canDelete;
+                    item.CanSetPrimary = canSetPrimary;
+                    item.CanDragAndDrop = canDragAndDrop;
+                } else if (model.ActionMode == "EditItem") {
+                    if (item.IsPrimary && item.ImageLock) {//已有的图片如果是Primary且Lock的再上传的图片不可设置Primary
+                        model.CustomerCanSetPrimary = false;
+                    }
+                    var canControl = item.ImageLock ? false : true;
+                    item.CanDelete = canControl;
+                    item.CanSetPrimary = !model.CustomerCanSetPrimary ? false : canControl;
+                    item.CanDragAndDrop = canControl;
+                }
+                $scope.insertImgObj(item);
+            });
+            angular.forEach(model.UploadCloudImgList, function (item, index) {
+                $scope.appendImageInCloundDiv(item);
+            });
+        }
+        svr.getCloudImageConfig(function (res) {
+            model.CloudHelpUrlGetCloudDriver = res.CloudHelpUrlGetCloudDriver;
+            model.CloudHelpUrlHowToUse = res.CloudHelpUrlHowToUse;
+            model.IsCloudImageEnabled = res.IsCloudImageEnabled;
+        });
+    };
+    $scope.pageLoad();
+    $scope.$on("imageMang_reloadData", $scope.pageLoad);
+
+    //after upload(local upload and upload by url)
+    $scope.uploadImageByCurSeller = function (name, url) {
+        var curNumber = model.UploadImgList.length + 1,
+            temp = {
+                Name: name,
+                Url: url,
+                Number: curNumber,
+                IsPrimary: false,
+                CanDelete: true,
+                CanSetPrimary: model.CustomerCanSetPrimary,
+                CanDragAndDrop: true
+            };
+        model.UploadImgList.push(temp);
+        model.SellerOwnerUploadedImgList.push(temp);
+        $scope.insertImgObj(temp);
+    };
+
+    //Upload Image
+    $scope.onSelectImages = function (e) {
+        setTimeout(function () {
+            if (e.files.length == 0)
+                return;
+            var $uploadPanel = e.sender.wrapper,
+                imgError = [];
+            jQuery.each(e.files, function (index, element) {
+                var msgError = "";
+                if (element.extension.toLowerCase() != ".jpg"
+                    && element.extension.toLowerCase() != ".jpeg"
+                    && element.extension.toLowerCase() != ".png") {
+                    msgError = ("The file " + element.name + " is not a PNG or JPEG/JPG file.");
+                    imgError.push(element.uid);
+                } else if (element.width < 320) {
+                    msgError = ("The file " + element.name + "'s width [" + element.width + "] is less than minimum width [320].");
+                    imgError.push(element.uid);
+                } else if (element.height < 240) {
+                    msgError = ("The file " + element.name + "'s height [" + element.height + "] is less than minimum height [240].");
+                    imgError.push(element.uid);
+                } else if ((element.size / 1024) >= 5 * 1024) {
+                    msgError = ("The file '" + element.name + "' exceeds the maximum upload size [5MB].");
+                    imgError.push(element.uid);
+                }
+                if (msgError.length > 0)
+                    messager.error(msgError);
+            });
+            if (imgError.length > 0) {
+                jQuery.each($uploadPanel.find("li"), function (index, ele) {
+                    if ($(ele).attr("class") == 'k-file' && jQuery.grep(imgError, function (n) { return n == $(ele).attr("data-uid") }).length > 0)
+                        ele.remove();
+                });
+                var tempList = [];
+                jQuery.each(e.files, function (i1, n1) {
+                    if (jQuery.grep(imgError, function (n2, i2) { return n2 == n1.uid; }).length == 0) {
+                        tempList.push(n1);
+                    }
+                });
+                e.files = tempList;
+            }
+
+            var unUploadCount = jQuery.grep($uploadPanel.find("li"), function (n) {
+                return ($(n).attr("class") == 'k-file');
+            }).length,
+                count = model.UploadImgList.length,
+                sellerOwnerCount = model.SellerOwnerUploadedImgList.length;
+            cloudCount = model.UploadCloudImgList.length,
+            hasSelect = unUploadCount - e.files.length,
+            allowCount = 7 - (sellerOwnerCount + cloudCount + hasSelect);
+
+            if (sellerOwnerCount + cloudCount + unUploadCount > 7) {
+                messager.error($translate("imagesManager.img_MaxUpload_Limit")
+                              .replace("{0}", sellerOwnerCount)
+                              .replace("{1}", allowCount));
+
+                var overImages = [];
+                jQuery.each(e.files, function (i, n) {
+                    if (i >= allowCount) {
+                        overImages.push(n.uid);
+                    }
+                });
+                jQuery.each(e.sender.wrapper.find("li"), function (index, ele) {
+                    if ($(ele).attr("class") == 'k-file' && jQuery.grep(overImages, function (n) { return n == $(ele).attr("data-uid") }).length > 0)
+                        ele.remove();
+                });
+                e.files.splice(0, allowCount);
+            }
+        }, 200);
+    };
+    $scope.itemImageUploadOptions = {
+        multiple: true,
+        accept: "image/jpeg,image/png",
+        async: {
+            saveUrl: svr.upLocalImgUrl
+        },
+        success: function (e, res) {
+            $scope.uploadImageByCurSeller(res[0].FileName, res[0].ImageBase64);
+        },
+        select: $scope.onSelectImages,
+        preview: {
+            maxWidth: 102,
+            maxHeight: 105
+        }
+    }
+    //Open View Image 
+    $scope.openViewImageModal = function (strInfo) {
+        var winContainer = angular.element.find("#item_image_view_modal");
+        if (winContainer.length > 0) {
+            $(winContainer).find("#divViewImage").html(strInfo);//绑定提示内容
+            $(winContainer).modal("show");
+        }
+    };
+    //Add Image By URL
+    $scope.click_BtnImageURL = function () {
+        var txtImageURL = $element.find("#txt_ImageURL").val() || "",
+            ownerImgCount = model.SellerOwnerUploadedImgList.length,
+            imgCount = model.UploadImgList.length,
+            imgCloudCount = model.UploadCloudImgList.length,
+            imgAppendCount = jQuery.grep($element.find("#uploadPanel").find("li"), function (n) {
+                return ($(n).attr("class") == 'k-file');
+            }).length,
+            warningMsg = '';
+        if (ownerImgCount + imgCloudCount + imgAppendCount >= 7) {
+            warningMsg = $translate("imagesManager.img_MaxUpload_Limit")
+                         .replace("{0}", 7)
+                         .replace("{1}", 0);
+            messager.warning(warningMsg);
+        } else if (txtImageURL == "") {
+            warningMsg = $translate("imagesManager.img_Empty_Msg");
+            messager.warning(warningMsg);
+        } else {
+            //var tempImage = new Image();
+            //tempImage.src = "txtImageURL";
+            //var imageWidth = image.width;
+            //if (imageWidth == 0) { 
+            //    return;
+            //} 
+            $scope.openConfirmModal($translate("imagesManager.img_Confirm"), function () {
+                svr.uploadImgByUrl({
+                    ImageUrl: txtImageURL, //encodeURIComponent
+                    SellerPartNumber: $scope.$parent.model.CurSellerPartNo,
+                    SellerId: authorize.sellerInfo.SellerID,
+                    //name: "abcd.jpg",        //????名称由后台生成
+                }, function (results) {
+                    if (!!results) {
+                        $element.find("#txt_ImageURL").val("");
+                        $scope.uploadImageByCurSeller(results.FileName, txtImageURL);
+                    }
+                });
+            });
+        }
+    };
+    //Add Image By Cloud
+    $scope.showCloudImageDialog = function () {
+        var uploaderByCloud = new cloudImage({
+            title: 'Seller Cloud Driver', ajax: true, single: false
+        });
+        uploaderByCloud.btns.cancel.action = function () {
+            uploaderByCloud.close();
+        }
+        uploaderByCloud.btns.ok.action = function () {
+            model.SelectCloudList = uploaderByCloud.selected;
+            var localCount = model.UploadImgList.length,
+                localAppendCount = jQuery.grep($element.find("#uploadPanel").find("li"), function (n) {
+                    return ($(n).attr("class") == 'k-file');
+                }).length;
+            if (localCount + model.SelectCloudList.length > 7) {
+                messager.warning("cloud image should not exceed the maximum permissible(" + (7 - localCount - localAppendCount) + ")");
+            } else {
+                if (model.UploadCloudImgList.length > 0)
+                    model.UploadCloudImgList.splice(0, model.UploadCloudImgList.length);
+                var cloudImgContainer = $element.find("#ul_showCloudImgList");
+                cloudImgContainer.html('');
+                var tempHtml = [];
+                for (var i = 0, j = uploaderByCloud.selected.length; i < j; i++) {
+                    //真实的图片地址是根据po组测试人员确认后而得出的规则：在缩略图后面加上=false即可 
+                    var item = uploaderByCloud.selected[i],
+                        img = new Image();
+                    img.src = item.data.src + '=false';
+                    var curNumber = model.UploadCloudImgList.length + 1,
+                        temp = {
+                            Name: item.data.name,
+                            Url: item.data.src + '=false',
+                            Number: curNumber,
+                            IsPrimary: false
+                        };
+                    model.UploadCloudImgList.push(temp);
+                    $scope.appendImageInCloundDiv(temp);
+                }
+                uploaderByCloud.close();
+            }
+        }
+        uploaderByCloud.renderer();
+        uploaderByCloud.viewer.modal('show');
+    };
+    //Confirm Window
+    $scope.openConfirmModal = function (strInfo, callback) {
+        var winContainer = angular.element.find("#item_confirm_modal");
+        if (winContainer.length > 0) {
+            $(winContainer).find("#divConfirmInfo").html(strInfo);//绑定提示内容
+            var primaryBtn = $(winContainer).find("button[class*='btn-primary']");
+            primaryBtn.unbind();
+            if (!!callback) {
+                primaryBtn.bind("click", callback);
+            }
+            $(winContainer).modal("show");
+        }
+    };
+    //Warning Window
+    $scope.openWarningModal = function (strInfo, callback) {
+        var winContainer = angular.element.find("#item_waring_modal");
+        if (winContainer.length > 0) {
+            $(winContainer).find("#divWarningInfo").html(strInfo);//绑定提示内容
+            var primaryBtn = $(winContainer).find("button[class*='btn-primary']");
+            primaryBtn.unbind();
+            if (!!callback) {
+                primaryBtn.bind("click", callback);
+            }
+            $(winContainer).modal("show");
+        }
+    };
+}]);
+
+
+
+
+==============================================
+
+angular.module('system.sellerportal')
+.factory('itemImagesManagementSvr',
+    ["$http", 'authorize', function ($http, authorize) {
+        return {
+            upLocalImgUrl: NEG.MpsApi + "/tool/file/ItemImage?SellerID=" + authorize.sellerInfo.SellerID + "&format=json",
+            uploadImgByUrl: function (data, callback) {
+                $http.post(NEG.MpsApi + "/item/image", data)
+                    .then(function (res) {
+                        callback(res.data);
+                    });
+            },
+            getCloudImageConfig: function (callback) {
+                $http.get(NEG.MpsApi + "/tool/neweggcloud")
+                    .then(function (res) {
+                        callback(res.data);
+                    });
+            },
+        }
+    }])
+
+
+===============================================
+
+ <div ng-include="templateUrls.imageManagementPage"></div>
+
+
+
+====================================================
+
+angular.module('system.sellerportal.common')
+.directive("mpsUpload", ["$compile", "$filter", "$translate", "storage", "authorize", "messager",
+    function ($compile, $filter, $translate, storage, authorize, messager) {
+        return {
+            restrict: 'E',
+            template: '<div id="uploadPanel"><input id="mpsUpload" type="file" name="files" /><div>',
+            link: function ($scope, $el, attrs) {
+                var uploadOptions = null;
+                var addExtensionClass = function (extension) {
+                    switch (extension) {
+                        case '.bmp':
+                        case '.jpg':
+                        case '.img':
+                        case '.png':
+                        case '.gif':
+                        case '.jpeg':
+                            return "img-file";
+                        case '.doc':
+                        case '.docx':
+                            return "doc-file";
+                        case '.xls':
+                        case '.xlsx':
+                            return "xls-file";
+                        case '.pdf':
+                            return "pdf-file";
+                        case '.zip':
+                        case '.rar':
+                            return "zip-file";
+                        default:
+                            return "default-file";
+                    }
+                }
+                var refreshOptions = function () {
+                    uploadOptions = eval("$scope." + attrs.ngOptions);
+
+                    uploadOptions.multiple = uploadOptions.multiple == null ? false : uploadOptions.multiple;
+
+                    if (!!uploadOptions.preview) {
+                        uploadOptions.template = function (data) {
+                            return '<span class="k-progress"></span>' +
+                                   (addExtensionClass(data.files[0].extension) == "img-file" ?
+                                   '<img id="' + data.files[0].uid + '" style="position:relative" src="" width="' + uploadOptions.preview.maxWidth + '" height="' + uploadOptions.preview.maxHeight + '"/>' :
+                                   '<span class="k-icon"></span>') +
+                                   '<span class="k-filename" title="' + data.name + '">' + data.name + '</span>' +
+                                   //'<span class="k-filename">size: ' + data.size + ' bytes</span>' +
+                                   '<strong class="k-upload-status">' +
+                                       '<button type="button" class="k-button k-button-bare k-upload-action"></button>' +
+                                   '</strong>';
+                        }
+                    }
+
+                    var callbackUpload = typeof (uploadOptions.upload) == "function" ? angular.copy(uploadOptions.upload) : null,
+                        callbackSelect = typeof (uploadOptions.select) == "function" ? angular.copy(uploadOptions.select) : null,
+                        callbackSuccess = typeof (uploadOptions.success) == "function" ? angular.copy(uploadOptions.success) : null,
+                        callbackError = typeof (uploadOptions.error) == "function" ? angular.copy(uploadOptions.error) : null,
+                        callbackComplete = typeof (uploadOptions.complete) == "function" ? angular.copy(uploadOptions.complete) : null;
+
+                    uploadOptions.async = $.extend({
+                        withCredentials: false,
+                        autoUpload: false,
+                        removeUrl: "#"
+                    }, uploadOptions.async);
+                    eval("$scope." + attrs.ngOptions + " = uploadOptions");
+
+                    var cloneOptions = angular.copy(uploadOptions);
+
+                    cloneOptions.upload = function (e) {
+                        var xhr = e.XMLHttpRequest;
+                        if (!!xhr) {
+                            xhr.addEventListener("readystatechange", function (event) {
+                                if (xhr.readyState == 1 && xhr.edited != true /* OPENED */) {
+                                    xhr.edited = true;
+                                    xhr.setRequestHeader("Accept", "application/json, text/plain, */*");
+                                    xhr.setRequestHeader("AuthorizationToken", storage.session.get('x-mps-token') || storage.local.get('x-mps-token'));
+                                    xhr.setRequestHeader("CurrentPlatform", storage.local.get(authorize.loginUser.platFormKey));
+                                    xhr.setRequestHeader("mps-language", $translate.uses());
+                                }
+                            });
+                        }
+                        if (uploadOptions.multiple == false) {
+                            e.sender.disable();
+                        }
+                        var response = null;
+                        if (!!e.XMLHttpRequest.response) {
+                            response = JSON.parse(e.XMLHttpRequest.response);
+                        }
+
+                        e.sender.wrapper.find(".k-file-error strong button:last").remove();
+
+                        !!callbackUpload && callbackUpload(e, response);
+                    }
+                    cloneOptions.select = function (e) {
+                        var $uploadPanel = e.sender.wrapper;
+                        if (e.sender.options.multiple == false) {
+                            $uploadPanel.find(".k-upload-files").children().remove();
+                        }
+
+                        var imgTotal = 0,
+                            imgLoaded = 0;
+
+                        $.each(e.files, function (i, kendoFile) {
+                            if (addExtensionClass(kendoFile.extension) == "img-file") {
+                                imgTotal++;
+                                var reader = new FileReader();
+                                reader.onload = function (evt) {
+                                    $uploadPanel.find(".k-upload-files img[id='" + kendoFile.uid + "']").attr("src", evt.target.result);
+                                    var _file = $.grep(e.files, function (n, _) { return n.uid == kendoFile.uid });
+                                    if (_file.length > 0) {
+                                        _file = _file[0];
+                                        var _tempImage = new Image();
+                                        _tempImage.src = evt.target.result;
+
+                                        _file.width = _tempImage.width;
+                                        _file.height = _tempImage.height;
+                                    }
+                                    imgLoaded++;
+                                    if (imgTotal == imgLoaded) {
+                                        !!callbackSelect && $scope.$apply(function () { callbackSelect(e) });
+                                    }
+                                }
+                                reader.readAsDataURL(kendoFile.rawFile);
+                            }
+                        });
+                        if (imgTotal == 0) {
+                            !!callbackSelect && $scope.$apply(function () { callbackSelect(e) });
+                        }
+                    }
+                    cloneOptions.success = function (e) {
+                        var response = null;
+                        if (!!e.XMLHttpRequest.response) {
+                            response = JSON.parse(e.XMLHttpRequest.response);
+                        }
+                        !!callbackSuccess && $scope.$apply(function () { callbackSuccess(e, response) });
+                    }
+                    cloneOptions.error = function (e) {
+                        var response = null;
+                        if (!!e.XMLHttpRequest.response) {
+                            response = JSON.parse(e.XMLHttpRequest.response);
+                            messager.error(response.Message);
+                        }
+
+                        e.sender.wrapper.find(".k-file-error strong").append('<button type="button" class="k-button k-button-bare k-upload-action" style="display: inline-block;"><span class="k-icon k-i-close k-delete" title="Remove"></span></button>');
+
+                        !!callbackError && $scope.$apply(function () { callbackError(e, response) });
+                    }
+                    cloneOptions.complete = function (e) {
+                        var $uploadPanel = e.sender.wrapper;
+
+                        $uploadPanel.find(".k-upload-files .k-file-success strong button").remove();
+
+                        if (uploadOptions.multiple == false) {
+                            e.sender.enable();
+                        }
+
+                        !!callbackComplete && $scope.$apply(function () { callbackComplete(e) });
+                    }
+
+                    if ($el.find("#mpsUpload").data("kendoUpload") != null) {
+                        $el.find("#mpsUpload").data("kendoUpload").destroy();
+                        $el.html('<div id="uploadPanel"><input id="mpsUpload" type="file" name="files" /><div>');
+                    }
+
+                    if (!!cloneOptions.accept) {
+                        $el.find("#mpsUpload").attr("accept", cloneOptions.accept);
+                    }
+                    $el.find("#mpsUpload").kendoUpload(cloneOptions);
+
+                    //translate
+                    //setTimeout(function () {
+                    //    var $uploadPanel = $el.find("#mpsUpload").parents("#uploadPanel");
+                    //    debugger;
+                    //});
+                }
+                refreshOptions();
+
+                $scope.$on(attrs.refreshKey, function (e) {
+                    refreshOptions();
+                });
+
+                $scope.$on("$destroy", function () {
+                    if ($el.find("#mpsUpload").data("kendoUpload") != null) {
+                        $el.find("#mpsUpload").data("kendoUpload").destroy();
+                    }
+                    $el.remove();
+                });
+            }
+        }
+    }
+]);
