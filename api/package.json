@@ -28,8 +28,11 @@
     "gulp-uglify": "^1.2.0",
     "body-parser": "*",
     "method-override": "*",
+    "run-sequence": "^1.1.1",
     "q": "~1.0.0",
     "request": "~2.34.0",
+    "multer":"~0.1.8",
+    "path":"~0.11.14",
     "tar": "^1.0.3"
   },
   "devDependencies": {

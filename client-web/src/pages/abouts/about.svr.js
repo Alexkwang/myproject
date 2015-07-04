@@ -1,8 +1,6 @@
 angular.module('scotchApp').factory('aboutService', 
 	["$http", function ($http) {
 
-    
-
 	return{
 			getmessage:function(callback){
 				//http://127.0.0.1:8201/user/5591ee7eaef61aec259d8450
@@ -10,11 +8,6 @@ angular.module('scotchApp').factory('aboutService',
 
 					callback(data);
 				});
-				 //var Commodity = global.dbHelper.getModel('commodity');
-            //Commodity.find({}, function (error, data) {
-               // callback(data);
-            //});
-//callback("alex test");
 			}	
 	};
 	}]);

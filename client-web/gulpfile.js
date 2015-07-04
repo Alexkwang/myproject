@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var runSequence = require('run-sequence');
-
+var argv = require('yargs').argv;
 var del = require('del');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
@@ -8,6 +8,8 @@ var cssmin = require('gulp-cssmin');
 var replace = require('gulp-replace');
 var fs = require('fs');
 var browserSync = require('browser-sync');
+
+var isDebug = !(argv.r || false);
 
 //var assets = JSON.parse(fs.readFileSync('assets.json', 'utf8'));
   // 
@@ -40,16 +42,16 @@ gulp.task('copy_Html', function() {
 /**/
 gulp.task('copy_system_js', function() {
   return gulp.src([
-  "./src/js/systems/angular.js",
-  "./src/js/systems/angular-route.js",
-  "./src/js/systems/bootstrap.min.js",
-  "./src/js/systems/jquery.min.js",
-   "./src/js/systems/Chart.min.js",
-  
+    "./src/js/systems/angular.js",
+    "./src/js/systems/angular-route.js",
+    "./src/js/systems/bootstrap.min.js",
+    "./src/js/systems/jquery.min.js",
+    "./src/js/systems/Chart.min.js",
+    "./src/js/systems/app.js",
+    "./src/js/systems/uploads/**/*.js"
   ])
     .pipe(gulp.dest('./dist/js/'));
 });
-
 
 
 gulp.task('copy_system_css', function() {
@@ -60,23 +62,40 @@ gulp.task('copy_system_css', function() {
     .pipe(gulp.dest('./dist/css/'));
 });
 
+gulp.task('copy_system_fonts', function() {
+  return gulp.src([
+  "./bower_components/bootstrap/fonts/*.*",
 
-gulp.task('copy',['copy_images','copy_Html','copy_system_css','copy_system_js']);
+  ])
+    .pipe(gulp.dest('./dist/fonts/'));
+});
 
+
+gulp.task('copy',['copy_images','copy_Html','copy_system_css','copy_system_js','copy_system_fonts']);
 
 
 gulp.task('js-zoomout', function() {
-  return gulp.src(["./src/js/systems/zoomout.js"])
-    .pipe(concat('zoomout.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('./dist/js/'));
+  var gulpStream = gulp.src(["./src/js/systems/zoomout.js"])
+    .pipe(concat('zoomout.min.js'));
+    
+    if(!isDebug)
+    {
+      gulpStream= gulpStream.pipe(uglify());
+    }
+    
+   return gulpStream.pipe(gulp.dest('./dist/js/'));
 });
 
 gulp.task('js', function() {
-  return gulp.src(['./src/js/*.js','./src/pages/**/*.js'])
-    .pipe(concat('app.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('./dist/js/'));
+ var  gulpStream= gulp.src(['./src/js/*.js','./src/js/directives/*.js','./src/pages/**/*.js'])
+    .pipe(concat('app.js'));
+    
+  if(!isDebug)
+  {
+    gulpStream=gulpStream.pipe(uglify());
+  }  
+
+   return gulpStream.pipe(gulp.dest('./dist/js/'));
 });
 
 gulp.task('css', function() {

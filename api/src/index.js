@@ -41,7 +41,6 @@ db.on('reconnected', function () {
  
 
   app.listen(port, function() {
-
     return logger.log("Begin listening on port " + port);
   });
 

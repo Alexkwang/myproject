@@ -4,6 +4,7 @@
 	var ObjectId = mongoose.Types.ObjectId;
 	var header = require('./../core/header'); 
 exports.viewUser = function(req, res, next){
+
     header.set(req,res);
      user.find(function(err,dataResult){
 		if (err) {

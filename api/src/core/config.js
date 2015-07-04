@@ -7,7 +7,7 @@
 
   config.listenPort = 8201;
 
-  config.attachment_group = "product";
+  config.attachment_images = "./images/product/";
 
   config.debug = true;
 
