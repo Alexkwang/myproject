@@ -70,8 +70,17 @@ gulp.task('copy_system_fonts', function() {
     .pipe(gulp.dest('./dist/fonts/'));
 });
 
+gulp.task('copy_ace', function() {
+  return gulp.src([
+  "./src/assets/**/*.*",
 
-gulp.task('copy',['copy_images','copy_Html','copy_system_css','copy_system_js','copy_system_fonts']);
+  ])
+    .pipe(gulp.dest('./dist/assets/'));
+});
+
+
+
+gulp.task('copy',['copy_images','copy_Html','copy_system_css','copy_system_js','copy_system_fonts','copy_ace']);
 
 
 gulp.task('js-zoomout', function() {
@@ -87,7 +96,7 @@ gulp.task('js-zoomout', function() {
 });
 
 gulp.task('js', function() {
- var  gulpStream= gulp.src(['./src/js/*.js','./src/js/directives/*.js','./src/pages/**/*.js'])
+ var  gulpStream= gulp.src(['./src/js/*.js','./src/js/directives/*.js','./src/pages/**/*.js','./src/indexController.js'])
     .pipe(concat('app.js'));
     
   if(!isDebug)

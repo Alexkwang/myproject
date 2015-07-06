@@ -2,27 +2,22 @@
 (function () {
 'use strict';
 angular.module('scotchApp').controller('indexController', ['$scope',function($scope) {
-    // create a message to display in our view
-  $scope.message = 'index pages.';
+   
+   var loginModel = $scope.loginModel={
 
-  var templateView = $scope.templateView = {
-                    ShowPage: ""
-                };
+    userName:null,
+    passWord:null
+   }
 
-  var templateUrls = $scope.templateUrls = {
-                    mainPage: "pages/backend/index/template.tpl1.html",
-                    subPage: ""
-                };
+$scope.login=function(){
 
+debugger;
 
-    $scope.refresh = function () {
-        			templateView.ShowPage = "template1";
-                };
- 			
- 			 $scope.refresh();
-   $scope.$on("refresh", $scope.refresh);
+  if(loginModel.userName=='admin' && loginModel.passWord=='admin')
+  {
 
-
+  }
+};
 
 }]);
 }).call(this);
