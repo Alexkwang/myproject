@@ -28,6 +28,14 @@ angular.module('scotchApp')
    $scope.refresh();
    $scope.$on("refresh", $scope.refresh);
 
+$('#fileupload')
+    .bind('fileuploaddone', function (e, data) {
+
+//debugger;
+
+    });
+
+
 }]);
 }).call(this);
 

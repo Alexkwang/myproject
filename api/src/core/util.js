@@ -1,5 +1,8 @@
 (function() {
-  var crypto = require("crypto");
+  var  crypto;
+
+  crypto = require("crypto");
+
   exports.getHash = function(data) {
     return crypto.createHash("md5").update(data).digest("hex");
   };
@@ -19,5 +22,7 @@
       return "";
     }
   };
+
+
 
 }).call(this);

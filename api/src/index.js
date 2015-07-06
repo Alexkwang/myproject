@@ -3,7 +3,7 @@
 
   logger = require("./core/logger");
 
-  config = require("./core/config");
+  config = require("./config");
 
   log4js = require("log4js");
 
@@ -38,9 +38,7 @@ db.on('reconnected', function () {
     return logger.log('MongoDB reconnected!');
 });
 
- 
-
-  app.listen(port, function() {
+app.listen(port, function() {
     return logger.log("Begin listening on port " + port);
   });
 

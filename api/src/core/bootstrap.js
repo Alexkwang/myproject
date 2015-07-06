@@ -1,18 +1,20 @@
-(function(){
+(function() {
+  var busboy, config, express, fs,upload,gm;
 
-  var restify = require('restify');
-  var fs = require("fs");
-  var cors = require('cors');
-  var busboy = require('connect-busboy');
-  var bodyParser = require('body-parser');
-  var methodOverride = require('method-override');
-  var multer  = require('multer');
-  var config = require("./config");
-  var header = require('./header'); 
+  fs = require("fs");
 
-module.exports = function(appPath){
+  express = require('express');
 
-    var app, corsOption, domainError, models_path, routes_path, token;
+  config = require("./../config");
+
+  busboy = require('connect-busboy');
+
+  upload = require('jquery-file-upload-middleware');
+
+  gm = require('gm');
+
+  module.exports = function(appPath) {
+    var app, models_path, routes_path;
     models_path = appPath + "/models";
     fs.readdirSync(models_path).forEach(function(file) {
       var newPath, stat;
@@ -25,56 +27,88 @@ module.exports = function(appPath){
       }
     });
  
-     app= restify.createServer();
-  
-     corsOption = {
-       methods:['PUT','POST','GET','DELETE','OPTIONS'],
-       origin:"*"
-     };
-    
+    app = express();
 
-      app.use(restify.CORS());
-      app.use(restify.fullResponse());
-    
-      app.use(bodyParser.json({limit: '10mb'}));
-      app.use(bodyParser.urlencoded({limit: '10mb', extended: true }));
-      app.use(methodOverride());
-      app.use(cors(corsOption));
+        upload.configure({
+        uploadDir: config.attachment_images,
+        uploadUrl: '/uploads',
+        accessControl: {
+        allowOrigin: '*',
+        allowMethods: 'OPTIONS, HEAD, GET, POST, PUT, DELETE'
+    },
 
-      app.use(busboy());
- 
-
-    app.use(multer({ dest: config.attachment_images,
-        onFileUploadComplete:function (file, req, res) {
-         //header.set(req,res);
-          res.setHeader('Access-Control-Allow-Origin', '*');
-          res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-          res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type,multipart/form-data');
-          res.setHeader('Access-Control-Allow-Credentials', true);
-         res.json({
-                    type: true,
-                    data: file.path
-                });
-       
+        imageVersions: {
+            thumbnail: {
+                width: 80,
+                height: 80
+            }
         }
-      }));
-  app.use(restify.bodyParser({
-          keepExtensions:true,
-           limit:10000000,// 10M limit
-           defer:true//enable event 
-       }));
-      app.use(restify.acceptParser(app.acceptable));
-      app.use(restify.dateParser());
-      app.use(restify.queryParser());
-      app.use(restify.jsonp());
-      app.use(restify.gzipResponse());
-     
+    });
 
+
+    app.configure(function() {
+      app.use(express.urlencoded({
+        limit: '10mb'
+      }));
+      app.use(express.json({
+        limit: '10mb'
+      }));
+      app.use('/upload',upload.fileHandler());
+      
+      upload.on('end', function (fileInfo) {
+    // insert file info
+    //console.log("files upload complete");
+
+        var filepath =upload.options.uploadDir();
+        var fileName = fileInfo.name;
+
+       var fileReadStream = fs.createReadStream(filepath+'/'+fileName);
+       var fileWriteStream = fs.createWriteStream(filepath+'/thumbnail/'+fileName);
+
+       fileReadStream.pipe(fileWriteStream);
+
+       fileWriteStream.on('close',function(){
+                 console.log('copy over');  
+       });
+
+
+        // var writeStream = fs.createWriteStream(filepath+'/thumbnail/'+fileName);
+        //     gm(filepath+'/'+fileName)
+        //     .resize('80', '80')
+        //     .stream()
+        //     .pipe(writeStream);
+
+
+
+      fileInfo.thumbnailUrl="./images/product/thumbnail/"+fileName;
+
+});
+
+
+      upload.on('delete', function (fileName) {
+    // remove file info
+    console.log("files remove complete");
+    console.log(fileName);
+});
+
+      app.use(express.methodOverride());
+   
+      app.use(busboy());
+     
+      app.use(app.router);
+      return app.use(function(err, req, res, next) {
+        res.statusCode = 500;
+        res.json({
+          Message: err.message,
+          Stack:  err.stack 
+        });
+        return res.end();
+      });
+    });
     routes_path = appPath + "/routes";
     fs.readdirSync(routes_path).forEach(function(file) {
       var newPath, stat;
       newPath = routes_path + "/" + file;
-
       stat = fs.statSync(newPath);
       if (stat.isFile()) {
         if (/(.*)\.(js$)/.test(file)) {
@@ -82,10 +116,7 @@ module.exports = function(appPath){
         }
       }
     });
-
     return app;
-};
+  };
 
 }).call(this);
-
-

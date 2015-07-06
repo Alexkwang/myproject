@@ -9,12 +9,12 @@ exports.viewUser = function(req, res, next){
      user.find(function(err,dataResult){
 		if (err) {
             res.status(500);
-            res.json({
+           return res.json({
                 type: false,
                 data: "Error occured: " + err
             })
         } else {
-                res.json({
+               return res.json({
                     type: true,
                     data: dataResult
                 })
@@ -28,18 +28,18 @@ header.set(req,res);
  user.findById(new ObjectId(req.params.id), function(err, dataResult) {
         if (err) {
             res.status(500);
-            res.json({
+            returnres.json({
                 type: false,
                 data: "Error occured: " + err
             })
         } else {
             if (dataResult) {
-                res.json({
+              return  res.json({
                     type: true,
                     data: dataResult
                 })
             } else {
-                res.json({
+               return res.json({
                     type: false,
                     data: "User: " + req.params.id + " not found"
                 })

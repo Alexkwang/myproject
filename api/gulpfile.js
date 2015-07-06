@@ -1,5 +1,5 @@
 /**
- * Created by alex on 7/2/2015.
+ * Created by alex wang on 7/6/2015.
  */
 
 var gulp = require('gulp');
@@ -10,8 +10,7 @@ var notify = require('gulp-notify');
 var argv = require('yargs').argv;
 var replace = require('gulp-replace');
 var nodemon = require('gulp-nodemon');
-var uglify = require('gulp-uglify');
-var runSequence = require('run-sequence');
+
 /**
  * Clean dist folder
  */
@@ -20,32 +19,29 @@ gulp.task('clean', function (cb) {
 });
 
 /**
- * compile js script
+ * compile coffee script
  */
-gulp.task('Js', function () {
+gulp.task('js', ['clean'], function () {
     var env = argv.e || "GDEV";
     return gulp.src('./src/**/*.js')
       .pipe(replace("[replace_env]", env))
       .pipe(gulp.dest('./dist/'))
       .pipe(notify({ message: "Compiler js complete." }));
-
 });
 
 /**
  * copy some project file
  */
-gulp.task('copy', function () {
+gulp.task('copy', ['clean'], function () {
     return gulp.src(['./src/log4js_configuration.json'])
       .pipe(gulp.dest('./dist/'))
-      .pipe(notify({ message: "Copy loger file complete." }));
+      .pipe(notify({ message: "Copy file complete." }));
 });
 
 /**
  * prepare task before start program
  */
-gulp.task('build', function(callback) {
-  return runSequence(['clean'],[ 'Js', 'copy'], callback);
-});
+gulp.task('build', ['clean', 'js', 'copy']);
 
 /**
  * start server

@@ -1,44 +1,24 @@
 {
+  "name": "express_api",
   "version": "0.0.1",
-  "name": "restful-api",
-  "description":"this is a restful API ,the Architecture is  restify + mongoose + nodejs ",
-  "author":"Alex.k.wang <wind.kaiable@gmail.com>",
-  "keywords":["node.js","restify","mongoose","gulp"],
-  "license":"MIT",
-  "repository":{
-	"type":"github",
-	"url":"https://github.com/Alexkwang/myproject.git"
-  },
-   "scripts":{
-	"start": "mode server"
-   },
-  "engines": {
-    "node": ">=0.10.0"
-  },
   "dependencies": {
-    "restify": "latest",
     "connect-busboy": "0.0.2",
     "cors": "~2.2.0",
+    "del": "^1.1.0",
+    "express": "~3.4.8",
     "lodash": "~2.4.1",
     "log4js": "~0.6.12",
     "mime": "^1.2.11",
     "mongodb": "~1.3.23",
     "mongoose": "~3.8.8",
     "node-uuid": "^1.4.1",
-    "gulp-uglify": "^1.2.0",
-    "body-parser": "*",
-    "method-override": "*",
-    "run-sequence": "^1.1.1",
     "q": "~1.0.0",
     "request": "~2.34.0",
-    "multer":"~0.1.8",
-    "path":"~0.11.14",
     "tar": "^1.0.3"
   },
   "devDependencies": {
     "del": "^1.1.0",
     "gulp": "^3.8.10",
-    "gulp-coffee": "^2.2.0",
     "gulp-nodemon": "^1.0.4",
     "gulp-notify": "^2.0.1",
     "gulp-replace": "^0.5.0",

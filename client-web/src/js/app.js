@@ -1,6 +1,6 @@
 (function () {
 'use strict';
-  var url = 'http://10.16.85.189:8201/upload';
+  var url = 'http://127.0.0.1:8201/upload';
  angular.module('scotchApp', ['ngRoute','blueimp.fileupload'])
 .config(["$routeProvider","$httpProvider",'fileUploadProvider',function($routeProvider,$httpProvider,fileUploadProvider) {
   
@@ -64,21 +64,24 @@
                     url: url
                 };
               
-                    $scope.loadingFiles = true;
+                    $scope.loadingFiles = false;
                     $http.get(url)
                         .then(
-                           
-                            function (response) {
-                                $scope.loadingFiles = false;
+                           //不要否则会自动加载所有内容出来
+                            // function (response) {
+
+                            //     $scope.loadingFiles = false;
                                 
-                                $scope.queue = response.data.files || [];
-                            },
-                            function () {
-                                $scope.loadingFiles = false;
-                            }
+                            //     $scope.queue = response.data.files || [];
+                            // },
+                            // function () {
+                            //     $scope.loadingFiles = false;
+                            // }
                         );
                 
             }
+
+            
         ])
 
         .controller('FileDestroyController', [
@@ -118,12 +121,6 @@
                 }
 
 
-
-                 $scope.filedone=function(e,data){
-
-    debugger;
-    
-   };
 
    
             }
