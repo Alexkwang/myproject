@@ -2,9 +2,11 @@
 (function () {
 'use strict';
 angular.module('scotchApp').controller('homeController', ['$scope',function($scope) {
-    // create a message to display in our view
+      var templateUrls = $scope.templateUrls = {
+        headerPage: "/pages/header.html"
+    };
+    /*==========begin your business=================================*/
 
-   
-    $scope.title = 'Everyone come and see how good I look!';
+    /*==========end your business===================================*/
 }]);
 }).call(this);

@@ -2,7 +2,14 @@
 (function () {
 'use strict';
 angular.module('scotchApp').controller('buildController', ['$scope',function($scope) {
-    // create a message to display in our view
-  $scope.message = 'build pages.';
+    
+   var templateUrls = $scope.templateUrls = {
+        headerPage: "/pages/header.html"
+    };
+    /*==========begin your business=================================*/
+
+    /*==========end your business===================================*/
+    
+
 }]);
 }).call(this);

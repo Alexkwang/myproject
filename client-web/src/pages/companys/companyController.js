@@ -3,6 +3,13 @@
 'use strict';
 angular.module('scotchApp').controller('companyController', ['$scope',function($scope) {
   
+   var templateUrls = $scope.templateUrls = {
+        headerPage: "/pages/header.html"
+    };
+    /*==========begin your business=================================*/
+
+    /*==========end your business===================================*/
+    
   	var radarChartData = {
 		labels: ["收益率", "快乐度", "工作强度", "技术进步性", "事业成长性"],
 		datasets: [
