@@ -11,7 +11,7 @@ cluster = require("cluster");
 
 http = require("http");
 
-logger = require("../common/logger");
+logger = require("../core/logger");
 
 numCPUs = require("os").cpus().length;
 

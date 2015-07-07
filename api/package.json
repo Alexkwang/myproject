@@ -3,8 +3,6 @@
   "version": "0.0.1",
   "dependencies": {
     "connect-busboy": "0.0.2",
-    "cors": "~2.2.0",
-    "del": "^1.1.0",
     "express": "~3.4.8",
     "lodash": "~2.4.1",
     "log4js": "~0.6.12",
@@ -14,7 +12,9 @@
     "node-uuid": "^1.4.1",
     "q": "~1.0.0",
     "request": "~2.34.0",
-    "tar": "^1.0.3"
+    "tar": "^1.0.3",
+    "jquery-file-upload-middleware":"latest",
+    "gm":"latest"
   },
   "devDependencies": {
     "del": "^1.1.0",

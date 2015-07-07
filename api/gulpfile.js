@@ -38,10 +38,17 @@ gulp.task('copy', ['clean'], function () {
       .pipe(notify({ message: "Copy file complete." }));
 });
 
+
+gulp.task('copylog', ['clean'], function () {
+    return gulp.src(['./src/logs/*.*'])
+      .pipe(gulp.dest('./dist/logs'))
+      .pipe(notify({ message: "created logs folder complete." }));
+});
+
 /**
  * prepare task before start program
  */
-gulp.task('build', ['clean', 'js', 'copy']);
+gulp.task('build', ['clean', 'js', 'copy','copylog']);
 
 /**
  * start server

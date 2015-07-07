@@ -8,11 +8,11 @@
 . /etc/rc.d/init.d/functions
 
 # USER="nodejs"
-DAEMON="/var/lib/newkit_api/bin/newkit_apiserver"
+DAEMON="/var/lib/express_api/bin/express_apiserver"
 SERVER="Newkit Server"
-LOG_FILE="/var/lib/newkit_api/server.log"
+LOG_FILE="/var/lib/express_api/server.log"
 
-LOCK_FILE="/var/lock/subsys/newkit-server"
+LOCK_FILE="/var/lock/subsys/express-server"
 
 export PATH=$PATH:/opt/app/node-v0.10.26/bin
 

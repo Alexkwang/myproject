@@ -1,5 +1,5 @@
 (function() {
-  var busboy, config, express, fs,upload,gm;
+  var busboy, config, express, fs,upload,gm,imageMagick;
 
   fs = require("fs");
 
@@ -11,7 +11,9 @@
 
   upload = require('jquery-file-upload-middleware');
 
-  gm = require('gm');
+  gm = require('gm').subClass({ imageMagick: true });
+ 
+ //imageMagick = require('imagemagick');
 
   module.exports = function(appPath) {
     var app, models_path, routes_path;
@@ -62,33 +64,28 @@
         var filepath =upload.options.uploadDir();
         var fileName = fileInfo.name;
 
-       var fileReadStream = fs.createReadStream(filepath+'/'+fileName);
-       var fileWriteStream = fs.createWriteStream(filepath+'/thumbnail/'+fileName);
+        gm(filepath+'/'+fileName)
+        .resize(80, 80)
+        .noProfile()
+        .write(filepath+'/thumbnail/'+fileName, function (err) {
+          if (!err) console.log('done');
+        });
 
-       fileReadStream.pipe(fileWriteStream);
-
-       fileWriteStream.on('close',function(){
-                 console.log('copy over');  
-       });
-
-
-        // var writeStream = fs.createWriteStream(filepath+'/thumbnail/'+fileName);
-        //     gm(filepath+'/'+fileName)
-        //     .resize('80', '80')
-        //     .stream()
-        //     .pipe(writeStream);
-
-
-
-      fileInfo.thumbnailUrl="./images/product/thumbnail/"+fileName;
-
+       fileInfo.thumbnailUrl="./images/product/thumbnail/"+fileName;
+      fileInfo.url="./images/product/"+fileName;
 });
 
 
       upload.on('delete', function (fileName) {
+    
+     var filepath =upload.options.uploadDir();
+
+      fs.rmdir(filepath+'/'+fileName,function(){});
+      fs.rmdir(filepath+'/thumbnail/'+fileName,function(){});
+   
     // remove file info
     console.log("files remove complete");
-    console.log(fileName);
+    //console.log(fileName);
 });
 
       app.use(express.methodOverride());
