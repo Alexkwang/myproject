@@ -2,7 +2,7 @@
 'use strict';
   var url = 'http://127.0.0.1:8201/upload';
  angular.module('scotchApp', ['ngRoute','blueimp.fileupload'])
-.config(["$routeProvider","$httpProvider",'fileUploadProvider',function($routeProvider,$httpProvider,fileUploadProvider) {
+.config(["$routeProvider","$httpProvider",'$locationProvider','fileUploadProvider',function($routeProvider,$httpProvider,$locationProvider,fileUploadProvider) {
   
         //$httpProvider.defaults.useXDomain = true;
        // $httpProvider.defaults.headers.common = 'Content-Type: application/json';
@@ -43,7 +43,7 @@
             controller  : 'buildController'
         })
 
-           .when('/team', {
+           .when('/us', {
             templateUrl : 'pages/teams/team.html',
             controller  : 'teamController'
         })
@@ -57,6 +57,9 @@
                 controller:'indexController'
             })
         .otherwise({redirectTo:'/'});
+
+         $locationProvider.html5Mode(true);
+
 }]) .controller('DemoFileUploadController', [
             '$scope', '$http', '$filter', '$window',
             function ($scope, $http) {
@@ -120,9 +123,6 @@
                     };
                 }
 
-
-
-   
             }
         ]);
 
