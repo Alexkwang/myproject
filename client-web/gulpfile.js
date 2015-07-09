@@ -78,9 +78,16 @@ gulp.task('copy_ace', function() {
     .pipe(gulp.dest('./dist/assets/'));
 });
 
+gulp.task('copy_favicon', function() {
+  return gulp.src([
+  "./src/favicon.ico",
+
+  ])
+    .pipe(gulp.dest('./dist/'));
+});
 
 
-gulp.task('copy',['copy_images','copy_Html','copy_system_css','copy_system_js','copy_system_fonts','copy_ace']);
+gulp.task('copy',['copy_images','copy_Html','copy_system_css','copy_system_js','copy_system_fonts','copy_ace','copy_favicon']);
 
 
 gulp.task('js-zoomout', function() {

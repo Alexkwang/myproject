@@ -3,7 +3,6 @@
  */
 
 var gulp = require('gulp');
-var coffee = require('gulp-coffee');
 var gutil = require('gulp-util');
 var del = require('del');
 var notify = require('gulp-notify');
