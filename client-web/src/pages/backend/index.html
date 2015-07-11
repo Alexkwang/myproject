@@ -44,7 +44,8 @@
     </head>
 
     <body class="no-skin">
-        <!-- #section:basics/navbar.layout -->
+       
+<!-- #section:basics/navbar.layout -->
         <div id="navbar" class="navbar navbar-default">
             <script type="text/javascript">
                 try{ace.settings.check('navbar' , 'fixed')}catch(e){}
@@ -64,77 +65,16 @@
 
         <!-- /section:basics/navbar.layout -->
         <div class="main-container" id="main-container">
-             <!-- #section:basics/sidebar -->
-            <div id="sidebar">
-               
-                <ul class="nav nav-list">
-                    <li class="">
-                        <a href="#/programlist">
-                            <i class="menu-icon fa fa-tachometer"></i>
-                            <span class="menu-text"> 项目管理 </span>
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-                    
-                    <li class="">
-                        <a href="widgets.html">
-                            <i class="menu-icon fa fa-list-alt"></i>
-                            <span class="menu-text"> Widgets </span>
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-
-                   
-                    <li class="">
-                        <a href="gallery.html">
-                            <i class="menu-icon fa fa-picture-o"></i>
-                            <span class="menu-text"> Gallery </span>
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-
-                  
-                </ul><!-- /.nav-list -->
-
-             
-
-                <!-- /section:basics/sidebar.layout.minimize -->
-                <script type="text/javascript">
-                    try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
-                </script>
-            </div>
-
-          
-
+            <div ng-include="templateUrls.backendmenuPage"></div>
                 <!-- /section:basics/content.breadcrumbs -->
                 <div>
-                    <!-- #section:settings.box -->
-
-
-                   
+                   <div ng-include="templateUrls.backendmainPage"></div>
                 </div><!-- /.page-content -->
            
 
-            <div class="footer">
-                <div class="footer-inner">
-                    <!-- #section:basics/footer -->
-                    <div class="footer-content">
-                        <span class="bigger-120">
-                            <span class="blue bolder">nine-urbanplanning and design co.ltd</span>
-                            Application &copy; 2015-2018
-                        </span>
-                    </div>
-
-                    <!-- /section:basics/footer -->
-                </div>
-            </div>
-
-            <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-                <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
-            </a>
+           
+            <div ng-include="templateUrls.backendfooterPage"></div>
+            
         </div><!-- /.main-container -->
 
         <!-- basic scripts -->
