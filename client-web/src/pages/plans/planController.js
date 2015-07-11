@@ -2,9 +2,7 @@
 (function () {
 	'use strict';
 angular.module('scotchApp').controller('planController',['$scope', function($scope) {
-     var templateUrls = $scope.templateUrls = {
-        headerPage: "/pages/header.html"
-    };
+
     /*==========begin your business=================================*/
 
     /*==========end your business===================================*/

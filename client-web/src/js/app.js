@@ -7,7 +7,7 @@
         //$httpProvider.defaults.useXDomain = true;
        // $httpProvider.defaults.headers.common = 'Content-Type: application/json';
         //$httpProvider.defaults.withCredentials = true;
-        
+         
   delete $httpProvider.defaults.headers.common['X-Requested-With'];
   fileUploadProvider.defaults.redirect = window.location.href.replace(
                     /\/[^\/]*$/,
@@ -52,13 +52,18 @@
             templateUrl : 'pages/abouts/about.html',
             controller  : 'aboutController'
         }) 
-            .when('/login',{
-                templateUrl:'pages/backend/index/index.html',
+            .when('/index',{
+                templateUrl:'pages/backend/index.html',
                 controller:'indexController'
             })
+            .when('/programlist',{
+                templateUrl:'pages/backend/manageprogram/programlist.html',
+                controller:'indexController'
+            })
+
         .otherwise({redirectTo:'/'});
 
-         $locationProvider.html5Mode(true);
+        // $locationProvider.html5Mode(true);
 
 }]) .controller('DemoFileUploadController', [
             '$scope', '$http', '$filter', '$window',

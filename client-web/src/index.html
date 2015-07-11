@@ -2,43 +2,27 @@
 <html ng-app="scotchApp">
   <head>
     <title>九创联合</title>
-      <base href="/">
-      <meta charset="utf-8">
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title ng-bind="pageTitle"></title>
-      <meta name="description" content="">
-      <meta name="viewport" content="width=device-width">
-      <meta name="keywords" content="">
-      <meta name="description" content="九创联合 建筑设计 景观设计 城市规划 商业综合体 高级住宅 公园 建筑设计公司 ">
-      <meta id="description" name="description" content="九创联合">
-  <link rel="shortcut icon" type="image/ico" href="/favicon.ico">
-  <link href="/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="/css/bootstrap-theme.min.css" rel="stylesheet"/> 
-
-      
-  
-  @@gulp.css
-
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title ng-bind="pageTitle"></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <meta name="keywords" content="">
+    <meta name="description" content="九创联合 建筑设计 景观设计 城市规划 商业综合体 高级住宅 公园 建筑设计公司 ">
+    <meta id="description" name="description" content="九创联合">
+    <link rel="shortcut icon" type="image/ico" href="/favicon.ico">
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/bootstrap-theme.min.css" rel="stylesheet"/> 
+      @@gulp.css
   </head>
   <body>
- <div ng-controller="homeController" class="app-content">
-
-
-      <!--begin content-->
-      <div class="wrap-content container" style="margin-left:220px;"  id="container">
-         <div ng-view></div>
-      </div>
-      <!--end content-->
-      <!-- start: FOOTER -->
-      <div class="col-md-12 margin-bottom-10 margin-top-30">
-      <div class="col-md-2"></div>
-          <div class="col-md-5">
-            &copy; <span class="current-year"></span><span class="text-bold text-uppercase">nine-urbanplanning and design co.ltd</span>. <span>All rights reserved</span>
-          </div>
-      </div>
-      <!-- end: FOOTER -->
-    </div>
+ <div ng-controller="homeController">
+  <!--begin content-->
+  <div ng-view></div>
+  <!--end content-->
+  </div>
 
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
