@@ -65,12 +65,17 @@
 
         <!-- /section:basics/navbar.layout -->
         <div class="main-container" id="main-container">
-            <div ng-include="templateUrls.backendmenuPage"></div>
+              
+              <div class="row">
+              <div class="col-md-2">
+                <div ng-include="templateUrls.backendmenuPage"></div>
+              
+              </div>
                 <!-- /section:basics/content.breadcrumbs -->
-                <div>
+                <div class="col-md-10">
                    <div ng-include="templateUrls.backendmainPage"></div>
                 </div><!-- /.page-content -->
-           
+           </div>
 
            
             <div ng-include="templateUrls.backendfooterPage"></div>

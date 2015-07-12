@@ -1,9 +1,10 @@
     <!-- #section:basics/sidebar -->
-            <div id="sidebar">
+    <div class="row" ng-controller="menuController">
+            <div class="col=md-12">
                
                 <ul class="nav nav-list">
                     <li class="">
-                        <a href="#/programlist">
+                        <a ng-click="goToProgramList()">
                             <i class="menu-icon fa fa-tachometer"></i>
                             <span class="menu-text"> 项目管理 </span>
                         </a>
@@ -12,7 +13,7 @@
                     </li>
                     
                     <li class="">
-                        <a href="widgets.html">
+                        <a ng-click="goToNewsList()">
                             <i class="menu-icon fa fa-list-alt"></i>
                             <span class="menu-text"> Widgets </span>
                         </a>
@@ -40,3 +41,5 @@
                     try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
                 </script>
             </div>
+
+</div>
