@@ -39,7 +39,7 @@ gulp.task('copy_Html', function() {
     .pipe(gulp.dest("./dist/pages/"));
 });
 
-/**/
+/*d*/
 gulp.task('copy_system_js', function() {
   return gulp.src([
     "./src/js/systems/angular.js",
@@ -62,7 +62,8 @@ gulp.task('copy_system_css', function() {
   "./bower_components/ngDialog/css/ngDialog.css",
   "./bower_components/ngDialog/css/ngDialog-theme-default.css",
   "./bower_components/ngDialog/css/ngDialog-theme-plain.css",
-   "./bower_components/ngDialog/css/ngDialog-custom-width.css"
+   "./bower_components/ngDialog/css/ngDialog-custom-width.css",
+   "./src/css/fileupload/*.css"
   
   ])
     .pipe(gulp.dest('./dist/css/'));
