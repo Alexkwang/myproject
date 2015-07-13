@@ -48,7 +48,8 @@ gulp.task('copy_system_js', function() {
     "./src/js/systems/jquery.min.js",
     "./src/js/systems/Chart.min.js",
     "./src/js/systems/app.js",
-    "./src/js/systems/uploads/**/*.js"
+    "./src/js/systems/uploads/**/*.js",
+    "./bower_components/ngDialog/js/ngDialog.min.js"
   ])
     .pipe(gulp.dest('./dist/js/'));
 });
@@ -57,7 +58,12 @@ gulp.task('copy_system_js', function() {
 gulp.task('copy_system_css', function() {
   return gulp.src([
   "./bower_components/bootstrap/dist/css/bootstrap.min.css",
-  "./bower_components/bootstrap/dist/css/bootstrap-theme.min.css"
+  "./bower_components/bootstrap/dist/css/bootstrap-theme.min.css",
+  "./bower_components/ngDialog/css/ngDialog.css",
+  "./bower_components/ngDialog/css/ngDialog-theme-default.css",
+  "./bower_components/ngDialog/css/ngDialog-theme-plain.css",
+   "./bower_components/ngDialog/css/ngDialog-custom-width.css"
+  
   ])
     .pipe(gulp.dest('./dist/css/'));
 });
@@ -116,9 +122,6 @@ gulp.task('js', function() {
 
 gulp.task('css', function() {
   return gulp.src([
-    "./src/css/themes/theme-1.css",
-    "./src/css/themes/plugins.css",
-    "./src/css/themes/styles.css",
     "./src/css/main.css"
     ])
     .pipe(concat('all.min.css'))

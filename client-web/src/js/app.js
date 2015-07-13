@@ -1,7 +1,7 @@
 (function () {
 'use strict';
   var url = 'http://127.0.0.1:8201/upload';
- angular.module('scotchApp', ['ngRoute','blueimp.fileupload'])
+ angular.module('scotchApp', ['ngRoute','blueimp.fileupload','ngDialog'])
 .config(["$routeProvider","$httpProvider",'$locationProvider','fileUploadProvider',function($routeProvider,$httpProvider,$locationProvider,fileUploadProvider) {
   
         //$httpProvider.defaults.useXDomain = true;

@@ -34,6 +34,7 @@
     "mongodb": "latest",
     "connect-mongo": "latest",
     "connect-flash": "latest",
-    "requirejs": "latest"
+    "requirejs": "latest",
+    "ng-dialog":"latest"
   }
 }
