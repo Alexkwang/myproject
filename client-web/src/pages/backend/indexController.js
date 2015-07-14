@@ -3,20 +3,16 @@
 'use strict';
 angular.module('scotchApp').controller('indexController', ['$scope',function($scope) {
    
-   var loginModel = $scope.loginModel={
+  $scope.goToNewsList=function(){
+	$scope.templateUrls.backendmainPage="/pages/backend/login/login.html";
+	$scope.homeName="员工管理";	
+};
 
-    userName:null,
-    passWord:null
-   }
 
-$scope.login=function(){
+$scope.goToProgramList=function(){
+	$scope.templateUrls.backendmainPage="/pages/backend/manageprogram/programlist.html";
+	$scope.homeName="项目管理";
 
-debugger;
-
-  if(loginModel.userName=='admin' && loginModel.passWord=='admin')
-  {
-
-  }
 };
 
 }]);

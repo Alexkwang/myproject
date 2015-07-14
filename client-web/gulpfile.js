@@ -49,7 +49,7 @@ gulp.task('copy_system_js', function() {
     "./src/js/systems/Chart.min.js",
     "./src/js/systems/app.js",
     "./src/js/systems/uploads/**/*.js",
-    "./bower_components/ngDialog/js/ngDialog.min.js"
+    "./src/js/systems/ngDialog.min.js"
   ])
     .pipe(gulp.dest('./dist/js/'));
 });
@@ -57,25 +57,25 @@ gulp.task('copy_system_js', function() {
 
 gulp.task('copy_system_css', function() {
   return gulp.src([
-  "./bower_components/bootstrap/dist/css/bootstrap.min.css",
-  "./bower_components/bootstrap/dist/css/bootstrap-theme.min.css",
-  "./bower_components/ngDialog/css/ngDialog.css",
-  "./bower_components/ngDialog/css/ngDialog-theme-default.css",
-  "./bower_components/ngDialog/css/ngDialog-theme-plain.css",
-   "./bower_components/ngDialog/css/ngDialog-custom-width.css",
+  "./src/css/bootstrap/bootstrap.min.css",
+  "./src/css/bootstrap/bootstrap-theme.min.css",
+  "./src/css/ngdialog/ngDialog.css",
+  "./src/css/ngdialog/ngDialog-theme-default.css",
+  "./src/css/ngdialog/ngDialog-theme-plain.css",
+   "./src/css/ngdialog/ngDialog-custom-width.css",
    "./src/css/fileupload/*.css"
   
   ])
     .pipe(gulp.dest('./dist/css/'));
 });
 
-gulp.task('copy_system_fonts', function() {
-  return gulp.src([
-  "./bower_components/bootstrap/fonts/*.*",
+// gulp.task('copy_system_fonts', function() {
+//   return gulp.src([
+//   "./bower_components/bootstrap/fonts/*.*",
 
-  ])
-    .pipe(gulp.dest('./dist/fonts/'));
-});
+//   ])
+//     .pipe(gulp.dest('./dist/fonts/'));
+// });
 
 gulp.task('copy_ace', function() {
   return gulp.src([
@@ -94,7 +94,7 @@ gulp.task('copy_favicon', function() {
 });
 
 
-gulp.task('copy',['copy_images','copy_Html','copy_system_css','copy_system_js','copy_system_fonts','copy_ace','copy_favicon']);
+gulp.task('copy',['copy_images','copy_Html','copy_system_css','copy_system_js','copy_ace','copy_favicon']);
 
 
 gulp.task('js-zoomout', function() {
