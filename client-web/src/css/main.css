@@ -1095,3 +1095,17 @@ nav.links a {
   -moz-transform: translateY(0px);
   transform: translateY(0px);
 }
+.item_image_review_normal {
+    border: 1px solid #87B3E0;
+    width: 140px;
+    height: 115px;
+}
+
+.item_image_review_primary {
+    border: 1px solid #F2A426;
+    width: 140px;
+    height: 115px;
+    -moz-box-shadow: inset 0px 0px 0px 4px #FCEBCF; /*firefox*/
+    -webkit-box-shadow: inset 0px 0px 0px 4px #FCEBCF; /*webkit*/
+    box-shadow: inset 0px 0px 0px 4px #FCEBCF; /*opera或ie9*/
+}
