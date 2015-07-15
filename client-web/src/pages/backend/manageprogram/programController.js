@@ -10,8 +10,18 @@
 angular.module('scotchApp').controller('programController', ['$scope','$element','$http','ngDialog',function($scope,$element,$http,ngDialog) {
    
    var model = $scope.model = {
+     ProjectName:null,
+     ProjectType:null,
+     ProjectEntrust:null,
+     ProjectPosition:null,
+     AreaCovered:null,
+     BuildingArea:null,
+     VolumeRatio:null,
+     DesignTime:null,
+     DesignDes:null,
    	 PrimaryImageNo:null,
    	 UploadImgList:[],
+
    	 DragStart: null             //切换图片位置时，要切换的图片对象
    };
     $scope.options = {url: url};
@@ -85,7 +95,7 @@ angular.module('scotchApp').controller('programController', ['$scope','$element'
                         }),
            linkDiv = $("<div style=\"margin-top: 10px;text-decoration: underline;font-size: 10px;vertical-align: middle;\">").append(link_primary).append(link_view),//.append(link_delete),
            dragStyle =  "cursor: pointer;",
-           imgItemObj = $("<div style=\"margin-right: 10px; " + dragStyle + "\">")
+           imgItemObj = $("<div style=\"margin: 10px; " + dragStyle + "\">")
                           .bind('dragstart', function (e) {
                               model.DragStart = $(e.target).parents("td:first");
                           })
@@ -169,6 +179,7 @@ angular.module('scotchApp').controller('programController', ['$scope','$element'
     };
 /*=================================end insertImgObj============================================*/
 
+//监听文件上传完成事件，把上传成功后的文件添加到model中
  $scope.$on('fileuploaddone', function(event, file){
  	
 	angular.forEach(file.result.files, function (item, index) {
@@ -184,6 +195,17 @@ angular.module('scotchApp').controller('programController', ['$scope','$element'
 		$scope.insertImgObj(itemmodel);
 	});
  });
+
+
+
+$scope.submitdata=function(model){
+
+debugger;
+
+
+
+};
+
 
 /*=================================end Controller============================================*/
 }]) .controller('FileDestroyController', [
@@ -218,7 +240,6 @@ angular.module('scotchApp').controller('programController', ['$scope','$element'
                     };
                 }
 
-            }
-        ]);
+            }]);
 
 }).call(this);
