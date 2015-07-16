@@ -26,6 +26,8 @@ angular.module('scotchApp').controller('programController', ['$scope','$element'
    };
     $scope.options = {url: url};
 
+   
+
  /*=================================begin setPrimaryImage============================================*/
  $scope.setPrimaryImage = function (curimg) {
         var trContainer = $element.find("#tr_imagelist");
@@ -141,14 +143,14 @@ angular.module('scotchApp').controller('programController', ['$scope','$element'
                                                model.DragStart.find("a[name='primarylink']").show();
                                                endTd.find("div[name='imgdiv']").attr("class", "item_image_review_primary");
                                                endTd.find("a[name='primarylink']").hide();
-                                               $scope.$parent.model.PrimaryImageNo = model.UploadImgList[indexEnd].Number;
+                                               model.PrimaryImageNo = model.UploadImgList[indexEnd].Number;
                                            }
                                            if (tempEndObj.IsPrimary) {
                                                model.DragStart.find("div[name='imgdiv']").attr("class", "item_image_review_primary");
                                                model.DragStart.find("a[name='primarylink']").hide();
                                                endTd.find("div[name='imgdiv']").attr("class", "item_image_review_normal");
                                                endTd.find("a[name='primarylink']").show();
-                                               $scope.$parent.model.PrimaryImageNo = model.UploadImgList[indexStart].Number;
+                                               model.PrimaryImageNo = model.UploadImgList[indexStart].Number;
                                            }
                                            //切换数据
                                           

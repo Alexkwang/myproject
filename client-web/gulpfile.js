@@ -49,7 +49,8 @@ gulp.task('copy_system_js', function() {
     "./src/js/systems/Chart.min.js",
     "./src/js/systems/app.js",
     "./src/js/systems/uploads/**/*.js",
-    "./src/js/systems/ngDialog.min.js"
+    "./src/js/systems/ngDialog.min.js",
+    "./src/js/systems/textAngular/*.js"
   ])
     .pipe(gulp.dest('./dist/js/'));
 });
@@ -62,9 +63,9 @@ gulp.task('copy_system_css', function() {
   "./src/css/ngdialog/ngDialog.css",
   "./src/css/ngdialog/ngDialog-theme-default.css",
   "./src/css/ngdialog/ngDialog-theme-plain.css",
-   "./src/css/ngdialog/ngDialog-custom-width.css",
-   "./src/css/fileupload/*.css"
-  
+  "./src/css/ngdialog/ngDialog-custom-width.css",
+  "./src/css/fileupload/*.css",
+  "./src/css/textAngular/*.css"
   ])
     .pipe(gulp.dest('./dist/css/'));
 });

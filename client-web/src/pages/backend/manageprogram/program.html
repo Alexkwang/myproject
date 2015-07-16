@@ -1,12 +1,8 @@
 <!--<link rel="stylesheet" href="css/style.css">
  blueimp Gallery styles -->
-<link rel="stylesheet" href="../css/blueimp-gallery.min.css">
-<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-<link rel="stylesheet" href="../css/jquery.fileupload.css">
-<link rel="stylesheet" href="css/jquery.fileupload-ui.css">
-<!-- CSS adjustments for browsers with JavaScript disabled -->
-<noscript><link rel="stylesheet" href="../css/jquery.fileupload-noscript.css"></noscript>
-<noscript><link rel="stylesheet" href="../css/jquery.fileupload-ui-noscript.css"></noscript>
+
+
+
 <div class="row widget-box" style="margin-top:20px;">
 <div class="row " style="margin:15px;">
 
@@ -124,9 +120,8 @@
 				</div>
 			</div>
 			<div class="row">
-						<!-- 	<textarea class="comments" ng-model="model.DesignDes"  style="height:expression((this.scrollHeight>150)?'300px':(this.scrollHeight+5)+'px'); width:100%; overflow:auto;"></textarea>  -->
-
-						<div class="wysiwyg-editor"  ng-model="model.DesignDes" contenteditable="true" id="editor1"></div>
+						<text-angular-toolbar name="toolbar"></text-angular-toolbar>
+						<div text-angular ng-model="model.DesignDes"  ta-target-toolbars='toolbar'></div>
 				</div>
 			<div class="row">
 				<div class="col-md-12 text-center widget-box" style="overflow-x:auto;">
@@ -246,9 +241,13 @@
 		<script src="../assets/js/bootstrap.min.js"></script>
 		<script src="../assets/js/jquery.hotkeys.min.js"></script>
 		<script src="../assets/js/bootstrap-wysiwyg.min.js"></script>
-		<script type="text/javascript">
-			jQuery(function($) {
 
+
+		<script type="text/javascript">
+			
+			 
+
+			jQuery(function($) {
 				$('.date-picker').datepicker({
 					autoclose: true,
 					todayHighlight: true

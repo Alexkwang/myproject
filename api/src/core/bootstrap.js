@@ -1,20 +1,18 @@
 (function() {
-  var busboy, config, express, fs,upload,gm,imageMagick;
+  var busboy, config, express, fs,upload,gm;
 
-  fs = require("fs");
+   var fs = require("fs");
 
-  express = require('express');
+   var express = require('express');
 
-  config = require("./../config");
+   var config = require("./../config");
 
-  busboy = require('connect-busboy');
+   var busboy = require('connect-busboy');
 
-  upload = require('jquery-file-upload-middleware');
+   var upload = require('jquery-file-upload-middleware');
 
-  gm = require('gm').subClass({ imageMagick: true });
+   var gm = require('gm').subClass({ imageMagick: true });
  
- //imageMagick = require('imagemagick');
-
   module.exports = function(appPath) {
     var app, models_path, routes_path;
     models_path = appPath + "/models";
@@ -87,7 +85,6 @@
     console.log("files remove complete");
     //console.log(fileName);
 });
-
       app.use(express.methodOverride());
    
       app.use(busboy());
