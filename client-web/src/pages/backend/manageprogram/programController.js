@@ -3,15 +3,11 @@
 (function () {
 'use strict';
 
-
-
- var url = 'http://127.0.0.1:8201/upload';
-
-angular.module('scotchApp').controller('programController', ['$scope','$element','$http','ngDialog',function($scope,$element,$http,ngDialog) {
+angular.module('scotchApp').controller('programController', ['$scope','$element','$http','ngDialog','programService',function($scope,$element,$http,ngDialog,programService) {
    
    var model = $scope.model = {
      ProjectName:null,
-     ProjectType:null,
+     ProjectType:"商业综合",
      ProjectEntrust:null,
      ProjectPosition:null,
      AreaCovered:null,
@@ -43,15 +39,15 @@ angular.module('scotchApp').controller('programController', ['$scope','$element'
         //设置当前图片为Primary 
         jQuery.each(model.UploadImgList, function (index, node) {
             if (!!model.PrimaryImageNo &&
-                node.Number == model.PrimaryImageNo)//去掉上一次设置的Primary
+                node.Numbers == model.PrimaryImageNo)//去掉上一次设置的Primary
                 node.IsPrimary = false;
-            if (node.Number == curimg.Number)//设置当前为Primary
+            if (node.Numbers == curimg.Numbers)//设置当前为Primary
                 node.IsPrimary = true;
         });
         if (!!model.PrimaryImageObj)
             model.PrimaryImageObj.attr("src", curimg.Url);
-        model.PrimaryImageNo = curimg.Number;
-        var newTdPrimary = trContainer.find("td[number=" + curimg.Number + "]");
+        model.PrimaryImageNo = curimg.Numbers;
+        var newTdPrimary = trContainer.find("td[number=" + curimg.Numbers + "]");
         if (newTdPrimary.length > 0) {
             newTdPrimary.find("div[name='imgdiv']").attr("class", "item_image_review_primary");
             newTdPrimary.find("a[name='primarylink']").css({ "display": "none" });
@@ -102,7 +98,7 @@ angular.module('scotchApp').controller('programController', ['$scope','$element'
                               model.DragStart = $(e.target).parents("td:first");
                           })
                           .append(imgObjDiv).append(linkDiv),
-            tdTemp = $("<td number=\"" + imgData.Number + "\">")
+            tdTemp = $("<td number=\"" + imgData.Numbers + "\">")
                            .bind('dragover', function (e) {
                                if (window.navigator.userAgent.indexOf("Firefox") != -1) {
                                    e.preventDefault();
@@ -126,9 +122,9 @@ angular.module('scotchApp').controller('programController', ['$scope','$element'
                                        var indexStart = -1,
                                            indexEnd = -1;
                                        jQuery.each(model.UploadImgList, function (i1, n1) {
-                                           if (n1.Number == startNo)
+                                           if (n1.Numbers == startNo)
                                                indexStart = i1;
-                                           if (n1.Number == endNo)
+                                           if (n1.Numbers == endNo)
                                                indexEnd = i1;
                                        });
 
@@ -143,14 +139,14 @@ angular.module('scotchApp').controller('programController', ['$scope','$element'
                                                model.DragStart.find("a[name='primarylink']").show();
                                                endTd.find("div[name='imgdiv']").attr("class", "item_image_review_primary");
                                                endTd.find("a[name='primarylink']").hide();
-                                               model.PrimaryImageNo = model.UploadImgList[indexEnd].Number;
+                                               model.PrimaryImageNo = model.UploadImgList[indexEnd].Numbers;
                                            }
                                            if (tempEndObj.IsPrimary) {
                                                model.DragStart.find("div[name='imgdiv']").attr("class", "item_image_review_primary");
                                                model.DragStart.find("a[name='primarylink']").hide();
                                                endTd.find("div[name='imgdiv']").attr("class", "item_image_review_normal");
                                                endTd.find("a[name='primarylink']").show();
-                                               model.PrimaryImageNo = model.UploadImgList[indexStart].Number;
+                                               model.PrimaryImageNo = model.UploadImgList[indexStart].Numbers;
                                            }
                                            //切换数据
                                           
@@ -187,7 +183,7 @@ angular.module('scotchApp').controller('programController', ['$scope','$element'
 	angular.forEach(file.result.files, function (item, index) {
 
 		var itemmodel ={
-			Number:model.UploadImgList.length+1,
+			Numbers:model.UploadImgList.length+1,
 			Name:item.name,
 			Url:item.url,
 			ThumbnailUrl:item.thumbnailUrl,
@@ -201,9 +197,30 @@ angular.module('scotchApp').controller('programController', ['$scope','$element'
 
 
 $scope.submitdata=function(model){
+ debugger;
+ var datamodel = {
 
-debugger;
+   ProjectName:model.ProjectName,
+     ProjectType:model.ProjectType,
+     ProjectEntrust:model.ProjectEntrust,
+     ProjectPosition:model.ProjectPosition,
+     AreaCovered:model.AreaCovered,
+     BuildingArea:model.BuildingArea,
+     VolumeRatio:model.VolumeRatio,
+     DesignTime:model.DesignTime,
+     DesignDes:model.DesignDes,
+     PrimaryImageNo:model.PrimaryImageNo,
+     UploadImgList:model.UploadImgList,
+ }
+programService.saveProgram(datamodel,function(data){
 
+  debugger;
+});
+
+// programService.getallProgram(function(resultData){
+
+//   debugger;
+// });
 
 
 };

@@ -1,0 +1,11 @@
+(function() {
+  var config, program;
+  program = require("../controllers/program");
+   config = require("./../config");
+ module.exports = function(app) {
+ 	app.post("" + config.apiPrefix + "/programs", program.Save);
+  	app.get("" + config.apiPrefix + "/programs",  program.viewprogram);
+ 	return app;
+  };
+
+}).call(this);

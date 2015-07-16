@@ -1,4 +1,5 @@
-(function () {
+ var url = 'http://127.0.0.1:8201/upload';
+ (function () {
 'use strict';
  
  angular.module('scotchApp', ['ngRoute','blueimp.fileupload','ngDialog','textAngular'])

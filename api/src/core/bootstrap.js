@@ -47,6 +47,15 @@
 
 
     app.configure(function() {
+      app.all('*', function(req, res, next) {
+  
+   res.setHeader('Access-Control-Allow-Origin', '*');
+    res.header("Access-Control-Allow-Headers", 'Origin, X-Requested-With, Content-Type, Accept,application/json');
+    res.header('Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Credentials', true);
+    next();
+});
+
       app.use(express.urlencoded({
         limit: '10mb'
       }));

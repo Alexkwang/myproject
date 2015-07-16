@@ -6,10 +6,15 @@
 
  	module.exports = {
 	set: function(req, res) {
-		res.setHeader('Access-Control-Allow-Origin', '*');
-		res.header("Access-Control-Allow-Headers", 'X-Requested-With,application/json');
-		res.header('Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS');
-		res.header('Access-Control-Allow-Credentials', true);
+		// res.setHeader('Access-Control-Allow-Origin', '*');
+		// res.header("Access-Control-Allow-Headers", 'X-Requested-With,application/json');
+		// res.header('Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS');
+		// res.header('Access-Control-Allow-Credentials', true);
+
+		 res.setHeader('Access-Control-Allow-Origin', '*');
+    res.header("Access-Control-Allow-Headers", 'Origin, X-Requested-With, Content-Type, Accept,application/json');
+    res.header('Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Credentials', true);
 	}
 };
 
