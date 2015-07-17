@@ -2,27 +2,24 @@
   "name": "express_api",
   "version": "0.0.1",
   "dependencies": {
-    "connect-busboy": "0.0.2",
-    "express": "~3.4.8",
-    "lodash": "~2.4.1",
-    "log4js": "~0.6.12",
-    "mime": "^1.2.11",
-    "mongodb": "~1.3.23",
-    "mongoose": "~3.8.8",
-    "node-uuid": "^1.4.1",
-    "q": "~1.0.0",
-    "request": "~2.34.0",
-    "tar": "^1.0.3",
+    "connect-busboy": "latest",
+    "express": "latest",
+    "cors": "latest",
+    "log4js": "latest",
+    "mongodb": "latest",
+    "mongoose": "latest",
+    "method-override":"latest",
+    "body-parser":"latest",
     "jquery-file-upload-middleware":"latest",
     "gm":"latest"
   },
   "devDependencies": {
-    "del": "^1.1.0",
-    "gulp": "^3.8.10",
-    "gulp-nodemon": "^1.0.4",
-    "gulp-notify": "^2.0.1",
-    "gulp-replace": "^0.5.0",
-    "gulp-util": "^3.0.1",
-    "yargs": "^1.3.3"
+    "del": "latest",
+    "gulp": "latest",
+    "gulp-nodemon": "latest",
+    "gulp-notify": "latest",
+    "gulp-replace": "latest",
+    "gulp-util": "latest",
+    "yargs": "latest"
   }
 }

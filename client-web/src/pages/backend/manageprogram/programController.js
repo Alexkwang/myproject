@@ -197,7 +197,7 @@ angular.module('scotchApp').controller('programController', ['$scope','$element'
 
 
 $scope.submitdata=function(model){
- debugger;
+
  var datamodel = {
 
    ProjectName:model.ProjectName,
@@ -212,17 +212,10 @@ $scope.submitdata=function(model){
      PrimaryImageNo:model.PrimaryImageNo,
      UploadImgList:model.UploadImgList,
  }
+
 programService.saveProgram(datamodel,function(data){
 
-  debugger;
 });
-
-// programService.getallProgram(function(resultData){
-
-//   debugger;
-// });
-
-
 };
 
 

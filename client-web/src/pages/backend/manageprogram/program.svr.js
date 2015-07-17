@@ -3,8 +3,7 @@ angular.module('scotchApp').factory('programService',
 
 	return{
 			saveProgram:function(models,callback){
-				//http://127.0.0.1:8201/user/5591ee7eaef61aec259d8450
-				debugger;
+
 				$http.post("http://127.0.0.1:8201/programs",models).success(function(data){
 					
 					callback(data);

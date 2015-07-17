@@ -6,6 +6,7 @@
  Schema   = mongoose.Schema;
 
  ProgramSchema = new Schema({
+     
   	 ProjectName:{type:String, trim: true},
      ProjectType:{type:String, trim: true},
      ProjectEntrust:{type:String, trim: true},
@@ -13,7 +14,7 @@
      AreaCovered:{type:String, trim: true},
      BuildingArea:{type:String, trim: true},
      VolumeRatio:{type:String, trim: true},
-     DesignTime:{type: Date},
+     DesignTime:{type: String},
      DesignDes:{type:String, trim: true},
    	 PrimaryImageNo:Number, 
    	 UploadImgList:[{

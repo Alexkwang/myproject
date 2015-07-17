@@ -1,26 +1,22 @@
 (function() {
 	var mongoose = require('mongoose');
-	var program = mongoose.model('Program');
+	var Program = mongoose.model('Program');
 	var ObjectId = mongoose.Types.ObjectId;
 	var header = require('./../core/header'); 
 
 exports.Save=function(req, res, next){
     
-    console.log(req);
-
-     header.set(req,res);
-
-     
-	program.create(req.body,function(err){
-
-		if(err!=null)
-		{
-			return next(new Error("Save data failed. " + err));
-		}
-		else {
-			return res.end();
-		}	
-	});
+    var program=new Program(req.body);
+     // console.log(newprogram);
+      program.save(function(err){
+            if(err)
+            {
+            	 res.send(400).send({error:err});
+            }
+            res.status(200).send({message:'program Added successful!'});   
+            
+        });
+	
 };
 
 exports.viewprogram = function(req, res, next){

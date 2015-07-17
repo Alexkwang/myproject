@@ -1,5 +1,4 @@
 (function() {
-  var busboy, config, express, fs,upload,gm;
 
    var fs = require("fs");
 
@@ -9,7 +8,11 @@
 
    var busboy = require('connect-busboy');
 
+   var bodyParser = require('body-parser');
+   var cors = require('cors');
    var upload = require('jquery-file-upload-middleware');
+
+   var methodOverride = require('method-override');
 
    var gm = require('gm').subClass({ imageMagick: true });
  
@@ -27,9 +30,22 @@
       }
     });
  
-    app = express();
+ var corsOption = {
+       methods:['PUT','POST','GET','DELETE','OPTIONS'],
+       origin:"*"
+     };
 
-        upload.configure({
+
+    app =  express();
+   
+
+    app.use(bodyParser.json({limit: '10mb'}));
+    app.use(bodyParser.urlencoded({limit: '10mb', extended: true }));
+    app.use(methodOverride());
+    app.use(busboy());
+    app.use(cors(corsOption));
+
+    upload.configure({
         uploadDir: config.attachment_images,
         uploadUrl: '/uploads',
         accessControl: {
@@ -46,68 +62,43 @@
     });
 
 
-    app.configure(function() {
-      app.all('*', function(req, res, next) {
-  
-   res.setHeader('Access-Control-Allow-Origin', '*');
-    res.header("Access-Control-Allow-Headers", 'Origin, X-Requested-With, Content-Type, Accept,application/json');
-    res.header('Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Credentials', true);
-    next();
-});
-
-      app.use(express.urlencoded({
-        limit: '10mb'
-      }));
-      app.use(express.json({
-        limit: '10mb'
-      }));
-      app.use('/upload',upload.fileHandler());
-      
-      upload.on('end', function (fileInfo) {
-    // insert file info
-    //console.log("files upload complete");
-
-        var filepath =upload.options.uploadDir();
-        var fileName = fileInfo.name;
-
-        gm(filepath+'/'+fileName)
+ app.use('/upload',upload.fileHandler());
+ 
+ upload.on('end', function (fileInfo) {
+  var filepath =upload.options.uploadDir();
+  var fileName = fileInfo.name;
+      gm(filepath+'/'+fileName)
         .resize(80, 80)
         .noProfile()
         .write(filepath+'/thumbnail/'+fileName, function (err) {
           if (!err) console.log('done');
         });
 
-       fileInfo.thumbnailUrl="./images/product/thumbnail/"+fileName;
+      fileInfo.thumbnailUrl="./images/product/thumbnail/"+fileName;
       fileInfo.url="./images/product/"+fileName;
-});
+  });
 
-
-      upload.on('delete', function (fileName) {
-    
-     var filepath =upload.options.uploadDir();
-
+  upload.on('delete', function (fileName) {
+   var filepath =upload.options.uploadDir();
       fs.rmdir(filepath+'/'+fileName,function(){});
       fs.rmdir(filepath+'/thumbnail/'+fileName,function(){});
-   
-    // remove file info
-    console.log("files remove complete");
-    //console.log(fileName);
+      console.log("files remove complete");
+    
 });
-      app.use(express.methodOverride());
-   
-      app.use(busboy());
-     
-      app.use(app.router);
-      return app.use(function(err, req, res, next) {
+
+
+      var router = express.Router();
+
+     app.use(router);
+       app.use(function(err, req, res, next) {
         res.statusCode = 500;
         res.json({
           Message: err.message,
-          Stack:  err.stack 
+          Stack: config.debug === true ? err.stack : void 0
         });
         return res.end();
       });
-    });
+
     routes_path = appPath + "/routes";
     fs.readdirSync(routes_path).forEach(function(file) {
       var newPath, stat;
@@ -119,7 +110,11 @@
         }
       }
     });
+
+    
+
     return app;
+
   };
 
 }).call(this);
