@@ -28,6 +28,22 @@
 				<div class="col-md-6">
 
 					<div class="form-group">
+						<label class="col-md-3 control-label no-padding-right" for="form-field-2"> 项目类型:</label>
+
+						<div class="col-md-9">
+							<select ng-model="model.ProjectClassification" class="form-control" id="form-field-select-1">
+								<option value="规划项目">规划项目</option>
+								<option value="建筑项目">建筑项目</option>								
+							</select>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
 						<label class="col-md-3 control-label no-padding-right" for="form-field-2"> 项目分类：</label>
 
 						<div class="col-md-9">
@@ -37,6 +53,16 @@
 								<option value="旅游地产">旅游地产</option>
 								<option value="高端住宅">高端住宅</option>
 							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label class="col-md-3 control-label no-padding-right" for="form-field-2"> 主页显示：</label>
+						<div class="col-md-9">
+						<input id="gritter-light" ng-model="model.IsShowMainPage" checked="" type="checkbox" class="ace ace-switch ace-switch-5" />
+							<span class="lbl middle"></span>
+							<input type="text" ng-disabled="!model.IsShowMainPage" ng-model="model.MainIndex" class="input-mini" id="spinner1" />
 						</div>
 					</div>
 				</div>
@@ -187,10 +213,10 @@
 		                        <i class="glyphicon glyphicon-ban-circle"></i>
 		                        <span>取消上传</span>
 		                    </button>
-		                    <button data-ng-controller="FileDestroyController "  type="button" class="btn btn-danger destroy btn-xs" data-ng-click="file.$destroy()" data-ng-hide="!file.$destroy">
+		                   <!--  <button data-ng-controller="FileDestroyController "  type="button" class="btn btn-danger destroy btn-xs" data-ng-click="file.$destroy()" data-ng-hide="!file.$destroy">
 		                        <i class="glyphicon glyphicon-trash"></i>
 		                        <span>删除</span>
-		                    </button>
+		                    </button> -->
 		                </td>
 		            </tr>
 		        </table>
@@ -212,6 +238,8 @@
 					</div>
 				</div>
 			</div>
+
+			
 		</form>
 	</div>	
 </div>

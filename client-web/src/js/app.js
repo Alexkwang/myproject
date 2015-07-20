@@ -1,4 +1,4 @@
- var url = 'http://127.0.0.1:8201/upload';
+ var url = 'http://127.0.0.1:8201/';
  (function () {
 'use strict';
  

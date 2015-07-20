@@ -12,8 +12,11 @@ angular.module('scotchApp').controller('homeController', ['$scope','ngDialog',fu
     /*==========begin your business=================================*/
 
  $scope.clickToOpen1 = function () {
-         
-         ngDialog.open({ template: '/pages/backend/login/login.html' });
+         debugger
+         ngDialog.open({
+          template: '/pages/common/contents/content.html',
+          className: 'ngdialog-theme-plain'
+           });
     };
 
     /*==========end your business===================================*/

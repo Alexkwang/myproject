@@ -3,26 +3,9 @@
 (function () {
 'use strict';
 
-angular.module('scotchApp').controller('programController', ['$scope','$element','$http','ngDialog','programService',function($scope,$element,$http,ngDialog,programService) {
+angular.module('scotchApp').controller('programController', ['$scope','$timeout','$element','$http','ngDialog','programService',function($scope,$timeout,$element,$http,ngDialog,programService) {
    
-   var model = $scope.model = {
-     ProjectName:null,
-     ProjectType:"商业综合",
-     ProjectEntrust:null,
-     ProjectPosition:null,
-     AreaCovered:null,
-     BuildingArea:null,
-     VolumeRatio:null,
-     DesignTime:null,
-     DesignDes:null,
-   	 PrimaryImageNo:null,
-   	 UploadImgList:[],
 
-   	 DragStart: null             //切换图片位置时，要切换的图片对象
-   };
-    $scope.options = {url: url};
-
-   
 
  /*=================================begin setPrimaryImage============================================*/
  $scope.setPrimaryImage = function (curimg) {
@@ -57,13 +40,13 @@ angular.module('scotchApp').controller('programController', ['$scope','$element'
 
 /*=================================end viewImage============================================*/ 
     $scope.viewImage = function (curimg) {
-        var viewhtml = "<img style=\"max-height:480px; max-width:640px;\" src=\"" + curimg.Url + "\" onerror=\"javascript:this.src='./images/Item/coming soon.jpg'\"/>";
+        var viewhtml = "<img style=\"max-height:480px; max-width:640px;\" src=\"" + curimg.Url + "\" onerror=\"javascript:this.src='./images/system/noimage.gif'\"/>";
         
          ngDialog.open({
           template: viewhtml,
           className: 'ngdialog-theme-plain',
           plain: true,
-          closeByDocument :true //关闭背景区域关闭事件
+       
            });
     };
 /*=================================end viewImage============================================*/ 
@@ -72,7 +55,7 @@ angular.module('scotchApp').controller('programController', ['$scope','$element'
     $scope.insertImgObj = function (imgData) {
         model.DragStart = null;
         var trContainer = $element.find("#tr_imagelist"),
-           imgObj = $("<img class=\"img-thumbnail\" style=\"width: 130px;height: 105px;margin: 5px;\" src=\"" + imgData.ThumbnailUrl + "\" onerror=\"javascript:this.src='./images/Item/coming soon.jpg'\"/>"),
+           imgObj = $("<img class=\"img-thumbnail\" style=\"width: 130px;height: 105px;margin: 5px;\" src=\"" + imgData.ThumbnailUrl + "\" onerror=\"javascript:this.src='./images/system/noimage.gif'\"/>"),
            imgObjDiv = $("<div name=\"imgdiv\" class=\"" + (imgData.IsPrimary ? "item_image_review_primary" : "item_image_review_normal") + "\">").append(imgObj),
            hidePrimary = imgData.IsPrimary ? true : false,
            link_primary = $("<a href=\"javascript:void(0);\" name=\"primarylink\" style=\"" + (hidePrimary ? "display:none;" : "") + "margin-right: 5px;\">")
@@ -81,17 +64,18 @@ angular.module('scotchApp').controller('programController', ['$scope','$element'
                                 $scope.setPrimaryImage(e.data.curImg);
                             }),
            
-           // link_delete = $("<a href=\"javascript:void(0);\" name=\"deletelink\" style=\"margin-right: 5px;\">")
-           //                 .html("删除")
-           //                 .bind('click', { curImg: imgData }, function (e) {//delete
-           //                     //$scope.deleteImage(e.data.curImg);
-           //                 }),
+           link_delete = $("<a href=\"javascript:void(0);\" name=\"deletelink\" style=\"margin-right: 5px;\">")
+                           .html("删除")
+                           .bind('click', { curImg: imgData }, function (e) {//delete
+                            
+                               $scope.deleteImage(e.data.curImg);
+                           }),
            link_view = $("<a href=\"javascript:void(0);\" name=\"viewlink\">")
                         .html("查看")
                         .bind('click', { curImg: imgData }, function (e) {//view
                             $scope.viewImage(e.data.curImg);
                         }),
-           linkDiv = $("<div style=\"margin-top: 10px;text-decoration: underline;font-size: 10px;vertical-align: middle;\">").append(link_primary).append(link_view),//.append(link_delete),
+           linkDiv = $("<div style=\"margin-top: 10px;text-decoration: underline;font-size: 10px;vertical-align: middle;\">").append(link_primary).append(link_delete).append(link_view),
            dragStyle =  "cursor: pointer;",
            imgItemObj = $("<div style=\"margin: 10px; " + dragStyle + "\">")
                           .bind('dragstart', function (e) {
@@ -177,6 +161,60 @@ angular.module('scotchApp').controller('programController', ['$scope','$element'
     };
 /*=================================end insertImgObj============================================*/
 
+   var model = $scope.model = {
+      Options:"create",
+     IsShowMainPage:false,
+     MainIndex:null,
+     ProjectClassification:"规划项目",
+     ProjectName:null,
+     ProjectType:"商业综合",
+     ProjectEntrust:null,
+     ProjectPosition:null,
+     AreaCovered:null,
+     BuildingArea:null,
+     VolumeRatio:null,
+     DesignTime:null,
+     DesignDes:null,
+   	 PrimaryImageNo:null,
+   	 UploadImgList:[],
+
+   	 DragStart: null             //切换图片位置时，要切换的图片对象
+   };
+    $scope.options = {url: url+"upload"};
+
+   if($scope.$parent.editprogramdata!=null)
+   {
+     
+debugger;
+      model.Options="edit";
+      
+      model.IsShowMainPage=$scope.$parent.editprogramdata.IsShowMainPage;
+      model.MainIndex=$scope.$parent.editprogramdata.MainIndex;
+      model.ProjectClassification=$scope.$parent.editprogramdata.ProjectClassification;
+      model.ProjectName=$scope.$parent.editprogramdata.ProjectName;
+      model.ProjectType=$scope.$parent.editprogramdata.ProjectType;
+      model.ProjectEntrust=$scope.$parent.editprogramdata.ProjectEntrust;
+      model.ProjectPosition=$scope.$parent.editprogramdata.ProjectPosition;
+      model.AreaCovered=$scope.$parent.editprogramdata.AreaCovered;
+      model.BuildingArea=$scope.$parent.editprogramdata.BuildingArea;
+      model.VolumeRatio=$scope.$parent.editprogramdata.VolumeRatio;
+      model.DesignTime=$scope.$parent.editprogramdata.DesignTime;
+      model.DesignDes=$scope.$parent.editprogramdata.DesignDes;
+      model.PrimaryImageNo=$scope.$parent.editprogramdata.PrimaryImageNo;
+      model.UploadImgList=$scope.$parent.editprogramdata.UploadImgList;
+
+
+ 
+      
+
+      angular.forEach(model.UploadImgList, function (item, index) {
+            $scope.insertImgObj(item);
+         });
+
+
+   }
+
+
 //监听文件上传完成事件，把上传成功后的文件添加到model中
  $scope.$on('fileuploaddone', function(event, file){
  	
@@ -195,12 +233,14 @@ angular.module('scotchApp').controller('programController', ['$scope','$element'
  });
 
 
-
+/*=================================end submitdata============================================*/ 
 $scope.submitdata=function(model){
 
  var datamodel = {
-
-   ProjectName:model.ProjectName,
+     IsShowMainPage:model.IsShowMainPage,
+     MainIndex:model.MainIndex,
+     ProjectClassification:model.ProjectClassification,
+     ProjectName:model.ProjectName,
      ProjectType:model.ProjectType,
      ProjectEntrust:model.ProjectEntrust,
      ProjectPosition:model.ProjectPosition,
@@ -210,14 +250,115 @@ $scope.submitdata=function(model){
      DesignTime:model.DesignTime,
      DesignDes:model.DesignDes,
      PrimaryImageNo:model.PrimaryImageNo,
-     UploadImgList:model.UploadImgList,
+     UploadImgList:model.UploadImgList
  }
 
+ if(datamodel.UploadImgList==null &&datamodel.UploadImgList.length <=0)
+  {
+    alertify.error("请至少上传一张图片！");
+    return;
+  }
+
+
+ if(datamodel.PrimaryImageNo==null &&datamodel.PrimaryImageNo <=0)
+      {
+        alertify.error("请设置一张图片作为主图！");
+        return;
+      }
+
+if(model.Options=="edit" && $scope.$parent.editprogramdata !=null)
+{
+  $scope.$parent.editprogramdata.Options="edit";
+  programService.deleteProgram($scope.$parent.editprogramdata,function(){});
+}
 programService.saveProgram(datamodel,function(data){
+
+  if(data.status='200')
+  { 
+    alertify.success(data.message);
+    ngDialog.close($('.ngdialog').attr("id"));
+
+   $timeout(function(){$scope.$parent.AutoLoad;
+   $scope.$parent.refresh;
+ },2000)
+
+   
+  }
+  else
+  {
+    alertify.error(data.message);
+  }                     
+  
+});
+
+};
+
+/*=================================end submitdata============================================*/
+
+$scope.deleteImage=function(curimg){
+
+$http.delete(url+"upload/"+curimg.Name).success(function(data){
+
+if(data.status='200')
+{
+  var deletimg="./images/product/thumbnail/"+curimg.Name;
+
+  $("img[src='"+deletimg+"']").parent().parent().parent().remove();
+
+
+     var trContainer = $element.find("#tr_imagelist"),
+            index = -1;
+        angular.forEach(model.UploadImgList, function (item, i) {
+            if (item.Numbers == curimg.Numbers) {
+                index = i;
+                return false;
+            }
+        });
+        if (index > -1) {
+            if (curimg.IsPrimary) {
+                if (!!$scope.$parent.model.PrimaryImageObj)
+                    $scope.$parent.model.PrimaryImageObj.attr("src", "/images/product/defautlNoImage.png");
+                $scope.$parent.model.PrimaryImageNo = null;
+            }
+
+           var sellerOwnerIndex = -1;
+            angular.forEach(model.SellerOwnerUploadedImgList, function (item, i) {
+                if (item.Name == model.UploadImgList[index].Name) {
+                    sellerOwnerIndex = i;
+                    return false;
+                }
+            });
+            if (sellerOwnerIndex > -1) {
+                model.SellerOwnerUploadedImgList.splice(sellerOwnerIndex, 1);
+            }
+
+            model.UploadImgList.splice(index, 1);
+            var deleteTd = trContainer.find("td[number=" + curimg.Numbers + "]");
+            deleteTd.remove();
+            //重新设置Number
+            angular.forEach(model.UploadImgList, function (item, i) {
+                item.Numbers = i + 1;
+                if (item.IsPrimary) {
+                    $scope.$parent.model.PrimaryImageNo = i + 1;
+                }
+            });
+            angular.forEach(trContainer.find("td"), function (tdNode, i) {
+                $(tdNode).attr("number", i + 1);
+            });
+        }
+
+ alertify.success('图片删除成功！');
+}
+else
+{
+  alertify.error('图片删除失败！');
+}
+
+
+
 
 });
 };
-
 
 /*=================================end Controller============================================*/
 }]) .controller('FileDestroyController', [
@@ -225,8 +366,8 @@ programService.saveProgram(datamodel,function(data){
             function ($scope, $http) {
                 var file = $scope.file,
                     state;
-
                 if (file.url) {
+
                     file.$state = function () {
                         return state;
                     };
@@ -247,6 +388,9 @@ programService.saveProgram(datamodel,function(data){
                         );
                     };
                 } else if (!file.$cancel && !file._index) {
+
+                  debugger;
+
                     file.$cancel = function () {
                         $scope.clear(file);
                     };

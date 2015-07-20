@@ -7,8 +7,8 @@
     <!-- left<div  ng-include="templateUrls.imageManagementPage" /> -->
     <div class="main_body_left_part_left">
         <!--left line 1-->
-        <div class="main_body_left_part_line_1 zoomout"  isget="4" style="z-index: 1;">
-       <a data-toggle="modal" data-target="#myModal" href="pages/content.html"> <img src="./images/product/6.jpg" style="border:0"> </a> 
+        <div class="main_body_left_part_line_1 zoomout" ng-controller="homeController" isget="4" style="z-index: 1;">
+        <img src="./images/product/6.jpg"  ng-click="clickToOpen1()" style="border:0"> 
         </div>
         <!--left line 1-->
         <!--left line 2-->
@@ -167,15 +167,15 @@
 
 <script src="/js/zoomout.min.js"></script>
 
-   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal fade" ng-controller="homeController"  id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">项目介绍</h4>
       </div>
-      <div class="modal-body">
-        ...
+      <div class="modal-body" ng-click="clickToOpen1()">
+        
       </div>
       
     </div>

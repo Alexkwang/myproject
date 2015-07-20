@@ -8,6 +8,9 @@
  ProgramSchema = new Schema({
      
   	 ProjectName:{type:String, trim: true},
+     IsShowMainPage:{type:Boolean},
+     MainIndex:Number,
+     ProjectClassification:{type:String,trim: true},
      ProjectType:{type:String, trim: true},
      ProjectEntrust:{type:String, trim: true},
      ProjectPosition:{type:String, trim: true},

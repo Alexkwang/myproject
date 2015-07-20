@@ -1,3 +1,7 @@
 .ngdialog.ngdialog-theme-plain.custom-width .ngdialog-content {
     width: 750px;
+    
+}
+.ngdialog-content{
+	border-radius:10px;
 }

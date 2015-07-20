@@ -2,25 +2,70 @@
 // create the controller and inject Angular's $scope
 (function () {
 'use strict';
-angular.module('scotchApp').controller('programlistController', ['$scope','$element','ngDialog',function($scope,$element,ngDialog) {
+angular.module('scotchApp').controller('programlistController', ['$scope','$element','ngDialog','programService',function($scope,$element,ngDialog,programService) {
    
+var model = $scope.model = {datas:[]};
+
+$scope.AutoLoad=function(){
+  $scope.editprogramdata=null;
+		programService.getallProgram(function(datarerult){
+   			model.datas= datarerult.data;
+   	});
+};
+
+
+/*=================================bengin Auto load============================================*/
+   $scope.refresh = function () {
+    $scope.editprogramdata=null;
+		programService.getallProgram(function(datarerult){
+   			model.datas= datarerult.data;
+   	});
+   };
+
+ $scope.refresh();
+ $scope.$on("refresh", $scope.refresh);
+ /*=================================end auto load============================================*/  
     $scope.clickToOpen = function () {
          
          ngDialog.open({
           template: '/pages/backend/manageprogram/program.html',
           className: 'ngdialog-theme-plain',
-          closeByDocument :false //关闭背景区域关闭事件
+          closeByDocument :false, //关闭背景区域关闭事件
+          scope:$scope
            });
     };
 
+/*=================================end submitdata============================================*/
 
-    $scope.andcontext =function(){
 
- 		var trContainer = $element.find("#tr_imagelist");
 
- 		trContainer.append('<td number=\"" + 1 + "\">test by alex</td>');
+$scope.deleteProgram=function(program){
 
-    };
+	programService.deleteProgram(program,function(datarerult){
+   		
+      if(datarerult.status='200')
+		  {
+		    alertify.success(datarerult.message);
+
+         $scope.refresh();
+		  }
+   	});
+};
+ 
+
+$scope.editProgram=function(program){
+
+$scope.editprogramdata =program;
+
+   ngDialog.open({
+          template: '/pages/backend/manageprogram/program.html',
+          className: 'ngdialog-theme-plain',
+          closeByDocument :false, //关闭背景区域关闭事件
+          scope:$scope
+           });
+};
+
+
 
 }]);
 }).call(this);
