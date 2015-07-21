@@ -4,5 +4,8 @@ angular + expres + nodejs + bootstrap
 2. 运行 bower install
 3. gulp
 
-PS: 运行如果保持，请按照提示安装。
+PS: 运行如果报错，请按照提示安装。
 
+http://jsfiddle.net/TNy3w/2/
+
+https://github.com/l-lin/angular-datatables
