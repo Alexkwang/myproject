@@ -50,7 +50,11 @@ gulp.task('copy_system_js', function() {
     "./src/js/systems/uploads/**/*.js",
     "./src/js/systems/ngDialog.min.js",
     "./src/js/systems/textAngular/*.js",
-     "./src/js/systems/alertify.min.js",
+    "./src/js/systems/alertify.min.js",
+    "./src/js/systems/ui-bootstrap-tpls.min.js",
+    "./src/js/systems/angular-datatables.min.js",
+    "./src/js/systems/jquery.dataTables.min.js"
+    
   ])
     .pipe(gulp.dest('./dist/js/'));
 });
@@ -71,13 +75,13 @@ gulp.task('copy_system_css', function() {
     .pipe(gulp.dest('./dist/css/'));
 });
 
-// gulp.task('copy_system_fonts', function() {
-//   return gulp.src([
-//   "./bower_components/bootstrap/fonts/*.*",
+gulp.task('copy_system_fonts', function() {
+  return gulp.src([
+  "./bower_components/bootstrap/fonts/*.*",
 
-//   ])
-//     .pipe(gulp.dest('./dist/fonts/'));
-// });
+  ])
+    .pipe(gulp.dest('./dist/fonts/'));
+});
 
 gulp.task('copy_ace', function() {
   return gulp.src([
@@ -96,7 +100,7 @@ gulp.task('copy_favicon', function() {
 });
 
 
-gulp.task('copy',['copy_images','copy_Html','copy_system_css','copy_system_js','copy_ace','copy_favicon']);
+gulp.task('copy',['copy_images','copy_Html','copy_system_css','copy_system_js','copy_ace','copy_favicon','copy_system_fonts']);
 
 
 gulp.task('js-zoomout', function() {

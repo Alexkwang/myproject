@@ -2,7 +2,7 @@
  (function () {
 'use strict';
  
- angular.module('scotchApp', ['ngRoute','blueimp.fileupload','ngDialog','textAngular','ui.bootstrap'])
+ angular.module('scotchApp', ['ngRoute','blueimp.fileupload','ngDialog','textAngular','ui.bootstrap','datatables'])
 .config(["$routeProvider","$httpProvider",'$locationProvider','fileUploadProvider',function($routeProvider,$httpProvider,$locationProvider,fileUploadProvider) {
   
         //$httpProvider.defaults.useXDomain = true;
