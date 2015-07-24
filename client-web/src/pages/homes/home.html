@@ -7,14 +7,14 @@
     <!-- left<div  ng-include="templateUrls.imageManagementPage" /> -->
     <div class="main_body_left_part_left">
         <!--left line 1-->
-        <div class="main_body_left_part_line_1 zoomout" ng-controller="homeController" isget="4" style="z-index: 1;">
-        <img src="./images/product/6.jpg"  ng-click="clickToOpen1()" style="border:0"> 
+        <div class="main_body_left_part_line_1 zoomout" id="ISBN564541" data-toggle="modal" data-target="#myModal" isget="4" style="z-index: 1;">
+        <img src="./images/product/6.jpg"   style="border:0"> 
         </div>
         <!--left line 1-->
         <!--left line 2-->
         <div class="main_body_left_part_line_2">
             <!--left line 2-1-->
-            <div class="main_body_left_part_line_2_pic_1 zoomout" data-toggle="modal" data-target="#myModal"  isget="4" style="z-index: 1;">
+            <div class="main_body_left_part_line_2_pic_1 zoomout" id="ISBN564542" data-toggle="modal" data-target="#myModal"  isget="4" style="z-index: 1;">
                 <img src="./images/product/10.jpg" style="border:0">
             </div>
             <!--left line 2-1-->
@@ -167,16 +167,55 @@
 
 <script src="/js/zoomout.min.js"></script>
 
-   <div class="modal fade" ng-controller="homeController"  id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal fade" ng-controller="homeController"   id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">项目介绍</h4>
       </div>
-      <div class="modal-body" ng-click="clickToOpen1()">
+     
+    <div >
+    
+        <carousel  interval="myInterval" no-wrap="noWrapSlides" style="height: 240px; width:598px">
+      <slide ng-repeat="slide in slides" active="slide.active">
+        <img ng-src="{{slide.image}}" style="margin:auto; width:595px; height:240px;">
+       
+      </slide>
+    </carousel>
+    </div>
+
+    <div>
+            <div class="page_bottom_page">
+                <div class="page_8_1_right_title">
+                <div class="jhjdxc" style="margin-left:40px;">深圳天安云谷</div>
+            </div>
+          <div class="building_line"> </div>
+            <div class="page_content">
+                <div class="page_content_item">项目位置  :  深圳市龙岗区</div>
+<div class="page_content_item">项目委托  :  </div>
+                <div class="page_content_item">项目定位  :  商业综合</div>
+                <div class="page_content_item">占地面积  :  51603.00m2</div>
+                <div class="page_content_item">建筑面积  :   396700.00m2</div>
+                <div class="page_content_item">容 积 率   :  7.7</div>             <div class="page_content_item">设计时间  :  2012</div>
+            </div>
+
+<div class="mainbuilding_intro">
+   <span class="explain">设计说明：</span>
+<div style="width:525px;height:144px;margin-top:10px;float:left;">
+    <div class="nano has-scrollbar">
+       <div class="content" style="width: 544px; height: 169px; right: -17px;" tabindex="0">
+          <div class="page_content_intro">
+                <p>七栋办公塔楼围绕着“坡地景观公园”及“云空间互动平台”布置，有着良好的观景朝向，让高层区的办公人群可以更多更好的享受到这个新型的办公场所。办公塔楼彼此间东西向最小间距控制在22米以上，增加了塔楼之间的舒适度。各栋塔楼有着独立的进出方式，也可通过低层办公区进行便捷的转换。从高层的办公单元出发，园区内部资源分布有序，工作线，方便直达，有效紧凑；生活线，舒适悠然，配套齐全，所有办公单元都尽揽坡地公园，与绿色为邻。</p>
+            </div>
+       </div>
+    <div class="pane" style="display: none;"><div class="slider" style="height: 111px;"></div></div></div>
+</div>
+   </div>                     
+</div>
+    </div>
         
-      </div>
+      
       
     </div>
   </div>

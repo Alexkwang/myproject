@@ -3,6 +3,8 @@
 'use strict';
 angular.module('scotchApp').controller('contentController', ['$scope',function($scope) {
 
+
+
     /*==========begin your business=================================*/
 
     /*==========end your business===================================*/

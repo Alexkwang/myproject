@@ -10,6 +10,10 @@ angular.module('scotchApp').controller('homeController', ['$scope','ngDialog',fu
         backendmainPage:"/pages/backend/manageprogram/programlist.html"
     };
     /*==========begin your business=================================*/
+ 
+$scope.myInterval = 5000;
+ var slides = $scope.slides =[];
+
 
  $scope.clickToOpen1 = function () {
          debugger
@@ -19,6 +23,21 @@ angular.module('scotchApp').controller('homeController', ['$scope','ngDialog',fu
            });
     };
 
+
+
+ $('#myModal').on('show.bs.modal', function (e) {
+ 
+  var esseyId = e.relatedTarget.id;
+ debugger;
+    slides.push({image:'./images/product/1.jpg'});
+    slides.push({image:'./images/product/2.jpg'});
+    slides.push({image:'./images/product/3.jpg'});
+    slides.push({image:'./images/product/4.jpg'});
+    slides.push({image:'./images/product/5.jpg'});
+    slides.push({image:'./images/product/6.jpg'});
+    slides.push({image:'./images/product/7.jpg'});
+
+ });
     /*==========end your business===================================*/
 }]);
 }).call(this);
