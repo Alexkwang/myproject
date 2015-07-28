@@ -1,9 +1,9 @@
 angular.module('scotchApp').factory('programService', 
-	["$http", function ($http) {
+	["$http","$q", function ($http,$q) {
 
 	return{
 			saveProgram:function(models,callback){
-				
+				 var deferred = $q.defer();
 					$http.post(url+"programs",models).success(function(data){
 					
 					callback(data);
@@ -11,12 +11,24 @@ angular.module('scotchApp').factory('programService',
 				
 				
 			},
-			getallProgram:function(callback){
-				//http://127.0.0.1:8201/user/5591ee7eaef61aec259d8450
+			// getallProgram:function(callback){
+				
+			// 	$http.get(url+"programs").success(function(data){
+			// 		callback(data);
+			// 	});
+			// },
+
+			getallProgram:function(){	 
+ 				var deferred = $q.defer();
 				$http.get(url+"programs").success(function(data){
-					callback(data);
+					debugger
+					deferred.resolve(data);
 				});
+				debugger
+
+				return deferred.promise;
 			},
+
 			
 			getProgramByID:function(projectid,callback)
 			{

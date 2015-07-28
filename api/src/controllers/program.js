@@ -27,14 +27,22 @@ exports.viewprogram = function(req, res, next){
         } 
         else {
 
-           return res.status(200).send({data:dataResult});
-               // return res.json({
-               //      type: true,
-               //      data: dataResult
-               //  })
+           return res.status(200).send(dataResult);
+           
            
         }
 	});
+
+
+       // return res.status(200).send([{
+//     "id": 860,
+//     "firstName": "Superman",
+//     "lastName": "Yoda"
+// }, {
+//     "id": 870,
+//     "firstName": "Foo",
+//     "lastName": "Whateveryournameis"
+// }]);
 
 };
 
