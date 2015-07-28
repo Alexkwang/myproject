@@ -70,7 +70,8 @@ gulp.task('copy_system_css', function() {
   "./src/css/ngdialog/ngDialog-custom-width.css",
   "./src/css/fileupload/*.css",
   "./src/css/textAngular/*.css",
-   "./src/css/alertify/*.css"
+  "./src/css/alertify/*.css",
+  "./src/css/datatable/*.css"
   ])
     .pipe(gulp.dest('./dist/css/'));
 });

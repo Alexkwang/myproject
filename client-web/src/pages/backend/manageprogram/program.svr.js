@@ -21,11 +21,8 @@ angular.module('scotchApp').factory('programService',
 			getallProgram:function(){	 
  				var deferred = $q.defer();
 				$http.get(url+"programs").success(function(data){
-					debugger
 					deferred.resolve(data);
 				});
-				debugger
-
 				return deferred.promise;
 			},
 
