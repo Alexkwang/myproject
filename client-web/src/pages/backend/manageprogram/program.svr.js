@@ -29,7 +29,7 @@ angular.module('scotchApp').factory('programService',
 			
 			getProgramByID:function(projectid,callback)
 			{
-				$http.get(url+"programs/"+queryid).success(function(data){
+				$http.get(url+"programs/"+projectid).success(function(data){
 					callback(data);
 				});
 			},

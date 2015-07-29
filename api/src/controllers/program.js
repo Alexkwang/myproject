@@ -45,6 +45,18 @@ exports.viewprogram = function(req, res, next){
 // }]);
 
 };
+exports.getprogramByID = function(req, res, next){
+
+
+Program.find({ProjectID:req.params.id},function(err,dataResult){
+    if (err) {
+           return res.send(400).send({error:err});
+        } 
+        else {
+           return res.status(200).send({data:dataResult}); 
+        }
+  });
+};
 
 exports.deleteprogramByID = function(req, res, next){
 

@@ -184,24 +184,23 @@ angular.module('scotchApp').controller('programController', ['$scope','$timeout'
 
    if($scope.$parent.editprogramdata!=null)
    {
-     
-debugger;
+
       model.Options="edit";
       
-      model.IsShowMainPage=$scope.$parent.editprogramdata.IsShowMainPage;
-      model.MainIndex=$scope.$parent.editprogramdata.MainIndex;
-      model.ProjectClassification=$scope.$parent.editprogramdata.ProjectClassification;
-      model.ProjectName=$scope.$parent.editprogramdata.ProjectName;
-      model.ProjectType=$scope.$parent.editprogramdata.ProjectType;
-      model.ProjectEntrust=$scope.$parent.editprogramdata.ProjectEntrust;
-      model.ProjectPosition=$scope.$parent.editprogramdata.ProjectPosition;
-      model.AreaCovered=$scope.$parent.editprogramdata.AreaCovered;
-      model.BuildingArea=$scope.$parent.editprogramdata.BuildingArea;
-      model.VolumeRatio=$scope.$parent.editprogramdata.VolumeRatio;
-      model.DesignTime=$scope.$parent.editprogramdata.DesignTime;
-      model.DesignDes=$scope.$parent.editprogramdata.DesignDes;
-      model.PrimaryImageNo=$scope.$parent.editprogramdata.PrimaryImageNo;
-      model.UploadImgList=$scope.$parent.editprogramdata.UploadImgList;
+      model.IsShowMainPage=$scope.$parent.editprogramdata[0].IsShowMainPage;
+      model.MainIndex=$scope.$parent.editprogramdata[0].MainIndex;
+      model.ProjectClassification=$scope.$parent.editprogramdata[0].ProjectClassification;
+      model.ProjectName=$scope.$parent.editprogramdata[0].ProjectName;
+      model.ProjectType=$scope.$parent.editprogramdata[0].ProjectType;
+      model.ProjectEntrust=$scope.$parent.editprogramdata[0].ProjectEntrust;
+      model.ProjectPosition=$scope.$parent.editprogramdata[0].ProjectPosition;
+      model.AreaCovered=$scope.$parent.editprogramdata[0].AreaCovered;
+      model.BuildingArea=$scope.$parent.editprogramdata[0].BuildingArea;
+      model.VolumeRatio=$scope.$parent.editprogramdata[0].VolumeRatio;
+      model.DesignTime=$scope.$parent.editprogramdata[0].DesignTime;
+      model.DesignDes=$scope.$parent.editprogramdata[0].DesignDes;
+      model.PrimaryImageNo=$scope.$parent.editprogramdata[0].PrimaryImageNo;
+      model.UploadImgList=$scope.$parent.editprogramdata[0].UploadImgList;
 
 
  
@@ -250,7 +249,8 @@ $scope.submitdata=function(model){
      DesignTime:model.DesignTime,
      DesignDes:model.DesignDes,
      PrimaryImageNo:model.PrimaryImageNo,
-     UploadImgList:model.UploadImgList
+     UploadImgList:model.UploadImgList,
+     ProjectID:parseInt(Math.random()*100000+1)
  }
 
  if(datamodel.UploadImgList==null &&datamodel.UploadImgList.length <=0)

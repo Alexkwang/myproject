@@ -6,7 +6,7 @@
  Schema   = mongoose.Schema;
 
  ProgramSchema = new Schema({
-     
+     ProjectID:Number,
   	 ProjectName:{type:String, trim: true},
      IsShowMainPage:{type:Boolean},
      MainIndex:Number,
