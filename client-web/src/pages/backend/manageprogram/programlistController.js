@@ -6,20 +6,14 @@ angular.module('scotchApp').controller('programlistController', ['$scope','$elem
    
 var model = $scope.model = {datas:[]};
 
-$scope.AutoLoad=function(){
-  $scope.editprogramdata=null;
-		// programService.getallProgram(function(datarerult){
-  //  			model.datas= datarerult.data;
-  //  	});
-};
-
 
 /*=================================bengin Auto load============================================*/
    $scope.refresh = function () {
+    
+    // programService.getMainprogram(function(data){
+    //     debugger
+    // })
     $scope.editprogramdata=null;
-		// programService.getallProgram(function(datarerult){
-  //  			model.datas= datarerult.data;
-  //  	});
 
          $scope.dtOptions = DTOptionsBuilder.fromFnPromise(function(){
                     model.datas = programService.getallProgram();
@@ -50,17 +44,24 @@ $scope.AutoLoad=function(){
 
 
 
-$scope.deleteProgram=function(program){
+$scope.deleteProgram=function(ProjectID){
 
-	programService.deleteProgram(program,function(datarerult){
-   		
-      if(datarerult.status='200')
-		  {
-		    alertify.success(datarerult.message);
+    programService.getProgramByID(ProjectID,function(resultdata){
+         if(resultdata!=null){
+              programService.deleteProgram(resultdata.data,function(datarerult){
+              
+              if(datarerult.status='200')
+              {
+                alertify.success(datarerult.message);
 
-         $scope.refresh();
-		  }
-   	});
+                 $scope.refresh();
+              }
+            });
+
+         }
+    });
+
+
 };
  
 
@@ -96,8 +97,8 @@ programService.getProgramByID(ProjectID,function(resultdata){
         DTColumnBuilder.newColumn('DesignTime').withTitle('设计时间'),
         DTColumnBuilder.newColumn(null).withTitle('操作').notSortable()
             .renderWith(function(data, type, full, meta) {
-                return '<button type="button" class="green" style="" ng-click="editProgram('+data.ProjectID+')"><i class="ace-icon fa fa-pencil bigger-130"></i>修改</button>'+
-                        '<a class="red" style="margin-left:5px;"  ng-click="deleteProgram('+data.ProjectID+')"><i class="ace-icon fa fa-trash-o bigger-130"></i></a>' ;
+                return '<a class="green" style="cursor:pointer" ng-click="editProgram('+data.ProjectID+')"><i class="ace-icon fa fa-pencil bigger-130"></i></a>'+
+                        '<a class="red" style="margin-left:10px;cursor:pointer"  ng-click="deleteProgram('+data.ProjectID+')"><i class="ace-icon fa fa-trash-o bigger-130"></i></a>' ;
             })
     ];
 

@@ -34,6 +34,11 @@ angular.module('scotchApp').factory('programService',
 				});
 			},
 
+			getMainprogram:function(callback){
+				$http.get(url+"programs/mains").success(function(data){
+					callback(data);
+				});
+			},
 			deleteProgram:function(program,callback)
 			{
 				
@@ -50,6 +55,5 @@ angular.module('scotchApp').factory('programService',
 					callback(data);
 				});
 			}
-
 	};
 	}]);

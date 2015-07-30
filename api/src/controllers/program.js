@@ -19,7 +19,7 @@ exports.Save=function(req, res, next){
         });
 };
 
-exports.viewprogram = function(req, res, next){
+exports.getAllProgram = function(req, res, next){
 
        Program.find(function(err,dataResult){
 		if (err) {
@@ -32,19 +32,34 @@ exports.viewprogram = function(req, res, next){
            
         }
 	});
+};
 
+exports.getProgramByClassification=function(req, res, next){
 
-       // return res.status(200).send([{
-//     "id": 860,
-//     "firstName": "Superman",
-//     "lastName": "Yoda"
-// }, {
-//     "id": 870,
-//     "firstName": "Foo",
-//     "lastName": "Whateveryournameis"
-// }]);
+  Program.find({ProjectClassification:req.params.Classification},function(err,dataResult){
+    if (err) {
+           return res.send(400).send({error:err});
+        } 
+        else {
+           return res.status(200).send({data:dataResult}); 
+        }
+  });
+};
+
+exports.getMainprogram=function(req,res,next){
+
+  Program.where('IsShowMainPage').equals(true).limit(12).sort('MainIndex').exec(function(err,dataResult){
+
+      if (err) {
+           return res.send(400).send({error:err});
+        } 
+        else {
+           return res.status(200).send(dataResult); 
+        }
+  });
 
 };
+
 exports.getprogramByID = function(req, res, next){
 
 

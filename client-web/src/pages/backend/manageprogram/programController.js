@@ -201,7 +201,7 @@ angular.module('scotchApp').controller('programController', ['$scope','$timeout'
       model.DesignDes=$scope.$parent.editprogramdata[0].DesignDes;
       model.PrimaryImageNo=$scope.$parent.editprogramdata[0].PrimaryImageNo;
       model.UploadImgList=$scope.$parent.editprogramdata[0].UploadImgList;
-
+      model.ProjectID=$scope.$parent.editprogramdata[0].ProjectID;
 
  
       
@@ -250,7 +250,7 @@ $scope.submitdata=function(model){
      DesignDes:model.DesignDes,
      PrimaryImageNo:model.PrimaryImageNo,
      UploadImgList:model.UploadImgList,
-     ProjectID:parseInt(Math.random()*100000+1)
+     ProjectID: parseInt(Math.random()*100000+1)
  }
 
  if(datamodel.UploadImgList==null &&datamodel.UploadImgList.length <=0)
