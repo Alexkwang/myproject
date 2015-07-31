@@ -103,13 +103,13 @@ $scope.myInterval = 5000;
     break;
   }
  //debugger;
-    // slides.push({image:'./images/product/1.jpg'});
-    // slides.push({image:'./images/product/2.jpg'});
-    // slides.push({image:'./images/product/3.jpg'});
-    // slides.push({image:'./images/product/4.jpg'});
-    // slides.push({image:'./images/product/5.jpg'});
-    // slides.push({image:'./images/product/6.jpg'});
-    // slides.push({image:'./images/product/7.jpg'});
+    slides.push({image:'./images/product/1.jpg'});
+    slides.push({image:'./images/product/2.jpg'});
+    slides.push({image:'./images/product/3.jpg'});
+    slides.push({image:'./images/product/4.jpg'});
+    slides.push({image:'./images/product/5.jpg'});
+    slides.push({image:'./images/product/6.jpg'});
+    slides.push({image:'./images/product/7.jpg'});
 
  });
     /*==========end your business===================================*/

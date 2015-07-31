@@ -32,6 +32,9 @@
 
 
 
+
+
+
 body{margin:0;}
  #obody{position: relative; overflow: hidden; height: 600px;}
  #ibody{position: absolute;top: 0; left: 0; height: 700px;}
@@ -66,8 +69,8 @@ body{margin:0;}
 .main_body_left_part_line_2_pic_4 img{width:152px;height:80px;}
 
 .main_body_left_part_line_3{width:620px; margin-top:4px; height:142px; float:left; display:inline}
-.main_body_left_part_line_3_pic_1 img{ float:left;width:310px; height:130px; display:inline;cursor: pointer;}
-.main_body_left_part_line_3_pic_2 img{ margin-left:4px; background:white; width:305px; height:130px; float:left; display:inline;cursor: pointer;}
+.main_body_left_part_line_3_pic_1 img{ float:left;width:308px; height:130px; display:inline;cursor: pointer;}
+.main_body_left_part_line_3_pic_2 img{ margin-left:4px; background:white; width:308px; height:130px; float:left; display:inline;cursor: pointer;}
 
 .main_body_riht_part{ width:315px; float:left; display:inline; overflow: hidden;cursor: pointer;}
 .main_body_right_part_right_line1{ margin-left:4px; float:left; display:inline}
@@ -83,10 +86,10 @@ body{margin:0;}
 
 
 .main_body_right_part_right_line2{ width:315px; margin-left:4px;margin-top:4px; float:left; display:inline;cursor: pointer;}
-.mmain_body_right_part_right_line2_pic_1 img{width: 101px;height: 82px; float:left; display:inline;cursor: pointer;}
-.mmain_body_right_part_right_line2_pic_2 img{width: 101px;height: 82px; margin-left:4px; float:left; display:inline;cursor: pointer;}
-.mmain_body_right_part_right_line2_pic_3 img{width: 102px;height: 82px; margin-left:4px; float:left; display:inline;cursor: pointer;}
-.mmain_body_right_part_right_line2_pic_4 img{width: 95px;height: 81px; margin-left:4px; margin-top:4px; float:left; display:inline;cursor: pointer;}
+.main_body_right_part_right_line2_pic_1 img{width: 101px;height: 82px; float:left; display:inline;cursor: pointer;}
+.main_body_right_part_right_line2_pic_2 img{width: 101px;height: 82px; margin-left:4px; float:left; display:inline;cursor: pointer;}
+.main_body_right_part_right_line2_pic_3 img{width: 101px;height: 82px; margin-left:4px; float:left; display:inline;cursor: pointer;}
+.main_body_right_part_right_line2_pic_4 img{width: 95px;height: 81px; margin-left:4px; margin-top:4px; float:left; display:inline;cursor: pointer;}
 
 .main_body_right_part_right_line3{ border:0; float:left; display:inline}
 .main_body_right_part_right_line3_line1{ width:350px; margin-left:4px; margin-top:4px; float:left; display:inline; overflow:hidden}
@@ -1106,4 +1109,41 @@ nav.links a {
     -moz-box-shadow: inset 0px 0px 0px 4px #FCEBCF; /*firefox*/
     -webkit-box-shadow: inset 0px 0px 0px 4px #FCEBCF; /*webkit*/
     box-shadow: inset 0px 0px 0px 4px #FCEBCF; /*opera或ie9*/
+}
+
+.carousel-control.left {
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%);
+  background-image:      -o-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%);
+  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0)));
+  background-image:         linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#00000000', GradientType=1);
+  background-repeat: repeat-x;
+}
+.carousel-control.right {
+  right: 0;
+  left: auto;
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%);
+  background-image:      -o-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%);
+  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0)));
+  background-image:         linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#00000000', GradientType=1);
+  background-repeat: repeat-x;
+}
+
+.carousel-control .icon-prev,
+.carousel-control .glyphicon-chevron-left {
+  left: 50%;
+  margin-left: -80px;
+  color: #565454;
+}
+.carousel-control .icon-next,
+.carousel-control .glyphicon-chevron-right {
+  right: 50%;
+  margin-right: -80px;
+  color: #565454;
+}
+.modal-header {
+  min-height: 20px;
+  padding: 15px;
+  border-bottom:0;
 }

@@ -108,20 +108,6 @@
 $(document).ready(function(){
 
     zoomout(); 
- $('.clonedItem').on('click',function(e){
-
-
-
-if($(this).attr('isget')==4 ){
-   
-  // $('#myModal').modal('show');
-  
-  }
-}); 
-
-
-
-
 /**/ 
 $('.main_body_right_part_right_line3_line1_pic_1').on('mouseout','img',function(){
 
