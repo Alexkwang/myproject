@@ -92,7 +92,7 @@ $scope.myInterval = 5000;
 
  
  $('#myModal').on('show.bs.modal', function (e) {
- 
+   
   var esseyId = e.relatedTarget.id;
   switch(esseyId)
   {
