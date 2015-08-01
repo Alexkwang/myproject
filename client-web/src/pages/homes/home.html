@@ -173,7 +173,7 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
-      <div class="panel panel-default" style="margin:10px;">
+      <div class="panel panel-default pop_background" style="margin:10px;">
          <!--image begin-->
         <div style="margin-left:110px;height:310px; margin-top:10px;">
             <carousel  interval="myInterval" no-wrap="noWrapSlides" style="height: 300px; width:598px;">
@@ -184,8 +184,34 @@
         </div>
         <!--image end-->
         <div style="margin-left:40px;">
-           <div class="row"><p>深圳天安云谷</p></div>
-           <div class="row"></div>
+            <div class="pop_title_font"><p>深圳天安云谷</p></div>
+            <div class="building_line"></div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div >
+                        <div class="page_content_item">项目位置 : 深圳市龙岗区</div>
+                        <div class="page_content_item">项目委托 :</div>
+                        <div class="page_content_item">项目定位 : 商业综合</div>
+                        <div class="page_content_item">占地面积 : 51603.00m2</div>
+                        <div class="page_content_item">建筑面积 : 396700.00m2</div>
+                        <div class="page_content_item">容 积 率 : 7.7</div>
+                        <div class="page_content_item">设计时间 : 2012</div>
+                    </div>
+                </div>
+                 <div class="col-md-8">
+                    <div class="row mainbuilding_intro">
+                            <span class="explain">设计说明：</span>
+                            <div class="modal-body">
+                            <div class="page_content_intro">
+                            随着中国经济的高速发展，尤其苏浙沪地区，旅游的业态发生了重要变化。从过去走马观花式的观赏型初级旅游阶段，逐渐走向以“养生，养心”为代表的体验型中高级旅游阶段。灵山耿湾这个项目，就是立足于现在灵山景区已有的300万游客，希望能顺应时代需要，建设一个可以以“佛学”为依托的休闲度假小镇，创造出符合现代精神的旅游产品。
+
+耿湾小镇是一个综合性的旅游会务度假圣地，他包括有重要精神性建筑——大禅堂、会议中心和会议酒店、若干高品质精品酒店、旅游休闲商业、文化性建筑、重点景点、商业建筑群、度假型物业区等功能组成。MAO在这个项目中，全程领衔参与了前期策划、规划设计、建筑设计和景观设计，展现出雄厚的全过程控制的能力，同时MAO领衔日本隈研吾事务所，在大禅堂项目上通力合作，将其建筑成一座可以代表东方“禅”文化的重要精神性标地物。希望通过与开发商、旅游产业者一起，打造一个在东部中国新的旅游目的地。整个项目将在2015年开园。
+                            </div>
+                     
+                            </div>
+                    </div>
+                </div>
+            </div>
            
         </div>
      </div>    
@@ -194,7 +220,20 @@
     </div>
   </div>
 </div>
-
+<script>
+        (function($){
+            $(window).ready(function(){
+                
+                $("#myModal .modal-body").mCustomScrollbar({
+                    setHeight:180,
+                    theme:"minimal-dark"
+                });  
+            });
+        })(jQuery);
+    </script>
 <div ng-include="templateUrls.footerPage"></div>
+
+    
+
 </div>
 

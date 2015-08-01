@@ -1192,3 +1192,80 @@ nav.links a {
 .carousel-caption .btn {
   text-shadow: none;
 }
+
+
+.pop_background {
+    background-image: url(../images/system/building_topbg.jpg);
+}
+
+.page_bottom_page {
+    display: inline;
+    float: left;
+    height: 232px;
+    overflow: hidden;
+    width: 793px;
+}
+
+.pop_title_font {
+    float: left;
+    display: inline;
+    font-size: 20px;
+    font-family: '微软雅黑';
+    line-height: 23px;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+
+.building_line {
+    float: left;
+    width: 785px;
+    height: 2px;
+    margin: 5px -20px 10px;
+    display: inline;
+    background-image: url(../images/system/line.png);
+}
+
+.page_content {
+    width: 310px;
+    height: 191px;
+    display: inline;
+    margin-left: 40px;
+}
+
+.page_content_item {
+    height: 25px;
+    line-height: 24px;
+    overflow: hidden;
+    width: 282px;
+    font-size: 16px;
+    color: #696969;
+    font-family: '微软雅黑';
+}
+
+.mainbuilding_intro {
+    height: 175px;
+    width: 523px;
+    display: inline;
+    margin-left: 5px;
+}
+
+.explain {
+    display: inline;
+    float: left;
+    font-size: 18px;
+    line-height: 18px;
+    font-family: '微软雅黑';
+}
+
+.page_content_intro {
+    color: #696969;
+    display: inline;
+    margin-top: 20px;
+    font-family: '微软雅黑';
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 20px;
+    overflow: auto;
+    width: 516px;
+}

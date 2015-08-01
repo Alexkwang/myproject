@@ -53,7 +53,8 @@ gulp.task('copy_system_js', function() {
     "./src/js/systems/alertify.min.js",
     "./src/js/systems/ui-bootstrap-tpls.min.js",
     "./src/js/systems/angular-datatables.min.js",
-    "./src/js/systems/jquery.dataTables.min.js"
+    "./src/js/systems/jquery.dataTables.min.js", 
+    "./src/js/systems/jquery.mCustomScrollbar.concat.min.js"
     
   ])
     .pipe(gulp.dest('./dist/js/'));
@@ -71,7 +72,8 @@ gulp.task('copy_system_css', function() {
   "./src/css/fileupload/*.css",
   "./src/css/textAngular/*.css",
   "./src/css/alertify/*.css",
-  "./src/css/datatable/*.css"
+  "./src/css/datatable/*.css",
+  "./src/css/scrollbar/*.css"
   ])
     .pipe(gulp.dest('./dist/css/'));
 });
