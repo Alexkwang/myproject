@@ -19,7 +19,8 @@
      VolumeRatio:{type:String, trim: true},
      DesignTime:{type: String},
      DesignDes:{type:String, trim: true},
-   	 PrimaryImageNo:Number, 
+   	 PrimaryImageNo:Number,
+     PrimaryUrl: {type:String, trim: true},
    	 UploadImgList:[{
    	 	 Numbers:Number,
 	     Name:{type:String, trim: true},

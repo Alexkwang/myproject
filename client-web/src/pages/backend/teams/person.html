@@ -1,0 +1,111 @@
+<div class="row widget-box" style="margin-top:20px;">
+	<div class="row " style="margin:15px;">
+		
+		<div class="col-md-12 ">
+		<form class="form-horizontal" role="form" 
+		method="POST" 
+		enctype="multipart/form-data" 
+		data-ng-app="scotchApp" 
+		data-ng-controller="teamController" 
+		data-file-upload="options" 
+		data-ng-class="{'fileupload-processing': processing() || loadingFiles}"
+		novalidate="novalidate">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label class="col-md-2 control-label no-padding-right" for="form-field-1"> 姓名：</label>
+						<div class="col-md-10">
+							<input type="text" id="form-field-1" aria-required="true" ng-model="model.name" placeholder="姓名" class="form-control" />
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label class="col-md-2 control-label no-padding-right" for="form-field-1"> 职称：</label>
+						<div class="col-md-10">
+							<input type="text" id="form-field-1" aria-required="true" ng-model="model.jobtitle" class="form-control" />
+							多个职称请使用逗号间隔
+						</div>
+					</div>
+				</div>
+			</div>
+
+<div class="row fileupload-buttonbar" >
+		        	 
+		            <div class="col-md-12" style="margin-left:15px;">
+		                <!-- The fileinput-button span is used to style the file input field as button -->
+		                <span class="btn btn-success fileinput-button btn-xs" ng-class="{disabled: disabled}">
+		                    <i class="glyphicon glyphicon-plus"></i>
+		                    <span>添加文件...</span>
+		                    <input id="fileupload" type="file" name="files[]" ng-disabled="disabled">
+		                </span>
+		                <button type="button" class="btn btn-primary start btn-xs" data-ng-click="submit()">
+		                    <i class="glyphicon glyphicon-upload"></i>
+		                    <span>开始上传</span>
+		                </button>
+		                <button type="button" class="btn btn-warning cancel btn-xs" data-ng-click="cancel()">
+		                    <i class="glyphicon glyphicon-ban-circle"></i>
+		                    <span>取消上传</span>
+		                </button>
+		                <!-- The global file processing state -->
+		                <span class="fileupload-process"></span>
+		            </div>
+		           
+
+		        </div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label class="col-md-2 control-label no-padding-right" for="form-field-1"> 履历：</label>
+						<div class="col-md-10">
+							
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			</div>
+			<div class="col-md-4">
+				<span class="profile-picture">
+					<img id="avatar" class="img-responsive" style="width:150px;hight:150px;" src="{{model.imageurl}}"></img>
+				</span>
+			</div>
+		</div>
+			        
+
+			
+
+				<div class="row" >
+						<text-angular-toolbar name="toolbar"></text-angular-toolbar>
+						<div text-angular style="hight:200px;" ng-model="model.record"  ta-target-toolbars='toolbar'></div>
+				</div>
+
+				<div class="hr hr-18 dotted hr-double"></div>
+			
+<div class="row">
+				<div class="clearfix">
+					<div class="col-md-offset-3 col-md-9">
+						<button class="btn btn-info" type="button" ng-click="submitdata()">
+							<i class="ace-icon fa fa-check bigger-110"></i>
+							提交
+						</button>
+						&nbsp; &nbsp; &nbsp;
+										<button class="btn" type="reset" ng-click="reset()">
+											<i class="ace-icon fa fa-undo bigger-110"></i>
+											重置
+										</button>
+					</div>
+				</div>
+			</div>
+
+		</form>
+	</div>
+	</div>
+</div>

@@ -1,8 +1,8 @@
 // create the controller and inject Angular's $scope
 (function () {
 'use strict';
-angular.module('scotchApp').controller('homeController', ['$scope','ngDialog','homeService',function($scope,ngDialog,homeService) {
-      var templateUrls = $scope.templateUrls = {
+angular.module('scotchApp').controller('homeController', ['$scope','$sce','ngDialog','homeService',function($scope,$sce,ngDialog,homeService) {
+    var templateUrls = $scope.templateUrls = {
         headerPage: "/pages/header.html",
         footerPage: "/pages/footer.html",
         backendfooterPage:"/pages/backend/footer.html",
@@ -11,9 +11,12 @@ angular.module('scotchApp').controller('homeController', ['$scope','ngDialog','h
     };
     /*==========begin your business=================================*/
  
-$scope.myInterval = 5000;
+  $scope.myInterval = 5000;
 
- var slides = $scope.slides =[];
+  var slides = $scope.slides =[];
+  var popmodel = $scope.popmodel={
+    program:null
+  };
 
   var model = $scope.model= {
       program1:null,
@@ -34,6 +37,7 @@ $scope.myInterval = 5000;
     homeService.getMainprogram(function(data){
       
       $.each(data,function(index,item){
+    
           if(item.MainIndex==1)
           {
             model.program1 = item;
@@ -94,24 +98,138 @@ $scope.myInterval = 5000;
  $('#myModal').on('show.bs.modal', function (e) {
    
   var esseyId = e.relatedTarget.id;
+
+  slides.length=0;
   switch(esseyId)
   {
     case ("program1"):
+
+       popmodel.program = model.program1;
+      // popmodel.program.DesignDes=null;
+       popmodel.program.DesignDes=model.program1.DesignDes;
+       //popmodel.program.DesignDes= $sce.trustAsHtml(model.program1.DesignDes);
        $.each(model.program1.UploadImgList,function(index,item){
+         slides.push({image:item.Url});
+       });
+
+    break;
+    case ("program2"):
+      popmodel.program = model.program2;
+      //popmodel.program.DesignDes=null;
+      popmodel.program.DesignDes=model.program2.DesignDes;
+      //popmodel.program.DesignDes= $sce.trustAsHtml(model.program2.DesignDes);
+       $.each(model.program2.UploadImgList,function(index,item){
+         slides.push({image:item.Url});
+       });
+
+    break;
+    case ("program3"):
+      popmodel.program = model.program3;
+      //popmodel.program.DesignDes=null;
+      popmodel.program.DesignDes=model.program3.DesignDes;
+      // popmodel.program.DesignDes= $sce.trustAsHtml(model.program3.DesignDes);
+       $.each(model.program3.UploadImgList,function(index,item){
+         slides.push({image:item.Url});
+       });
+
+    break;
+    case ("program4"):
+      popmodel.program = model.program4;
+      //popmodel.program.DesignDes=null;
+      popmodel.program.DesignDes=model.program4.DesignDes;
+       //popmodel.program.DesignDes= $sce.trustAsHtml(model.program4.DesignDes);
+       $.each(model.program4.UploadImgList,function(index,item){
+         slides.push({image:item.Url});
+       });
+
+    break;
+    case ("program5"):
+      popmodel.program = model.program5;
+     // popmodel.program.DesignDes=null;
+      popmodel.program.DesignDes=model.program5.DesignDes;
+       //popmodel.program.DesignDes= $sce.trustAsHtml(model.program5.DesignDes);
+       $.each(model.program5.UploadImgList,function(index,item){
+         slides.push({image:item.Url});
+       });
+
+    break;
+    case ("program6"):
+      popmodel.program = model.program6;
+      //popmodel.program.DesignDes=null;
+      popmodel.program.DesignDes=model.program6.DesignDes;
+       //popmodel.program.DesignDes= $sce.trustAsHtml(model.program6.DesignDes);
+       $.each(model.program6.UploadImgList,function(index,item){
+         slides.push({image:item.Url});
+       });
+
+    break;
+    case ("program7"):
+      popmodel.program = model.program7;
+      //popmodel.program.DesignDes=null;
+      popmodel.program.DesignDes=model.program7.DesignDes;
+       //popmodel.program.DesignDes= $sce.trustAsHtml(model.program7.DesignDes);
+       $.each(model.program7.UploadImgList,function(index,item){
+         slides.push({image:item.Url});
+       });
+
+    break;
+    case ("program8"):
+      popmodel.program = model.program8;
+     // popmodel.program.DesignDes=null;
+      popmodel.program.DesignDes=model.program8.DesignDes;
+      //popmodel.program.DesignDes= $sce.trustAsHtml(model.program8.DesignDes);
+       $.each(model.program8.UploadImgList,function(index,item){
+         slides.push({image:item.Url});
+       });
+
+    break;
+    case ("program9"):
+        popmodel.program = model.program9;
+       // popmodel.program.DesignDes=null;
+        popmodel.program.DesignDes=model.program9.DesignDes;
+        //popmodel.program.DesignDes= $sce.trustAsHtml(model.program9.DesignDes);
+       $.each(model.program9.UploadImgList,function(index,item){
+         slides.push({image:item.Url});
+       });
+
+    break;
+    case ("program10"):
+      popmodel.program = model.program10;
+     // popmodel.program.DesignDes=null;
+      popmodel.program.DesignDes=model.program10.DesignDes;
+       //popmodel.program.DesignDes= $sce.trustAsHtml(model.program10.DesignDes);
+       $.each(model.program10.UploadImgList,function(index,item){
+         slides.push({image:item.Url});
+       });
+
+    break;
+
+    case ("program11"):
+      popmodel.program = model.program11;
+     // popmodel.program.DesignDes=null;
+      popmodel.program.DesignDes=model.program11.DesignDes;
+       //popmodel.program.DesignDes= $sce.trustAsHtml(model.program11.DesignDes);
+       $.each(model.program11.UploadImgList,function(index,item){
+         slides.push({image:item.Url});
+       });
+
+    break;
+    case ("program12"):
+      popmodel.program = model.program12;
+      // popmodel.program.DesignDes=null;
+       popmodel.program.DesignDes=model.program12.DesignDes;
+       //popmodel.program.DesignDes= $sce.trustAsHtml(model.program12.DesignDes);
+       $.each(model.program12.UploadImgList,function(index,item){
          slides.push({image:item.Url});
        });
     break;
   }
- //debugger;
-    slides.push({image:'./images/product/1.jpg'});
-    slides.push({image:'./images/product/2.jpg'});
-    slides.push({image:'./images/product/3.jpg'});
-    slides.push({image:'./images/product/4.jpg'});
-    slides.push({image:'./images/product/5.jpg'});
-    slides.push({image:'./images/product/6.jpg'});
-    slides.push({image:'./images/product/7.jpg'});
 
  });
     /*==========end your business===================================*/
-}]);
+}]).filter('htmlize', ['$sce', function($sce){
+      return function(val) {
+        return $sce.trustAsHtml(val);
+      };
+  }]);
 }).call(this);

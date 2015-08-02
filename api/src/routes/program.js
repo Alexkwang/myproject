@@ -7,6 +7,8 @@
   	app.get("" + config.apiPrefix + "/programs",  program.getAllProgram);
   	app.get("" + config.apiPrefix + "/programs/mains",  program.getMainprogram);
   	app.get("" + config.apiPrefix + "/programs/Classification/:Classification",  program.getProgramByClassification);
+  	app.get("" + config.apiPrefix + "/programs/build/projecttype/:projecttype",  program.getbuildProgramByprojecttype);
+  	app.get("" + config.apiPrefix + "/programs/plan/projecttype/:projecttype",  program.getplanProgramByprojecttype);
   	app.get("" + config.apiPrefix + "/programs/:id",  program.getprogramByID);
     app.delete("" + config.apiPrefix + "/programs/:id",  program.deleteprogramByID);
  	return app;

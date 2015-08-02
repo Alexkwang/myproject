@@ -15,5 +15,12 @@ $scope.goToProgramList=function(){
 
 };
 
+$scope.goToteamInfo=function(){
+	$scope.templateUrls.backendmainPage="/pages/backend/teams/teaminfo.html";
+	$scope.homeName="团队信息";
+
+};
+
+
 }]);
 }).call(this);

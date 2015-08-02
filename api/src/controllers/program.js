@@ -36,15 +36,47 @@ exports.getAllProgram = function(req, res, next){
 
 exports.getProgramByClassification=function(req, res, next){
 
-  Program.find({ProjectClassification:req.params.Classification},function(err,dataResult){
-    if (err) {
+Program
+.where('ProjectClassification').equals(req.params.Classification)
+.exec(function(err,dataResult){
+     if (err) {
            return res.send(400).send({error:err});
         } 
         else {
-           return res.status(200).send({data:dataResult}); 
+           return res.status(200).send(dataResult); 
         }
   });
 };
+
+exports.getbuildProgramByprojecttype=function(req, res, next){
+  Program
+  .where('ProjectClassification').equals('建筑项目')
+  .where('ProjectType').equals(req.params.projecttype)
+  .exec(function(err,dataResult){
+     if (err) {
+           return res.send(400).send({error:err});
+        } 
+        else {
+           return res.status(200).send(dataResult); 
+        }
+  });
+};
+
+
+exports.getplanProgramByprojecttype=function(req, res, next){
+  Program
+  .where('ProjectClassification').equals('规划项目')
+  .where('ProjectType').equals(req.params.projecttype)
+  .exec(function(err,dataResult){
+     if (err) {
+           return res.send(400).send({error:err});
+        } 
+        else {
+           return res.status(200).send(dataResult); 
+        }
+  });
+};
+
 
 exports.getMainprogram=function(req,res,next){
 

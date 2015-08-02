@@ -3,7 +3,6 @@ angular.module('scotchApp').factory('programService',
 
 	return{
 			saveProgram:function(models,callback){
-				 var deferred = $q.defer();
 					$http.post(url+"programs",models).success(function(data){
 					
 					callback(data);
@@ -42,16 +41,18 @@ angular.module('scotchApp').factory('programService',
 			deleteProgram:function(program,callback)
 			{
 				
+				debugger
+
 				if(program.Options ==null|| program.Options!="edit")
 				{
 					//循环删除物理图片
-					$.each(program.UploadImgList,function(index,item){
+					$.each(program[0].UploadImgList,function(index,item){
 						$http.delete(url+"upload/"+item.Name).success(function(){});
 					});
 				}
 				
 
-				$http.delete(url+"programs/"+program._id).success(function(data){
+				$http.delete(url+"programs/"+program[0]._id).success(function(data){
 					callback(data);
 				});
 			}

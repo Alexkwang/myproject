@@ -3,7 +3,7 @@
 (function () {
 'use strict';
 
-angular.module('scotchApp').controller('programController', ['$scope','$timeout','$element','$http','ngDialog','programService',function($scope,$timeout,$element,$http,ngDialog,programService) {
+angular.module('scotchApp').controller('programController', ['$scope','$route','$timeout','$element','$http','ngDialog','programService',function($scope,$route,$timeout,$element,$http,ngDialog,programService) {
    
 
 
@@ -30,6 +30,7 @@ angular.module('scotchApp').controller('programController', ['$scope','$timeout'
         if (!!model.PrimaryImageObj)
             model.PrimaryImageObj.attr("src", curimg.Url);
         model.PrimaryImageNo = curimg.Numbers;
+        model.PrimaryUrl=curimg.Url;
         var newTdPrimary = trContainer.find("td[number=" + curimg.Numbers + "]");
         if (newTdPrimary.length > 0) {
             newTdPrimary.find("div[name='imgdiv']").attr("class", "item_image_review_primary");
@@ -184,7 +185,6 @@ angular.module('scotchApp').controller('programController', ['$scope','$timeout'
 
    if($scope.$parent.editprogramdata!=null)
    {
-
       model.Options="edit";
       
       model.IsShowMainPage=$scope.$parent.editprogramdata[0].IsShowMainPage;
@@ -202,7 +202,7 @@ angular.module('scotchApp').controller('programController', ['$scope','$timeout'
       model.PrimaryImageNo=$scope.$parent.editprogramdata[0].PrimaryImageNo;
       model.UploadImgList=$scope.$parent.editprogramdata[0].UploadImgList;
       model.ProjectID=$scope.$parent.editprogramdata[0].ProjectID;
-
+      model.PrimaryUrl=$scope.$parent.editprogramdata[0].PrimaryUrl;
  
       
 
@@ -233,6 +233,9 @@ angular.module('scotchApp').controller('programController', ['$scope','$timeout'
 
 
 /*=================================end submitdata============================================*/ 
+$scope.reset=function(){
+  model=null;
+};
 $scope.submitdata=function(model){
 
  var datamodel = {
@@ -250,8 +253,10 @@ $scope.submitdata=function(model){
      DesignDes:model.DesignDes,
      PrimaryImageNo:model.PrimaryImageNo,
      UploadImgList:model.UploadImgList,
-     ProjectID: parseInt(Math.random()*100000+1)
+      PrimaryUrl:model.PrimaryUrl
  }
+
+datamodel.ProjectID = model.ProjectID==null?parseInt(Math.random()*100000+1):model.ProjectID;
 
  if(datamodel.UploadImgList==null &&datamodel.UploadImgList.length <=0)
   {
@@ -278,7 +283,8 @@ programService.saveProgram(datamodel,function(data){
     alertify.success(data.message);
     ngDialog.close($('.ngdialog').attr("id"));
 
-   $timeout(function(){$scope.$parent.AutoLoad;
+   $timeout(function(){
+    $scope.$parent.AutoLoad;
    $scope.$parent.refresh;
  },2000)
 
@@ -290,7 +296,6 @@ programService.saveProgram(datamodel,function(data){
   }                     
   
 });
-
 };
 
 /*=================================end submitdata============================================*/
@@ -353,9 +358,6 @@ else
 {
   alertify.error('图片删除失败！');
 }
-
-
-
 
 });
 };

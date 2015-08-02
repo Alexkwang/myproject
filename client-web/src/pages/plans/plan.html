@@ -1,14 +1,124 @@
 <div class="wrap-content container" style="margin-left:220px;"  id="container">
  <div ng-include="templateUrls.headerPage"></div>
 
-<div>
-     <div>
-         <h1>planProject content goes here...</h1>
-         
-          <p>{{ message }}</p>
+<div class="content_part">
+<div class="col-md-1">
+	
+	<!--the left part-->
+	<div class="left_menu">
+		<div class="page_1_left_part_1" style="height: 170px;">
+			<div class="left_part_lines">
+				<div class="page_1_right_part_top_line" style="display: block;">
+				<div class="top_line_1" style="height: 1px; width: 0px; display: block; background: rgb(33, 56, 56);"></div></div>
+					<div class="page_1_right_part_middle_line" style="height: 79px; display: block;"></div>
+					<div class="page_1_right_part_bottom_line" style="width: 28px; display: block;"></div>
+					<div class="page_1_right_part_right_line" param="100" style="height: 100px; display: block;"></div>
+			</div>
+			<div class="page_1_right_part_index_1">
+				<div class="page_1_class" id="menu1" style="color: rgb(76, 76, 76);" ng-click="menu_clike('menu1','项目分类')">项目分类</div>
+					<div class="page_1_right_part_index_1_index" id="program" style="display: block;">
+						<div id="menu2" class="page_1_class" style="color: rgb(132, 132, 132);" ng-click="menu_clike('menu2','商业综合')">商业综合</div>
+						<div id="menu3" class="page_1_class" style="color: rgb(132, 132, 132);" ng-click="menu_clike('menu3','景观设计')">景观设计</div>
+						<div id="menu4" class="page_1_class" style="color: rgb(132, 132, 132);" ng-click="menu_clike('menu4','旅游地产')">旅游地产</div>
+						<div id="menu5" class="page_1_class" style="color: rgb(132, 132, 132);" ng-click="menu_clike('menu5','高端住宅')">高端住宅</div>
+					</div>
+			</div>
+		</div>
+	</div>
 
-     </div>
 </div>
 
+ <div class="col-md-10" style="margin-left:50px;">
+ 	
+ 	 <div id="div_imagelist" class="col-sm-12">
+ 	<div name="div_itemcont" class="col-md-4" style="padding-left:-1000px;" ng-repeat="program in model.programs">
+ 	<div id="{{program.ProjectID}}" data-toggle="modal" data-target="#planModal">
+  		 <a  class="thumbnail">
+  		 		<img src="{{program.PrimaryUrl}}">
+  		 </a> 
+  		      <div style="font-size: 10px;color: #696969;font-family: '微软雅黑';margin-top:-10px;margin-bottom:10px; text-align: center;">{{program.ProjectName}}</div>
+	</div>
+  		
+ 	</div>
+ </div>
+ </div>
+
+
+
+
+</div>
+
+<script>
+        (function($){
+            $(window).ready(function(){
+                
+                $("#div_imagelist").mCustomScrollbar({
+                    setHeight:380,
+                    theme:"minimal-dark"
+                }); 
+
+                 $("#planModal .modal-body").mCustomScrollbar({
+                    setHeight:180,
+                    theme:"minimal-dark"
+                });  
+                 
+            });
+        })(jQuery);
+    </script>
+
 <div ng-include="templateUrls.footerPage"></div>
+</div>
+
+
+
+   <div class="modal fade" ng-controller="planController" id="planModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="width:850px">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="panel panel-default pop_background" style="margin:10px;">
+         <!--image begin-->
+        <div style="margin-left:110px;height:310px; margin-top:10px;">
+            <carousel  interval="myInterval" no-wrap="noWrapSlides" style="height: 300px; width:598px;">
+                  <slide ng-repeat="slide in slides" active="slide.active">
+                    <img ng-src="{{slide.image}}" style="margin:auto; width:598px; height:300px;">
+                  </slide>
+            </carousel>
+        </div>
+
+        <!--image end-->
+        <div style="margin-left:40px;">
+            <div class="pop_title_font"><p>{{popmodel.program.ProjectName}}</p></div>
+            <div class="building_line"></div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div >
+                        <div class="page_content_item">项目位置 : {{popmodel.program.ProjectPosition}}</div>
+                        <div class="page_content_item">项目性质 : {{popmodel.program.ProjectEntrust}}</div>
+                        <div class="page_content_item">项目定位 : {{popmodel.program.ProjectType}}</div>
+                        <div class="page_content_item">占地面积 : {{popmodel.program.AreaCovered}}</div>
+                        <div class="page_content_item">建筑面积 : {{popmodel.program.BuildingArea}}</div>
+                        <div class="page_content_item">容 积 率 : {{popmodel.program.VolumeRatio}}</div>
+                        <div class="page_content_item">设计时间 : {{popmodel.program.DesignTime}}</div>
+                    </div>
+                </div>
+                 <div class="col-md-8">
+                    <div class="row mainbuilding_intro">
+                            <span class="explain">设计简介：</span>
+                            <div class="modal-body">
+                            <div class="page_content_intro" ng-bind-html="popmodel.program.DesignDes | htmlize">
+                            </div>
+                     
+                            </div>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+     </div>    
+      
+      
+    </div>
+  </div>
 </div>

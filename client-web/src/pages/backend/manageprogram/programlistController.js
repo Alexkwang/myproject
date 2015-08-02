@@ -2,17 +2,16 @@
 // create the controller and inject Angular's $scope
 (function () {
 'use strict';
-angular.module('scotchApp').controller('programlistController', ['$scope','$element','$compile','ngDialog','programService','DTOptionsBuilder','DTColumnBuilder',function($scope,$element,$compile,ngDialog,programService,DTOptionsBuilder,DTColumnBuilder) {
+angular.module('scotchApp').controller('programlistController', ['$scope','$route','$element','$compile','ngDialog','programService','DTOptionsBuilder','DTColumnBuilder',function($scope,$route,$element,$compile,ngDialog,programService,DTOptionsBuilder,DTColumnBuilder) {
    
-var model = $scope.model = {datas:[]};
+var model = $scope.model = {
+
+  datas:[]};
 
 
 /*=================================bengin Auto load============================================*/
    $scope.refresh = function () {
-    
-    // programService.getMainprogram(function(data){
-    //     debugger
-    // })
+
     $scope.editprogramdata=null;
 
          $scope.dtOptions = DTOptionsBuilder.fromFnPromise(function(){
@@ -29,9 +28,15 @@ var model = $scope.model = {datas:[]};
 
  $scope.refresh();
  $scope.$on("refresh", $scope.refresh);
+
+ $scope.AutoLoad=function(){
+  $route.reload();
+ };
+
+
  /*=================================end auto load============================================*/  
     $scope.clickToOpen = function () {
-         
+         $scope.editprogramdata=null;
          ngDialog.open({
           template: '/pages/backend/manageprogram/program.html',
           className: 'ngdialog-theme-plain',
@@ -42,27 +47,31 @@ var model = $scope.model = {datas:[]};
 
 /*=================================end submitdata============================================*/
 
-
-
 $scope.deleteProgram=function(ProjectID){
 
-    programService.getProgramByID(ProjectID,function(resultdata){
-         if(resultdata!=null){
-              programService.deleteProgram(resultdata.data,function(datarerult){
-              
-              if(datarerult.status='200')
-              {
-                alertify.success(datarerult.message);
+          ngDialog.openConfirm({
+                              template: '/pages/backend/manageprogram/confirm.html',                  
+                          }).then(function (value) {
+                                programService.getProgramByID(ProjectID,function(resultdata){
+                                   if(resultdata!=null){
+                                              programService.deleteProgram(resultdata.data,function(datarerult){
 
-                 $scope.refresh();
-              }
-            });
+                                              if(datarerult.status='200')
+                                              {
+                                                alertify.success(datarerult.message);
 
-         }
-    });
+                                                 $scope.refresh();
+                                              }
+                                            });
+                                        }
+                                });
 
+                          }, function (reason) {
+                          });
 
 };
+
+
  
 
 $scope.editProgram=function(ProjectID){
