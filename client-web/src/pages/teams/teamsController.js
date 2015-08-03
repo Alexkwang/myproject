@@ -2,16 +2,17 @@
 (function () {
 'use strict';
 angular.module('scotchApp')
-.controller('aboutController', ['$scope','aboutService',function($scope,aboutService) {
- 
+.controller('teamsController', ['$scope',function($scope) {
+
 
  $scope.refresh = function () {
-   
  };
   
  
    $scope.refresh();
    $scope.$on("refresh", $scope.refresh);
+
+
 
 
 
@@ -21,4 +22,4 @@ angular.module('scotchApp')
 
 
 
-
+ 

@@ -54,7 +54,9 @@ gulp.task('copy_system_js', function() {
     "./src/js/systems/ui-bootstrap-tpls.min.js",
     "./src/js/systems/angular-datatables.min.js",
     "./src/js/systems/jquery.dataTables.min.js", 
-    "./src/js/systems/jquery.mCustomScrollbar.concat.min.js"
+    "./src/js/systems/jquery.mCustomScrollbar.concat.min.js",
+    "./src/js/systems/jquery.kxbdmarquee.js"
+
     
   ])
     .pipe(gulp.dest('./dist/js/'));

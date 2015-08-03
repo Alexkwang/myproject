@@ -1,7 +1,69 @@
 <div class="wrap-content container" style="margin-left:220px;"  id="container">  
 <div ng-include="templateUrls.headerPage"></div>
+<div class="row" style="margin-left:100px;">
+
+<div class="row">
+	<div class="col-md-12">
+		地址：成都市天府新区南湖度假区
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		电话：028-85654045 座机
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		邮箱：405811183@qq.com
+	</div>
+</div>
+
+</div>
+
+<style type="text/css">
+*{margin:0;padding:0;}
+body{font-size:12px;}
+a{color:#333;}
+ul{list-style:none;}
+#marquee{margin-top:10px;margin-left:50px; margin-bottom: 10px; width:800px;height:300px;overflow:hidden;}
+#marquee ul li{float:left; padding:0 1px;}
+#marquee ul li img{display:block;}
+</style>
+
+<div id="marquee">
+	<ul>
+		<li><img  src="./images/product/company/1.jpg" width="485" height="300"></li>
+		<li><img  src="./images/product/company/2.jpg" width="485" height="300"></li>
+		<li><img  src="./images/product/company/3.jpg" width="485" height="300"></li>
+		<li><img  src="./images/product/company/4.jpg" width="485" height="300"></li>
+	</ul>
+</div>
 
 
+<!-- <div id="demo">
+<div id="indemo">
+<div id="demo1">
+ 			<a href="#"><img src="../images/product/company/1.jpg" border="0" width="485" height="240" /></a>
+            <a href="#"><img src="../images/product/company/2.jpg" border="0" width="485" height="240" /></a>
+            <a href="#"><img src="../images/product/company/3.jpg" border="0" width="485" height="240" /></a>
+            <a href="#"><img src="../images/product/company/4.jpg" border="0" width="485" height="240" /></a>
+            <a href="#"><img src="../images/product/company/5.jpg" border="0" width="485" height="240" /></a>
+</div>
+<div id="demo2"></div>
+</div>
+</div> -->
+
+<script type="text/javascript">
+(function(){
+	//$("#marquee1").kxbdMarquee({direction:"right"});
+	$("#marquee").kxbdMarquee({isEqual:false});
+	//$("#marquee3").kxbdMarquee({direction:"down"});
+	//$("#marquee4").kxbdMarquee({direction:"up",isEqual:false});
+})();
+
+</script>
 <div ng-include="templateUrls.footerPage"></div>
 </div>
   
