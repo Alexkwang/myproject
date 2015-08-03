@@ -44,7 +44,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<label class="col-md-3 control-label no-padding-right" for="form-field-2"> 项目分类：</label>
+						<label class="col-md-3 control-label no-padding-right" for="form-field-2"> 项目性质：</label>
 
 						<div class="col-md-9">
 							<select ng-model="model.ProjectType" class="form-control" id="form-field-select-1">
@@ -72,9 +72,9 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<label class="col-md-3 control-label no-padding-right" for="form-field-3">  项目性质： </label>
+						<label class="col-md-3 control-label no-padding-right" for="form-field-3">  项目备注： </label>
 						<div class="col-md-9">
-							<input type="text" id="form-field-1-1" ng-model="model.ProjectEntrust" placeholder="请填写项目特性" class="form-control" />
+							<input type="text" id="form-field-1-1" ng-model="model.ProjectEntrust" placeholder="" class="form-control" />
 						</div>
 					</div>
 				</div>
@@ -213,10 +213,7 @@
 		                        <i class="glyphicon glyphicon-ban-circle"></i>
 		                        <span>取消上传</span>
 		                    </button>
-		                   <!--  <button data-ng-controller="FileDestroyController "  type="button" class="btn btn-danger destroy btn-xs" data-ng-click="file.$destroy()" data-ng-hide="!file.$destroy">
-		                        <i class="glyphicon glyphicon-trash"></i>
-		                        <span>删除</span>
-		                    </button> -->
+		                  
 		                </td>
 		            </tr>
 		        </table>
