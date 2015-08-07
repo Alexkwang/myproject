@@ -126,12 +126,9 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label no-padding-right" for="form-field-8">  设计时间： </label>
 						<div class="col-md-9">
-								<div class="input-group">
-									<input class="form-control date-picker" ng-model="model.DesignTime" id="id-date-picker-1" type="text" data-date-format="dd-mm-yyyy" />
-									<span class="input-group-addon">
-										<i class="fa fa-calendar bigger-110"></i>
-									</span>
-								</div>
+								<input type='text' id="form-field-1-2" ng-model="model.DesignTime" class="form-control"  />
+	                				
+            					
 						</div>
 					</div>
 				</div>
@@ -271,18 +268,22 @@
 		<script type="text/javascript">
 			
 			 
-
-			jQuery(function($) {
-				$('.date-picker').datepicker({
-					autoclose: true,
-					todayHighlight: true
-				})
-				//show datepicker when clicking on the icon
-				.next().on(ace.click_event, function(){
-					$(this).prev().focus();
-				});
+			// $(function () {
+   //          $('#datetimepicker9').datetimepicker({
+   //              viewMode: 'years'
+   //          });
+   //      	});
+			// jQuery(function($) {
+			// 	// $('.date-picker').datepicker({
+			// 	// 	autoclose: true,
+			// 	// 	todayHighlight: true
+			// 	// })
+			// 	// //show datepicker when clicking on the icon
+			// 	// .next().on(ace.click_event, function(){
+			// 	// 	$(this).prev().focus();
+			// 	// });
 			
-			});
+			// });
 
 
 				$('#editor1').ace_wysiwyg({
