@@ -40,9 +40,6 @@ angular.module('scotchApp').factory('programService',
 			},
 			deleteProgram:function(program,callback)
 			{
-				
-				debugger
-
 				if(program.Options ==null|| program.Options!="edit")
 				{
 					//循环删除物理图片

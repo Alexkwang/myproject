@@ -14,7 +14,7 @@ exports.Save=function(req, res, next){
             {
             	 res.send(400).send({error:err});
             }
-            res.status(200).send({message:'项目添加成功!'});   
+            res.status(200).send({message:'项目编辑成功!'});   
             
         });
 };

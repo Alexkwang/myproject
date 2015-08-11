@@ -60,7 +60,7 @@ $scope.deleteProgram=function(ProjectID){
                                               {
                                                 alertify.success(datarerult.message);
 
-                                                 $scope.refresh();
+                                                 $route.reload();
                                               }
                                             });
                                         }
