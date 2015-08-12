@@ -1,6 +1,28 @@
 angular.module('scotchApp').factory('teamService', 
 	["$http","$q", function ($http,$q) {
 	return{
+		saveteam:function(models,callback){
+			$http.post(url+"teams",models).success(function(data){
+					callback(data);
+				});
+		},
+		getteam:function(callback){	 	
+				$http.get(url+"teams").success(function(data){
+					callback(data);
+				});	
+		},
+		deleteteam:function(team,callback)
+			{
+				debugger
+				$http.delete(url+"upload/"+team[0].imagename).success(function(){});
+
+				$http.delete(url+"teams/"+team[0]._id).success(function(data){
+					callback(data);
+				});
+		}
+
+
+		/*
 		saveperson:function(models,callback){
 			$http.post(url+"persons",models).success(function(data){
 					callback(data);
@@ -30,6 +52,7 @@ angular.module('scotchApp').factory('teamService',
 					callback(data);
 				});
 		}
+		*/
 	};
 
 }]);

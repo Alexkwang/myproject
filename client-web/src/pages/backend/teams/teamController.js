@@ -2,7 +2,60 @@
 'use strict';
 angular.module('scotchApp').controller('teamController', ['$scope','$route','$element','$compile','ngDialog','teamService','DTOptionsBuilder','DTColumnBuilder',function($scope,$route,$element,$compile,ngDialog,teamService,DTOptionsBuilder,DTColumnBuilder) {
 /*=========================================================================================*/
-    $scope.options = {url: url+"upload"};
+
+$scope.options = {url: url+"upload"};
+
+ var model = $scope.model = {
+  imageurl:null,
+  imagename:null,
+  teams:[]
+ };
+
+ $scope.refresh = function () {
+    teamService.getteam(function(data){
+      
+      if(data.length>0)
+      {
+        model.teams = data;
+        model.imageurl= data[0].imageurl;
+        model.imagename= data[0].imagename;
+      }
+     
+    });
+ };
+
+$scope.refresh();
+$scope.$on("refresh", $scope.refresh);
+
+$scope.$on('fileuploaddone', function(event, file){
+  model.imageurl=file.result.files[0].url;
+  model.imagename=file.result.files[0].name;
+ });
+
+$scope.submitdata=function(){
+debugger
+ if(model.teams.length>0)
+ {
+   teamService.deleteteam(model.teams,function(){});
+ }
+  teamService.saveteam(model,function(result){
+
+    if(result.status='200')
+        { 
+          alertify.success(result.message);
+          $route.reload();
+        }
+        else
+        {
+          alertify.error(data.message);
+        } 
+
+  });
+};
+
+
+
+   /* $scope.options = {url: url+"upload"};
     var model = $scope.model = {
     personid:null,
     name: null,
@@ -153,7 +206,7 @@ $scope.dtColumns = [
  $scope.AutoLoad=function(){
   $route.reload();
  };
-
+*/
 
 
 /*=========================================================================================*/

@@ -1,17 +1,63 @@
 <div ng-controller="teamController">
 	<h4 class="pink">
 		<i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
-			<button class="btn btn-sm btn-warning" ng-click="clickaddperson()" ><i class="ace-icon fa fa-plus"></i>添加团队成员</button>
+			添加团队成员
+<form class="form-horizontal" role="form" 
+		method="POST" 
+		enctype="multipart/form-data" 
+		data-ng-app="scotchApp" 
+		data-ng-controller="teamController" 
+		data-file-upload="options" 
+		data-ng-class="{'fileupload-processing': processing() || loadingFiles}"
+		novalidate="novalidate">
+		<div class="row fileupload-buttonbar" >
+		        	 
+		            <div class="col-md-12" style="margin-left:15px;">
+		                <!-- The fileinput-button span is used to style the file input field as button -->
+		                <span class="btn btn-success fileinput-button btn-xs" ng-class="{disabled: disabled}">
+		                    <i class="glyphicon glyphicon-plus"></i>
+		                    <span>添加文件...</span>
+		                    <input id="fileupload" type="file" name="files[]" ng-disabled="disabled">
+		                </span>
+		                <button type="button" class="btn btn-primary start btn-xs" data-ng-click="submit()">
+		                    <i class="glyphicon glyphicon-upload"></i>
+		                    <span>开始上传</span>
+		                </button>
+		                <button type="button" class="btn btn-warning cancel btn-xs" data-ng-click="cancel()">
+		                    <i class="glyphicon glyphicon-ban-circle"></i>
+		                    <span>取消上传</span>
+		                </button>
+		                <!-- The global file processing state -->
+		                <span class="fileupload-process"></span>
+		            </div>
+	</div>
+</form>
+	<button class="btn btn-info btn-sm" type="button" ng-click="submitdata()">
+		<i class="ace-icon fa fa-check bigger-110"></i>提交
+	</button>
 
-			<button class="btn btn-sm btn-info" ng-click="AutoLoad()" ><i class="ace-icon fa fa-refresh bigger-130"></i></button>
 	</h4>
 
 <div class="hr hr-18 dotted hr-double"></div>
 
 <div class="row">
-		<div class="col-xs-12">
-			<table datatable dt-options="dtOptions" dt-columns="dtColumns" class="table table-striped table-bordered table-hover">
-		</div>
-	</div>
+	 <div id="teaminfo" class="col-md-10">
+	 	 <div id="div_imagelist" class="col-sm-12">
+	 		<img src="{{model.imageurl}}">
+	 	</div>
+	</div>	
+</div>
+
+<script>
+        (function($){
+            $(window).ready(function(){
+                
+                $("#div_imagelist").mCustomScrollbar({
+                    setHeight:380,
+                    theme:"minimal-dark"
+                });  
+            });
+        })(jQuery);
+    </script>
 
 </div>

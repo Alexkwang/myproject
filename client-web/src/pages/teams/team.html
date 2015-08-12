@@ -14,8 +14,8 @@
 					
 			</div>
 			<div class="page_1_right_part_index_1">
-				<div class="page_1_class" id="menu1" style="color: rgb(76, 76, 76);" ng-click="menu_clike('menu1','项目分类')">团队成员</div>
-				<div id="menu2" class="page_1_class" style="color: rgb(132, 132, 132);" ng-click="menu_clike('menu2','商业综合')">团队活动</div>
+				<div class="page_1_class" id="menu1" style="color: rgb(76, 76, 76);" ng-click="menu_clike('menu1','teaminfo')">团队成员</div>
+				<div id="menu2" class="page_1_class" style="color: rgb(132, 132, 132);" ng-click="menu_clike('menu2','activety')">团队活动</div>
 						
 			</div>
 		</div>
@@ -23,10 +23,33 @@
 
 </div>
 
- <div class="col-md-10" style="margin-left:50px;">
-
+ <div id="teaminfo" class="col-md-10" style="margin-left:50px;" ng-show="model.showteaminfo" >
+ 	 <div id="div_imagelist" class="col-sm-12">
+ 		<img src="{{model.teamimageurl}}">
  	</div>
 </div>
+
+<div id="activety" class="col-md-10" style="margin-left:50px;" ng-show="model.showactivety">
+	wwwwwww
+</div>
+
+<script>
+        (function($){
+            $(window).ready(function(){
+                
+                $("#div_imagelist").mCustomScrollbar({
+                    setHeight:380,
+                    theme:"minimal-dark"
+                });  
+            });
+        })(jQuery);
+    </script>
+
+
+
+</div>
+
+
 <div ng-include="templateUrls.footerPage"></div>
 </div>
   

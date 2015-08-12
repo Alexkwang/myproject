@@ -5,14 +5,16 @@ angular.module('scotchApp')
 .controller('teamsController', ['$scope','$sce','teamsService',function($scope,$sce,teamsService) {
 
 var model=$scope.model={
-		persons:null
+		teamimageurl:null,
+		showteaminfo:true,
+		showactivety:false
 	};
 
  $scope.refresh = function () {
 	
-	teamsService.getAllPerson(function(data){
+	teamsService.getteam(function(data){
 			debugger
-			model.persons=data;	
+			model.teamimageurl=data[0].imageurl;	
 		});
  };
   
@@ -21,7 +23,22 @@ var model=$scope.model={
    $scope.$on("refresh", $scope.refresh);
 
 
+$scope.menu_clike= function(MenuID,menuName){
+   		$(".page_1_class").css({"color": "rgb(132, 132, 132)"});
+   		$("#"+MenuID).css({"color": " rgb(76, 76, 76)"});
 
+   		if(menuName == 'teaminfo')
+   		{
+			model.showteaminfo=true;
+			model.showactivety=false;
+
+   		}
+   		if(menuName=='activety')
+   		{	
+   			model.showteaminfo=false;
+			model.showactivety=true;
+		}
+   };
 
 
 }]).filter('htmlize', ['$sce', function($sce){
