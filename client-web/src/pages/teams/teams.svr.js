@@ -6,12 +6,12 @@ angular.module('scotchApp').factory('teamsService',
 				$http.get(url+"teams").success(function(data){
 					callback(data);
 				});	
+		},
+		gettbs:function(callback){	 	
+				$http.get(url+"tbs").success(function(data){
+					callback(data);
+				});	
 		}
-			// getAllActivity:function(callback){
-			// 	// $http.get(url+"programs/plan/projecttype/"+prjectType).success(function(data){
-			// 	// 	callback(data);
-			// 	// });
-			// }
 	
 	
 	};

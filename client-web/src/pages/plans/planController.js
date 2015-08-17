@@ -16,10 +16,7 @@ angular.module('scotchApp').controller('planController',['$scope','$sce','planSe
 	$scope.refresh = function () {
 
 		planService.getprogram(function(data){
-
 			model.programs=data;
-			
-
 		});
 	}
 

@@ -282,19 +282,12 @@ programService.saveProgram(datamodel,function(data){
   { 
     alertify.success(data.message);
     ngDialog.close($('.ngdialog').attr("id"));
-
-   $timeout(function(){
-    $scope.$parent.AutoLoad;
-   $scope.$parent.refresh;
- },2000)
-
-   
   }
   else
   {
     alertify.error(data.message);
   }                     
-  
+     $route.reload();
 });
 };
 

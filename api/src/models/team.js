@@ -1,6 +1,6 @@
 (function() {
 
- var mongoose,Schema, PersonSchema;
+ var mongoose,Schema, TeamSchema;
 
  mongoose = require("mongoose");
  Schema   = mongoose.Schema;

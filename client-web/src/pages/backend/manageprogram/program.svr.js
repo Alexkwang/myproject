@@ -10,12 +10,7 @@ angular.module('scotchApp').factory('programService',
 				
 				
 			},
-			// getallProgram:function(callback){
-				
-			// 	$http.get(url+"programs").success(function(data){
-			// 		callback(data);
-			// 	});
-			// },
+		
 
 			getallProgram:function(){	 
  				var deferred = $q.defer();

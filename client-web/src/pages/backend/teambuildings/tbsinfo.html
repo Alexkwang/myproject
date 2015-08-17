@@ -1,8 +1,3 @@
-<!--<link rel="stylesheet" href="css/style.css">
- blueimp Gallery styles -->
-
-
-
 <div class="row widget-box" style="margin-top:20px;">
 <div class="row " style="margin:15px;">
 
@@ -11,153 +6,29 @@
 		method="POST" 
 		enctype="multipart/form-data" 
 		data-ng-app="scotchApp" 
-		data-ng-controller="programController" 
+		data-ng-controller="tbsinfoController" 
 		data-file-upload="options" 
 		data-ng-class="{'fileupload-processing': processing() || loadingFiles}"
 		novalidate="novalidate">
 			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
-						<label class="col-md-3 control-label no-padding-right" for="form-field-1"> 项目名称：</label>
-
-						<div class="col-md-9">
-							<input type="text" id="form-field-1" aria-required="true" ng-model="model.ProjectName" placeholder="项目名称" class="form-control" />
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-
-					<div class="form-group">
-						<label class="col-md-3 control-label no-padding-right" for="form-field-2"> 项目类型:</label>
-
-						<div class="col-md-9">
-							<select ng-model="model.ProjectClassification" class="form-control" id="form-field-select-1">
-								<option value="规划项目">规划项目</option>
-								<option value="建筑项目">建筑项目</option>								
-							</select>
-						</div>
-					</div>
+				<label class="col-md-2 control-label no-padding-right" for="form-field-1"> 新闻标题：</label>
+				<div class="col-md-10">
+					<input type="text" id="form-field-1" aria-required="true" ng-model="model.tbstitle"  class="form-control" />
 				</div>
 				
 			</div>
 
 			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
-						<label class="col-md-3 control-label no-padding-right" for="form-field-2"> 项目性质：</label>
-
-						<div class="col-md-9">
-							<select ng-model="model.ProjectType" class="form-control" id="form-field-select-1">
-								<option value="商业综合">商业综合</option>
-								<option value="景观设计">景观设计</option>
-								<option value="旅游地产">旅游地产</option>
-								<option value="高端住宅">高端住宅</option>
-							</select>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<label class="col-md-3 control-label no-padding-right" for="form-field-2"> 主页显示：</label>
-						<div class="col-md-9">
-						<input id="gritter-light" ng-model="model.IsShowMainPage" checked="" type="checkbox" class="ace ace-switch ace-switch-5" />
-							<span class="lbl middle"></span>
-							<input type="text" ng-disabled="!model.IsShowMainPage" ng-model="model.MainIndex" class="input-mini" id="spinner1" />
-						</div>
-					</div>
-				</div>
-				
-			</div>
-
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
-						<label class="col-md-3 control-label no-padding-right" for="form-field-3">  项目备注： </label>
-						<div class="col-md-9">
-							<input type="text" id="form-field-1-1" ng-model="model.ProjectEntrust" placeholder="" class="form-control" />
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<label class="col-md-3 control-label no-padding-right" for="form-field-4">  项目位置： </label>
-						<div class="col-md-9">
-								<input type="text" id="form-field-1-1" ng-model="model.ProjectPosition" placeholder="项目位置" class="form-control" />
-						</div>
-					</div>
-
-				</div>
-				
-			</div>
-			
-
-
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
-						<label class="col-md-3 control-label no-padding-right" for="form-field-5">  占地面积： </label>
-						<div class="col-md-9">
-								<input type="text" id="form-field-1-1" ng-model="model.AreaCovered" placeholder="占地面积" class="form-control" />
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<label class="col-md-3 control-label no-padding-right" for="form-field-6">  建筑面积： </label>
-						<div class="col-md-9">
-								<input type="text" id="form-field-1-1" ng-model="model.BuildingArea"  placeholder="建筑面积" class="form-control" />
-						</div>
-					</div>
-
-				</div>
-				
-			</div>
-
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
-						<label class="col-md-3 control-label no-padding-right" for="form-field-7">  容积率： </label>
-						<div class="col-md-9">
-								<input type="text" id="form-field-1-1" ng-model="model.VolumeRatio" placeholder="容积率" class="form-control" />
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<label class="col-md-3 control-label no-padding-right" for="form-field-8">  设计时间： </label>
-						<div class="col-md-9">
-								<input type='text' id="form-field-1-2" ng-model="model.DesignTime" class="form-control"  />
-	                				
-            					
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-md-6">
-				<div class="form-group">
-					<label class="col-md-3 control-label no-padding-right" for="form-field-9">  设计说明： </label>
+				<label class="col-md-2 control-label no-padding-right" for="form-field-9">  设计说明： </label>
 					<div class="col-md-9"></div>
-				</div>
-				</div>
 			</div>
 			<div class="row">
-						<text-angular-toolbar name="toolbar"></text-angular-toolbar>
-						<div text-angular ng-model="model.DesignDes"  ta-target-toolbars='toolbar'></div>
-				</div>
-			<div class="row">
-				<div class="col-md-12 text-center widget-box" style="overflow-x:auto;">
-					<table align="center">
-						<body>
-							<tr id="tr_imagelist" stlye="hight:120px;" ></tr>
-						</body>
-					</table>	
-				</div>
+				<text-angular-toolbar name="toolbar"></text-angular-toolbar>
+				<div text-angular ng-model="model.tbscontent"  ta-target-toolbars='toolbar'></div>
 			</div>
+	
 			
-			
-			<div class="row ">
+			<div class="row" style="margin-top:10px;">
 				
 		        <div class="row fileupload-buttonbar" >
 		        	 
@@ -211,6 +82,11 @@
 		                        <span>取消上传</span>
 		                    </button>
 		                  
+		                    <button data-ng-controller="FileDestroyController" type="button" class="btn btn-danger destroy" data-ng-click="file.$destroy()" data-ng-hide="!file.$destroy">
+		                        <i class="glyphicon glyphicon-trash"></i>
+		                        <span>删除</span>
+                    		</button>
+
 		                </td>
 		            </tr>
 		        </table>
