@@ -114,8 +114,6 @@ newsService.saveNews(datamodel,function(data){
                     };
                 } else if (!file.$cancel && !file._index) {
 
-                  debugger;
-
                     file.$cancel = function () {
                         $scope.clear(file);
                     };

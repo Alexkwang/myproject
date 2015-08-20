@@ -1,0 +1,15 @@
+851229
+
+123.57.159.207
+root
+Newegg1234
+
+
+配置开机自动启动
+
+chkconfig mongod on
+
+yum install ImageMagick
+
+npm install forever -gd
+

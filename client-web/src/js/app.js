@@ -1,4 +1,4 @@
- var url = 'http://127.0.0.1:8201/';
+ var url ='@@URL'; //'http://127.0.0.1:8201/';
  (function () {
 'use strict';
  
@@ -53,7 +53,7 @@
             templateUrl : 'pages/abouts/about.html',
             controller  : 'aboutController'
         }) 
-            .when('/index',{
+            .when('/mgr',{
                 templateUrl:'pages/backend/index.html',
                 controller:'indexController'
             })
