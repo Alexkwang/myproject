@@ -127,12 +127,10 @@ gulp.task('js', function() {
   if(!isDebug)
   {
     gulpStream=gulpStream.pipe(replace('@@URL', 'http://123.57.159.207:8201/')).pipe(uglify());
-  }
-  else
-  {
+  } 
+  else{
     gulpStream=gulpStream.pipe(replace('@@URL', 'http://127.0.0.1:8201/'))
-  }  
-
+  } 
    return gulpStream.pipe(gulp.dest('./dist/js/'));
 });
 

@@ -10,7 +10,7 @@ exports.Save=function(req, res, next){
       Person.save(function(err){
             if(err)
             {
-            	 res.send(400).send({error:err});
+            	 res.status(400).send({error:err});
             }
             res.status(200).send({message:'团队成员编辑成功!'});              
         });
@@ -20,7 +20,7 @@ exports.getallperson = function(req, res, next){
 
        person.find(function(err,dataResult){
 		if (err) {
-           return res.send(400).send({error:err});
+           return res.status(400).send({error:err});
         } 
         else {
 
@@ -35,7 +35,7 @@ exports.deleteperson = function(req, res, next){
       person.remove({_id:req.params.id},function(err){
            if(err)
             {
-              return res.send(400).send({error:err});
+              return res.status(400).send({error:err});
             }
              return res.status(200).send({message:"团队成员删除成功！"});
       });
@@ -45,7 +45,7 @@ exports.getpersonByID = function(req, res, next){
 
 person.find({personid:req.params.id},function(err,dataResult){
     if (err) {
-           return res.send(400).send({error:err});
+           return res.status(400).send({error:err});
         } 
         else {
            return res.status(200).send({data:dataResult}); 

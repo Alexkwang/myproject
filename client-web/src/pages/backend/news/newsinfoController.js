@@ -26,6 +26,7 @@ $scope.options = {url: url+"upload"};
  }
 
 
+
 //监听文件上传完成事件，把上传成功后的文件添加到model中
  $scope.$on('fileuploaddone', function(event, file){
     
@@ -66,21 +67,37 @@ datamodel.newsid = model.newsid==null?parseInt(Math.random()*100000+1):model.new
 if(model.Options=="edit" && $scope.$parent.editnewsdata !=null)
 {
   $scope.$parent.editnewsdata.Options="edit";
-  newsService.deleteNews($scope.$parent.editnewsdata[0]._id,function(){});
+    newsService.deleteNews($scope.$parent.editnewsdata[0].newsid,function(){
+        newsService.saveNews(datamodel,function(data){
+            if(data.status='200')
+            { 
+              alertify.success(data.message);
+              ngDialog.close($('.ngdialog').attr("id"));
+            }
+            else
+            {
+              alertify.error(data.message);
+            }                     
+             $route.reload();
+        });
+    });
 }
-newsService.saveNews(datamodel,function(data){
+else
+{
+    newsService.saveNews(datamodel,function(data){
+      if(data.status='200')
+      { 
+        alertify.success(data.message);
+        ngDialog.close($('.ngdialog').attr("id"));
+      }
+      else
+      {
+        alertify.error(data.message);
+      }                     
+       $route.reload();
+  });
+}
 
-  if(data.status='200')
-  { 
-    alertify.success(data.message);
-    ngDialog.close($('.ngdialog').attr("id"));
-  }
-  else
-  {
-    alertify.error(data.message);
-  }                     
-   $route.reload();
-});
 };
 
 

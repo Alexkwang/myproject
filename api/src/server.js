@@ -5,7 +5,7 @@
 
   http = require("http");
 
-  logger = require("./core/logger");
+  // = require("./core/logger");
 
   numCPUs = require("os").cpus().length;
 
@@ -18,7 +18,8 @@
       i++;
     }
     cluster.on("exit", function(worker, code, signal) {
-      logger.error("worker " + worker.process.pid + " died");
+      //logger.error("worker " + worker.process.pid + " died");
+      console.log("worker " + worker.process.pid + " died");
       return cluster.fork();
     });
   } else {

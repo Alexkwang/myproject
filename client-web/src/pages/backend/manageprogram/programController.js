@@ -271,24 +271,42 @@ datamodel.ProjectID = model.ProjectID==null?parseInt(Math.random()*100000+1):mod
         return;
       }
 
-if(model.Options=="edit" && $scope.$parent.editprogramdata !=null)
-{
-  $scope.$parent.editprogramdata.Options="edit";
-  programService.deleteProgram($scope.$parent.editprogramdata,function(){});
-}
-programService.saveProgram(datamodel,function(data){
+  if(model.Options=="edit" && $scope.$parent.editprogramdata !=null)
+  {
+    $scope.$parent.editprogramdata.Options="edit";
+    programService.deleteProgram($scope.$parent.editprogramdata,function(){
 
-  if(data.status='200')
-  { 
-    alertify.success(data.message);
-    ngDialog.close($('.ngdialog').attr("id"));
+      programService.saveProgram(datamodel,function(data){
+      if(data.status='200')
+      { 
+        alertify.success(data.message);
+        ngDialog.close($('.ngdialog').attr("id"));
+      }
+      else
+      {
+        alertify.error(data.message);
+      }                     
+         $route.reload();
+    });
+      
+    });
   }
   else
   {
-    alertify.error(data.message);
-  }                     
-     $route.reload();
-});
+      programService.saveProgram(datamodel,function(data){
+      if(data.status='200')
+      { 
+        alertify.success(data.message);
+        ngDialog.close($('.ngdialog').attr("id"));
+      }
+      else
+      {
+        alertify.error(data.message);
+      }                     
+         $route.reload();
+    });
+  }
+
 };
 
 /*=================================end submitdata============================================*/
@@ -383,9 +401,6 @@ else
                         );
                     };
                 } else if (!file.$cancel && !file._index) {
-
-                  debugger;
-
                     file.$cancel = function () {
                         $scope.clear(file);
                     };

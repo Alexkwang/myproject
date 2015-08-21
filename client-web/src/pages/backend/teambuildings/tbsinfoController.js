@@ -16,7 +16,7 @@ $scope.options = {url: url+"upload"};
    };
 
  if($scope.$parent.edittbsdata!=null)
- {debugger
+ {
      model.Options="edit";
      model.tbstitle=$scope.$parent.edittbsdata[0].tbstitle;
      model.tbscontent=$scope.$parent.edittbsdata[0].tbscontent;
@@ -30,7 +30,7 @@ $scope.options = {url: url+"upload"};
  $scope.$on('fileuploaddone', function(event, file){
     
     angular.forEach(file.result.files, function (item, index) {
-        debugger
+        
         if(model.primaryurl==null)
         {
             model.primaryurl=item.url;
@@ -51,7 +51,6 @@ $scope.reset=function(){
 };
 
 $scope.submitdata=function(model){
-debugger
  var datamodel = {
      tbstitle:model.tbstitle,
      tbscontent:model.tbscontent,
@@ -67,9 +66,26 @@ datamodel.tbsid = model.tbsid==null?parseInt(Math.random()*100000+1):model.tbsid
 if(model.Options=="edit" && $scope.$parent.edittbsdata !=null)
 {
   $scope.$parent.edittbsdata.Options="edit";
-  tbsService.deleteTBs($scope.$parent.edittbsdata[0]._id,function(){});
+  tbsService.deleteTBs($scope.$parent.edittbsdata[0].tbsid,function(){
+    tbsService.saveTBs(datamodel,function(data){
+
+  if(data.status='200')
+  { 
+    alertify.success(data.message);
+    ngDialog.close($('.ngdialog').attr("id"));
+  }
+  else
+  {
+    alertify.error(data.message);
+  }                     
+   $route.reload();
+    });
+
+  });
 }
-tbsService.saveTBs(datamodel,function(data){
+else
+{
+    tbsService.saveTBs(datamodel,function(data){
 
   if(data.status='200')
   { 
@@ -82,6 +98,8 @@ tbsService.saveTBs(datamodel,function(data){
   }                     
    $route.reload();
 });
+}
+
 };
 
 
@@ -114,9 +132,6 @@ tbsService.saveTBs(datamodel,function(data){
                         );
                     };
                 } else if (!file.$cancel && !file._index) {
-
-                  debugger;
-
                     file.$cancel = function () {
                         $scope.clear(file);
                     };
