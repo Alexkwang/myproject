@@ -11,9 +11,10 @@ exports.Save=function(req, res, next){
       News.save(function(err){
             if(err)
             {
-            	 res.status(400).send({error:err});
+            	return res.status(400).send({error:err});
             }
-            res.status(200).send({message:'新闻内容编辑成功!'});              
+          console.log("news:" +program.newsid +" Has been saved!");
+           return res.status(200).send({message:'新闻内容编辑成功!'});              
         });
 };
 
@@ -24,12 +25,7 @@ exports.getAllNews = function(req, res, next){
 		if (err) {
            return res.status(400).send({error:err});
         } 
-        else {
-
            return res.status(200).send(dataResult);
-           
-           
-        }
 	});
 };
 
@@ -39,9 +35,7 @@ news.find({newsid:req.params.id},function(err,dataResult){
     if (err) {
            return res.status(400).send({error:err});
         } 
-        else {
            return res.status(200).send({data:dataResult}); 
-        }
   });
 };
 
@@ -51,6 +45,7 @@ exports.deleteNewsByID = function(req, res, next){
             {
               return res.status(400).send({error:err});
             }
+             console.log("news:" +req.params.id +" Has been remvoed!");
              return res.status(200).send({message:"新闻删除成功！"});
       });
     };   

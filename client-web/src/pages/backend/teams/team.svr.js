@@ -13,7 +13,6 @@ angular.module('scotchApp').factory('teamService',
 		},
 		deleteteam:function(team,callback)
 			{
-				debugger
 				$http.delete(url+"upload/"+team[0].imagename).success(function(){});
 
 				$http.delete(url+"teams/"+team[0]._id).success(function(data){

@@ -11,3 +11,4 @@ http://jsfiddle.net/TNy3w/2/
 https://github.com/l-lin/angular-datatables
 
 http://ristal90.info/2015/01/29/angular-datatables%E4%BD%BF%E7%94%A8/ 
+/etc/init.d/nginx restart

@@ -44,7 +44,7 @@ angular.module('scotchApp').factory('programService',
 				}
 				
 
-				$http.delete(url+"programs/"+program[0]._id).success(function(data){
+				$http.delete(url+"programs/"+program[0].ProjectID).success(function(data){
 					callback(data);
 				});
 			}

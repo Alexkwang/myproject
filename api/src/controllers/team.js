@@ -10,9 +10,10 @@ exports.Save=function(req, res, next){
       Team.save(function(err){
             if(err)
             {
-            	 res.send(400).send({error:err});
+            	return res.status(400).send({error:err});
             }
-            res.status(200).send({message:'团队信息编辑成功!'});              
+             console.log("teams:" +Team._id +" Has been saved!");
+           return res.status(200).send({message:'团队信息编辑成功!'});              
         });
 };
 
@@ -20,14 +21,9 @@ exports.getteam = function(req, res, next){
 
        team.find(function(err,dataResult){
 		if (err) {
-           return res.send(400).send({error:err});
+           return res.status(400).send({error:err});
         } 
-        else {
-
            return res.status(200).send(dataResult);
-           
-           
-        }
 	});
 };
 
@@ -35,8 +31,9 @@ exports.deleteteam = function(req, res, next){
       team.remove({_id:req.params.id},function(err){
            if(err)
             {
-              return res.send(400).send({error:err});
+              return res.status(400).send({error:err});
             }
+             console.log("teams:" +req.params.id +" Has been remvoed!");
              return res.status(200).send({message:"团队信息删除成功！"});
       });
     }; 

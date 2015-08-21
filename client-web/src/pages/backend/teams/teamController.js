@@ -33,12 +33,10 @@ $scope.$on('fileuploaddone', function(event, file){
  });
 
 $scope.submitdata=function(){
-debugger
  if(model.teams.length>0)
  {
-   teamService.deleteteam(model.teams,function(){});
- }
-  teamService.saveteam(model,function(result){
+   teamService.deleteteam(model.teams,function(){
+      teamService.saveteam(model,function(result){
 
     if(result.status='200')
         { 
@@ -51,6 +49,26 @@ debugger
         } 
 
   });
+   });
+ }
+ else
+ {
+    teamService.saveteam(model,function(result){
+
+    if(result.status='200')
+        { 
+          alertify.success(result.message);
+          $route.reload();
+        }
+        else
+        {
+          alertify.error(data.message);
+        } 
+
+  });
+
+ }
+  
 };
 
 

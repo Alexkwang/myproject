@@ -11,25 +11,21 @@ exports.Save=function(req, res, next){
       TBs.save(function(err){
             if(err)
             {
-            	 res.status(400).send({error:err});
+            	return res.status(400).send({error:err});
             }
-            res.status(200).send({message:'团队活动编辑成功!'});              
+              console.log("teams activetity:" +TBs.tbsid +" Has been saved!");
+           return res.status(200).send({message:'团队活动编辑成功!'});              
         });
 };
 
 
 exports.getAllTBs = function(req, res, next){
-
        tbs.find(function(err,dataResult){
 		if (err) {
            return res.status(400).send({error:err});
         } 
-        else {
-
            return res.status(200).send(dataResult);
-           
-           
-        }
+
 	});
 };
 
@@ -39,9 +35,7 @@ tbs.find({tbsid:req.params.id},function(err,dataResult){
     if (err) {
            return res.status(400).send({error:err});
         } 
-        else {
            return res.status(200).send({data:dataResult}); 
-        }
   });
 };
 
@@ -51,6 +45,7 @@ exports.deleteTBsByID = function(req, res, next){
             {
               return res.status(400).send({error:err});
             }
+             console.log("teams activetity:" +req.params.id +" Has been remvoed!");
              return res.status(200).send({message:"团队活动删除成功！"});
       });
     };   

@@ -71,7 +71,7 @@
         .resize(80, 80)
         .noProfile()
         .write(filepath+'/thumbnail/'+fileName, function (err) {
-          if (!err) console.log('done');
+          if (!err) console.log(fileName + 'update successful!');
         });
 
       fileInfo.thumbnailUrl="./images/product/thumbnail/"+fileName;
@@ -79,10 +79,17 @@
   });
 
   upload.on('delete', function (fileName) {
-   var filepath =upload.options.uploadDir();
+    try{
+       var filepath =upload.options.uploadDir();
       fs.rmdir(filepath+'/'+fileName,function(){});
       fs.rmdir(filepath+'/thumbnail/'+fileName,function(){});
-      console.log("files remove complete");
+      console.log("files"+fileName+" remove successful");
+    }
+    catch(e)
+    {
+      console.log(e);
+    }
+  
     
 });
 
