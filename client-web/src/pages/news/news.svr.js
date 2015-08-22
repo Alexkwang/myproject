@@ -3,7 +3,7 @@ angular.module('scotchApp').factory('newsfrontService',
 
 	return{
 			getnews:function(callback){
-				$http.get(url+"news/").success(function(data){
+				$http.get(url+"news/"+"?buts="+ (new Date()).valueOf()).success(function(data){
 					callback(data);
 				});
 			}	

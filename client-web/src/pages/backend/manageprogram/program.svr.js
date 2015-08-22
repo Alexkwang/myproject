@@ -14,7 +14,7 @@ angular.module('scotchApp').factory('programService',
 
 			getallProgram:function(){	 
  				var deferred = $q.defer();
-				$http.get(url+"programs").success(function(data){
+				$http.get(url+"programs"+"?buts="+ (new Date()).valueOf()).success(function(data){
 					deferred.resolve(data);
 				});
 				return deferred.promise;
@@ -23,13 +23,13 @@ angular.module('scotchApp').factory('programService',
 			
 			getProgramByID:function(projectid,callback)
 			{
-				$http.get(url+"programs/"+projectid).success(function(data){
+				$http.get(url+"programs/"+projectid+"?buts="+ (new Date()).valueOf()).success(function(data){
 					callback(data);
 				});
 			},
 
 			getMainprogram:function(callback){
-				$http.get(url+"programs/mains").success(function(data){
+				$http.get(url+"programs/mains"+"?buts="+ (new Date()).valueOf()).success(function(data){
 					callback(data);
 				});
 			},

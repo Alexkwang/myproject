@@ -3,12 +3,12 @@ angular.module('scotchApp').factory('teamsService',
 
 	return{
 			getteam:function(callback){	 	
-				$http.get(url+"teams").success(function(data){
+				$http.get(url+"teams"+"?buts="+ (new Date()).valueOf()).success(function(data){
 					callback(data);
 				});	
 		},
 		gettbs:function(callback){	 	
-				$http.get(url+"tbs").success(function(data){
+				$http.get(url+"tbs"+"?buts="+ (new Date()).valueOf()).success(function(data){
 					callback(data);
 				});	
 		}

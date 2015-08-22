@@ -10,7 +10,7 @@ angular.module('scotchApp').factory('newsService',
 
 			getallNews:function(){	 
  				var deferred = $q.defer();
-				$http.get(url+"news").success(function(data){
+				$http.get(url+"news"+"?buts="+ (new Date()).valueOf()).success(function(data){
 					deferred.resolve(data);
 				});
 				return deferred.promise;
@@ -19,7 +19,7 @@ angular.module('scotchApp').factory('newsService',
 			
 			getNewsByID:function(newsid,callback)
 			{
-				$http.get(url+"news/"+newsid).success(function(data){
+				$http.get(url+"news/"+newsid+"?buts="+ (new Date()).valueOf()).success(function(data){
 					callback(data);
 				});
 			},

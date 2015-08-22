@@ -7,7 +7,7 @@ angular.module('scotchApp').factory('teamService',
 				});
 		},
 		getteam:function(callback){	 	
-				$http.get(url+"teams").success(function(data){
+				$http.get(url+"teams"+"?buts="+ (new Date()).valueOf()).success(function(data){
 					callback(data);
 				});	
 		},

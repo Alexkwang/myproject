@@ -10,6 +10,7 @@
         //$httpProvider.defaults.withCredentials = true;
          
   delete $httpProvider.defaults.headers.common['X-Requested-With'];
+         $httpProvider.defaults.cache=false;
   fileUploadProvider.defaults.redirect = window.location.href.replace(
                     /\/[^\/]*$/,
                     '/pages/cors/result.html?%s'

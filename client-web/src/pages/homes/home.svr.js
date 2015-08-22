@@ -3,7 +3,7 @@ angular.module('scotchApp').factory('homeService',
 
 	return{
 			getMainprogram:function(callback){
-				$http.get(url+"programs/mains").success(function(data){
+				$http.get(url+"programs/mains"+"?buts="+ (new Date()).valueOf()).success(function(data){
 					callback(data);
 				});
 			}

@@ -10,7 +10,7 @@ angular.module('scotchApp').factory('tbsService',
 
 			getallTBs:function(){	 
  				var deferred = $q.defer();
-				$http.get(url+"tbs").success(function(data){
+				$http.get(url+"tbs"+"?buts="+ (new Date()).valueOf()).success(function(data){
 					deferred.resolve(data);
 				});
 				return deferred.promise;
@@ -19,7 +19,7 @@ angular.module('scotchApp').factory('tbsService',
 			
 			getTBsByID:function(tbsid,callback)
 			{
-				$http.get(url+"tbs/"+tbsid).success(function(data){
+				$http.get(url+"tbs/"+tbsid+"?buts="+ (new Date()).valueOf()).success(function(data){
 					callback(data);
 				});
 			},
