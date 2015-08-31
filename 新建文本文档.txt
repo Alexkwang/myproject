@@ -13,3 +13,12 @@ yum install ImageMagick
 
 npm install forever -gd
 
+/etc/init.d/nginx restart
+
+forever start /home/api/dist/index.js
+
+service nginx start
+
+service nginx status
+
+service nginx reload

@@ -126,7 +126,7 @@ gulp.task('js', function() {
     
   if(!isDebug)
   {
-    gulpStream=gulpStream.pipe(replace('@@URL', 'http://123.57.159.207:8201/')).pipe(uglify());
+    gulpStream=gulpStream.pipe(replace('@@URL', 'http://112.74.30.168:8201/')).pipe(uglify());
   } 
   else{
     gulpStream=gulpStream.pipe(replace('@@URL', 'http://127.0.0.1:8201/'))
