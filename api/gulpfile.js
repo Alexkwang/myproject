@@ -14,7 +14,7 @@ var nodemon = require('gulp-nodemon');
  * Clean dist folder
  */
 gulp.task('clean', function (cb) {
-    del(['dist/**/*.js', 'dist/**/*.json'], cb)
+   return del(['dist/**/*.js', 'dist/**/*.json'], cb)
 });
 
 /**
