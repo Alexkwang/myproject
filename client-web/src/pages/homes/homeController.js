@@ -11,7 +11,7 @@ angular.module('scotchApp').controller('homeController', ['$scope','$sce','ngDia
     };
     /*==========begin your business=================================*/
  
-  $scope.myInterval = 5000;
+  $scope.myInterval = 8000;
 
   var slides = $scope.slides =[];
   var popmodel = $scope.popmodel={
