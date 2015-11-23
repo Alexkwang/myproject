@@ -1,6 +1,7 @@
-<div class="wrap-content container" style="margin-left:220px;"  id="container">
+<div class="wrap-content container" id="container">
  <div ng-include="templateUrls.headerPage"></div>
 
+<div class="main_body"> 
   <div id="div_imagelist" >
      	<div name="div_itemcont" class="col-md-2"  ng-repeat="item in model.news">
        	<div id="{{item.newsid}}" data-toggle="modal" data-target="#newsModal">
@@ -28,7 +29,7 @@
         })(jQuery);
     </script>
 
- <div ng-include="templateUrls.footerPage"></div>
+ </div>
  </div>
 
 <div class="modal fade" ng-controller="newsController" id="newsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -38,13 +39,6 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
 
-<!--      <div ng-show="false" style="margin-left:110px;height:310px; margin-top:10px;">
-            <carousel  interval="myInterval" no-wrap="noWrapSlides" style="height: 300px; width:598px;">
-                  <slide ng-repeat="slide in slides" active="slide.active">
-                    <img ng-src="{{slide.image}}" style="margin:auto; width:598px; height:300px;">
-                  </slide>
-            </carousel>
-        </div>  -->
 
       <div class="panel panel-default pop_background " style="margin:10px;">
 	      <div class="row modal-body" style="margin-left:10px;">
@@ -65,3 +59,6 @@
     </div>
   </div>
 </div>
+
+
+ <div ng-include="templateUrls.footerPage"></div>

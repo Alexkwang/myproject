@@ -39,9 +39,6 @@ $('#newsModal').on('show.bs.modal', function (e) {
 				popnewsmodel.newstitle = item.newstitle;
 				popnewsmodel.newscontent=item.newscontent;
 				popnewsmodel.newsdate=item.newsdate;
-				 // $.each(item.uploadimglist,function(index,image){
-			  //        slides.push({image:image.Url});
-			  //      });
 			}
 	});
 

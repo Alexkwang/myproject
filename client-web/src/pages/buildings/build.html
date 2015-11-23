@@ -1,6 +1,6 @@
-<div class="wrap-content container" style="margin-left:220px;"  id="container">
+<div class="wrap-content container" id="container">
  <div ng-include="templateUrls.headerPage"></div>
-
+<div class="main_body"> 
 <div class="content_part">
 <div class="col-md-1">
 	
@@ -32,7 +32,7 @@
  	
  	 <div id="div_imagelist" class="col-sm-12">
  	<div name="div_itemcont" class="col-md-4" style="padding-left:-1000px;" ng-repeat="program in model.programs">
- 	<div id="{{program.ProjectID}}" data-toggle="modal" data-target="#buildModal">
+ 	<div id="{{program.ProjectID}}" class="zoomout" data-toggle="modal" data-target="#buildModal">
   		 <a  class="thumbnail">
   		 		<img src="{{program.PrimaryUrl}}">
   		 </a> 
@@ -58,7 +58,7 @@
                 }); 
 
                  $("#buildModal .modal-body").mCustomScrollbar({
-                    setHeight:180,
+                    setHeight:140,
                     theme:"minimal-dark"
                 });  
                  
@@ -66,9 +66,9 @@
         })(jQuery);
     </script>
 
-<div ng-include="templateUrls.footerPage"></div>
-</div>
 
+</div>
+</div>
 
 
    <div class="modal fade" ng-controller="buildController" id="buildModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -82,7 +82,7 @@
         <div style="margin-left:110px;height:310px; margin-top:10px;">
             <carousel  interval="myInterval" no-wrap="noWrapSlides" style="height: 300px; width:598px;">
                   <slide ng-repeat="slide in slides" active="slide.active">
-                    <img ng-src="{{slide.image}}" style="margin:auto; width:598px; height:300px;">
+                    <img ng-src="{{slide.image}}"  style="margin:auto; max-width:598px; max-height:300px;">
                   </slide>
             </carousel>
         </div>
@@ -122,3 +122,4 @@
     </div>
   </div>
 </div>
+<div ng-include="templateUrls.footerPage"></div>
