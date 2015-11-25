@@ -43,13 +43,14 @@
 
       <ul id="imgmove" style="margin-top:0; margin-bottom:0;" ng-repeat="program in model.programs">
         <li>
-        <div id="{{program.ProjectID}}" data-toggle="modal" data-target="#planModal">
+        <div id="{{program.ProjectID}}" style="text-align: center;" data-toggle="modal" data-target="#planModal">
           <img src="{{program.PrimaryUrl}}" /> 
-              <p>{{program.ProjectName}}</p>
+              <span>{{program.ProjectName}}</span>
         </div>
             
         </li>
       </ul>
+      <div style="clear:both" />
    </div>
  </div>
 
@@ -66,6 +67,9 @@
                     setHeight:380,
                     theme:"minimal-dark"
                 }); 
+              
+                $("#mCSB_1_container").attr("style","height:110px;");
+
 
                  $("#planModal .modal-body").mCustomScrollbar({
                     setHeight:140,
