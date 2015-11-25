@@ -1,8 +1,22 @@
-<div class="wrap-content container" id="container">
+<div id="container">
  <div ng-include="templateUrls.headerPage"></div>
 
 <div class="main_body"> 
-  <div id="div_imagelist" >
+ <div id="div_imagelist">
+
+      <ul id="imgmove" style="margin-top:0; margin-bottom:0;" ng-repeat="item in model.news">
+        <li>
+        <div id="{{item.newsid}}" style="text-align: center;" data-toggle="modal" data-target="#newsModal">
+          <img src="{{item.primaryurl}}" /> 
+              <span  style="font-size: 10px;color: #696969;font-family: '微软雅黑';margin-top:-10px;margin-bottom:10px; text-align: center;">{{item.newstitle}}</span>
+        </div>
+            
+        </li>
+      </ul>
+      <div style="clear:both" />
+   </div>
+
+  <!-- <div id="div_imagelist" >
      	<div name="div_itemcont" class="col-md-2"  ng-repeat="item in model.news">
        	<div id="{{item.newsid}}" data-toggle="modal" data-target="#newsModal">
         		 <a  class="thumbnail">
@@ -12,16 +26,17 @@
       	</div>
       		
      	</div>
-   </div>
+   </div> -->
 <script>
         (function($){
             $(window).ready(function(){     
                 $("#div_imagelist").mCustomScrollbar({
-                    setHeight:580,
+                    setHeight:500,
                     theme:"minimal-dark"
                 });
-
-                  $("#planModal .modal-body").mCustomScrollbar({
+                $(".mCSB_container").attr("style","height:580px;");
+                  
+                $("#planModal .modal-body").mCustomScrollbar({
                     setHeight:480,
                     theme:"minimal-dark"
                 });      

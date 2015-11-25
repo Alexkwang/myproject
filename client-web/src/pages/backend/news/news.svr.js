@@ -3,6 +3,7 @@ angular.module('scotchApp').factory('newsService',
 
 	return{
 			saveNews:function(models,callback){
+				debugger
 					$http.post(url+"news",models).success(function(data){
 					callback(data);
 				});
