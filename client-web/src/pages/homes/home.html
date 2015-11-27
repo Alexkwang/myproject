@@ -195,13 +195,13 @@
             <div class="row">
                 <div class="col-md-4">
                     <div >
-                        <div class="page_content_item">项目位置 : {{popmodel.program.ProjectPosition}}</div>
-                        <div class="page_content_item">项目性质 : {{popmodel.program.ProjectType}}</div>
-                        <div class="page_content_item">占地面积 : {{popmodel.program.AreaCovered}}</div>
-                        <div class="page_content_item">建筑面积 : {{popmodel.program.BuildingArea}}</div>
-                        <div class="page_content_item">容 积 率 : {{popmodel.program.VolumeRatio}}</div>
-                        <div class="page_content_item">项目备注 : {{popmodel.program.ProjectEntrust}}</div>
-                        <div class="page_content_item">设计时间 : {{popmodel.program.DesignTime}}</div>
+                       <div ng-show="popmodel.program.ProjectPosition!==null" class="page_content_item">项目位置 : {{popmodel.program.ProjectPosition}}</div>
+                        <div ng-show="popmodel.program.ProjectType!==null" class="page_content_item">项目性质 : {{popmodel.program.ProjectType}}</div>
+                        <div ng-show="popmodel.program.AreaCovered!==null" class="page_content_item">占地面积 : {{popmodel.program.AreaCovered}}</div>
+                        <div ng-show="popmodel.program.BuildingArea!==null" class="page_content_item">建筑面积 : {{popmodel.program.BuildingArea}}</div>
+                        <div ng-show="popmodel.program.VolumeRatio!==null"class="page_content_item">容 积 率 : {{popmodel.program.VolumeRatio}}</div>
+                        <div ng-show="popmodel.program.ProjectEntrust!==null" class="page_content_item">项目备注 : {{popmodel.program.ProjectEntrust}}</div>
+                        <div ng-show="popmodel.program.DesignTime!==null"class="page_content_item">设计时间 : {{popmodel.program.DesignTime}}</div>
                     </div>
                 </div>
                  <div class="col-md-8">

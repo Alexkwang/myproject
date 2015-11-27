@@ -30,9 +30,9 @@
 
 </div>
 
- <div class="col-md-9" style="margin-left:10px;">
+ <div class="col-md-9" style="margin-left:10px;min-height:500px;margin-bottom:20px;">
  	
-    <div id="div_imagelist">
+    
 
       <ul id="imgmove" style="margin-top:0; margin-bottom:0;" ng-repeat="program in model.programs">
         <li>
@@ -44,7 +44,7 @@
         </li>
       </ul>
       <div style="clear:both" />
-   </div>
+   
  </div>
 
 
@@ -82,13 +82,16 @@
       </div>
       <div class="panel panel-default pop_background" style="margin:10px;">
          <!--image begin-->
-        <div style="margin-left:110px;height:310px; margin-top:10px;">
+         <div style="margin-left:110px;height:310px; margin-top:10px;">
             <carousel  interval="myInterval" no-wrap="noWrapSlides" style="height: 300px; width:598px;">
                   <slide ng-repeat="slide in slides" active="slide.active">
-                    <img ng-src="{{slide.image}}"  style="margin:auto; width:598px; height:300px;">
+                  <p style="text-align:center; vertical-align:middle;">
+                    <img ng-src="{{slide.image}}" style="margin:auto; max-width:598px; max-height:300px;">
+                    </p>
                   </slide>
             </carousel>
         </div>
+
 
         <!--image end-->
         <div style="margin-left:40px;">

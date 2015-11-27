@@ -1,7 +1,7 @@
 <div id="container">
  <div ng-include="templateUrls.headerPage"></div>
 <div class="main_body"> 
-<div class="col-md-1">
+<div class="col-md-2">
 	
 	<!--the left part-->
 	<div class="left_menu">
@@ -29,13 +29,13 @@
 
 </div>
 
- <div class="col-md-10" style="margin-left:50px;">
+  <div class="col-md-9" style="margin-left:10px;min-height:500px;margin-bottom:20px;">
   
-    <div id="div_imagelist" class="col-sm-12">
-
+ <!--    <div id="div_imagelist" class="col-sm-12"></div>
+ -->
       <ul id="imgmove" style="margin-top:0; margin-bottom:0;" ng-repeat="program in model.programs">
         <li>
-        <div id="{{program.ProjectID}}" style="text-align: center;" data-toggle="modal" data-target="#planModal">
+        <div id="{{program.ProjectID}}" style="text-align: center;" data-toggle="modal" data-target="#buildModal">
           <img src="{{program.PrimaryUrl}}" /> 
               <span>{{program.ProjectName}}</span>
         </div>
@@ -43,7 +43,7 @@
         </li>
       </ul>
       <div style="clear:both" />
-   </div>
+   
  </div>
 
 <script>
@@ -79,13 +79,16 @@
       </div>
       <div class="panel panel-default pop_background" style="margin:10px;">
          <!--image begin-->
-        <div style="margin-left:110px;height:310px; margin-top:10px;">
+         <div style="margin-left:110px;height:310px; margin-top:10px;">
             <carousel  interval="myInterval" no-wrap="noWrapSlides" style="height: 300px; width:598px;">
                   <slide ng-repeat="slide in slides" active="slide.active">
-                    <img ng-src="{{slide.image}}"  style="margin:auto; max-width:598px; max-height:300px;">
+                  <p style="text-align:center; vertical-align:middle;">
+                    <img ng-src="{{slide.image}}" style="margin:auto; max-width:598px; max-height:300px;">
+                    </p>
                   </slide>
             </carousel>
         </div>
+
 
         <!--image end-->
         <div style="margin-left:40px;">
