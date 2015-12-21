@@ -12,17 +12,18 @@
 				<div class="top_line_1" style="height: 1px; width: 0px; display: block; background: rgb(33, 56, 56);"></div></div>
 					<div class="page_1_right_part_middle_line" style="height: 79px; display: block;"></div>
 					<div class="page_1_right_part_bottom_line" style="width: 28px; display: block;"></div>
-					<div class="page_1_right_part_right_line" param="100" style="height: 150px; display: block;"></div>
+					<div class="page_1_right_part_right_line" param="100" style="height: 170px; display: block;"></div>
 			</div>
 			<div class="page_1_right_part_index_1">
 				<div class="page_1_class" id="menu1" style="color: rgb(76, 76, 76);" ng-click="menu_clike('menu1','项目分类')">项目分类</div>
 					<div class="page_1_right_part_index_1_index" id="program" style="display: block;">
-						  <div id="menu2" class="page_1_class" style="color: rgb(132, 132, 132);" ng-click="menu_clike('menu2','村镇建设规划')">村镇建设规划</div>
-            <div id="menu3" class="page_1_class" style="color: rgb(132, 132, 132);" ng-click="menu_clike('menu3','风貌改造设计')">风貌改造设计</div>
-            <div id="menu4" class="page_1_class" style="color: rgb(132, 132, 132);" ng-click="menu_clike('menu4','城市形态设计')">城市形态设计</div>
-            <div id="menu5" class="page_1_class" style="color: rgb(132, 132, 132);" ng-click="menu_clike('menu5','专项规划')">专项规划</div>
-            <div id="menu6" class="page_1_class" style="color: rgb(132, 132, 132);" ng-click="menu_clike('menu6','景观节点设计')">景观节点设计</div>
-            <div id="menu7" class="page_1_class" style="color: rgb(132, 132, 132);" ng-click="menu_clike('menu7','地块包装')">地块包装</div>
+						  <div id="menu2" class="page_1_class" style="color: rgb(132, 132, 132);" ng-click="menu_clike('menu2','城市设计')">城市设计</div>
+            <div id="menu3" class="page_1_class" style="color: rgb(132, 132, 132);" ng-click="menu_clike('menu3','专项规划')">专项规划</div>
+            <div id="menu4" class="page_1_class" style="color: rgb(132, 132, 132);" ng-click="menu_clike('menu4','景观设计')">景观设计</div>
+            <div id="menu5" class="page_1_class" style="color: rgb(132, 132, 132);" ng-click="menu_clike('menu5','风貌改造')">风貌改造</div>
+            <div id="menu6" class="page_1_class" style="color: rgb(132, 132, 132);" ng-click="menu_clike('menu6','地块包装')">地块包装</div>
+            <div id="menu7" class="page_1_class" style="color: rgb(132, 132, 132);" ng-click="menu_clike('menu7','村镇规划')">村镇规划</div>
+             <div id="menu8" class="page_1_class" style="color: rgb(132, 132, 132);" ng-click="menu_clike('menu8','其他规划')">其他规划</div>
 					</div>
 			</div>
 		</div>
@@ -36,7 +37,7 @@
 
       <ul id="imgmove" style="margin-top:0; margin-bottom:0;" ng-repeat="program in model.programs">
         <li>
-        <div id="{{program.ProjectID}}" style="text-align:center;" data-toggle="modal" data-target="#planModal">
+        <div id="{{program.ProjectID}}" style="text-align:center;font-family: '微软雅黑';" data-toggle="modal" data-target="#planModal">
           <img src="{{program.PrimaryUrl}}" /> 
               <span>{{program.ProjectName}}</span>
         </div>
@@ -57,11 +58,10 @@
                     theme:"minimal-dark"
                 }); 
               
-                $(".mCSB_container").attr("style","height:380px;");
-
-
+                $(".mCSB_container").attr("style","height:380px; margin-top:-20px;");
+               
                  $("#planModal .modal-body").mCustomScrollbar({
-                    setHeight:140,
+                    setHeight:140,setWidth:400,
                     theme:"minimal-dark"
                 });  
                  
@@ -85,20 +85,59 @@
          <div style="margin-left:110px;height:310px; margin-top:10px;">
             <carousel  interval="myInterval" no-wrap="noWrapSlides" style="height: 300px; width:598px;">
                   <slide ng-repeat="slide in slides" active="slide.active">
-                  <p style="text-align:center; vertical-align:middle;">
-                    <img ng-src="{{slide.image}}" style="margin:auto; max-width:598px; max-height:300px;">
-                    </p>
+                 
+                    <img ng-src="{{slide.image}}" style="margin:auto;vertical-align:middle; max-width:598px; height:300px;">
+                 
                   </slide>
             </carousel>
         </div>
 
 
         <!--image end-->
-        <div style="margin-left:40px;">
+        <div style="margin-left:40px;font-family: '微软雅黑';">
             <div class="pop_title_font"><p>{{popmodel.program.ProjectName}}</p></div>
             <div class="building_line"></div>
             <div class="row">
-                <div class="col-md-4">
+
+             <table style="width:800px;">
+                    <td style="width:400px;">
+                        <table class="page_content">
+                            <tr ng-show="popmodel.program.ProjectPosition!==null">
+                                <td > <div class="page_content_item">项目位置 : {{popmodel.program.ProjectPosition}}</div></td>
+                            </tr>
+                             <tr ng-show="popmodel.program.ProjectType!==null">
+                                <td><div class="page_content_item">项目性质 : {{popmodel.program.ProjectType}}</div></td>
+                            </tr>
+                             <tr  ng-show="popmodel.program.AreaCovered!==null" >
+                                <td><div class="page_content_item">占地面积 : {{popmodel.program.AreaCovered}}</div></td>
+                            </tr>
+                             <tr ng-show="popmodel.program.BuildingArea!==null">
+                                <td><div class="page_content_item">建筑面积 : {{popmodel.program.BuildingArea}}</div></td>
+                            </tr>
+                             <tr ng-show="popmodel.program.VolumeRatio!==null">
+                                <td><div class="page_content_item">容 积 率 : {{popmodel.program.VolumeRatio}}</div></td>
+                            </tr>
+                             <tr ng-show="popmodel.program.DesignTime!==null">
+                                <td><div class="page_content_item">设计时间 : {{popmodel.program.DesignTime}}</div></td>
+                            </tr>
+                             <tr ng-show="popmodel.program.ProjectEntrust!==null">
+                                <td><div class="page_content_item">项目备注 : {{popmodel.program.ProjectEntrust}}</div></td>
+                            </tr>
+                        </table>
+                    </td>
+                     <td style="width:400px;">
+                      <div class="row mainbuilding_intro">
+                            <span class="explain">设计简介：</span>
+                            <div class="modal-body">
+                            <div class="page_content_intro"  ng-bind-html="popmodel.program.DesignDes | htmlize">
+                            </div>
+                     
+                            </div>
+                    </div>
+                    </td>
+                   
+                </table>
+                <!-- <div class="col-sm-4">
                     <div >
                         <div ng-show="popmodel.program.ProjectPosition!==null" class="page_content_item">项目位置 : {{popmodel.program.ProjectPosition}}</div>
                         <div ng-show="popmodel.program.ProjectType!==null" class="page_content_item">项目性质 : {{popmodel.program.ProjectType}}</div>
@@ -109,7 +148,7 @@
                         <div ng-show="popmodel.program.DesignTime!==null"class="page_content_item">设计时间 : {{popmodel.program.DesignTime}}</div>
                     </div>
                 </div>
-                 <div class="col-md-8">
+                 <div class="col-sm-8">
                     <div class="row mainbuilding_intro">
                             <span class="explain">设计简介：</span>
                             <div class="modal-body">
@@ -118,7 +157,7 @@
                      
                             </div>
                     </div>
-                </div>
+                </div> -->
             </div>
            
         </div>

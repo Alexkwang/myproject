@@ -46,14 +46,23 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label no-padding-right" for="form-field-2"> 项目性质：</label>
 
-						<div class="col-md-9">
+						<div ng-show="model.ProjectClassification==='规划项目'" class="col-md-9">
 							<select ng-model="model.ProjectType" class="form-control" id="form-field-select-1">
-								<option value="村镇建设规划">村镇建设规划</option>
-								<option value="风貌改造设计">风貌改造设计</option>
-								<option value="城市形态设计">城市形态设计</option>
+								<option value="城市设计">城市设计</option>
 								<option value="专项规划">专项规划</option>
-								<option value="景观节点设计">景观节点设计</option>
+								<option value="景观设计">景观设计</option>
+								<option value="风貌改造">风貌改造</option>
 								<option value="地块包装">地块包装</option>
+								<option value="村镇规划">村镇规划</option>
+								<option value="其他规划">其他规划</option>
+							</select>
+						</div>
+						<div ng-show="model.ProjectClassification==='建筑项目'" class="col-md-9">
+							<select ng-model="model.ProjectType" class="form-control" id="form-field-select-1">
+								<option value="公共建筑">公共建筑</option>
+								<option value="居住建筑">居住建筑</option>
+								<option value="私人定制">私人定制</option>
+								<option value="其他设计">其他设计</option>
 							</select>
 						</div>
 					</div>

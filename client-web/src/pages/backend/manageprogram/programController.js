@@ -168,7 +168,7 @@ angular.module('scotchApp').controller('programController', ['$scope','$route','
      MainIndex:null,
      ProjectClassification:"规划项目",
      ProjectName:null,
-     ProjectType:"商业综合",
+     ProjectType:"",
      ProjectEntrust:null,
      ProjectPosition:null,
      AreaCovered:null,

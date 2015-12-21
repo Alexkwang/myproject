@@ -170,7 +170,7 @@
 
 <script src="/js/zoomout.min.js"></script>
 
-   <div class="modal fade" ng-controller="homeController" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal fade" style="z-index:99999" ng-controller="homeController" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content" style="width:850px">
       <div class="modal-header">
@@ -179,21 +179,57 @@
       <div class="panel panel-default pop_background" style="margin:10px;">
          <!--image begin-->
         <div style="margin-left:110px;height:310px; margin-top:10px;">
-            <carousel  interval="myInterval" no-wrap="noWrapSlides" style="height: 300px; width:598px;">
+            <carousel  interval="myInterval" no-wrap="noWrapSlides" style="height: 260px; width:598px;">
                   <slide ng-repeat="slide in slides" active="slide.active">
-                  <p style="text-align:center; vertical-align:middle;">
-                    <img ng-src="{{slide.image}}" style="margin:auto; max-width:598px; max-height:300px;">
-                    </p>
+                    <img ng-src="{{slide.image}}" style="margin:auto;vertical-align:middle; max-width:598px; height:300px;">
                   </slide>
             </carousel>
         </div>
 
         <!--image end-->
-        <div style="margin-left:40px;">
+        <div style="margin-left:40px;font-family: '微软雅黑';">
             <div class="pop_title_font"><p>{{popmodel.program.ProjectName}}</p></div>
             <div class="building_line"></div>
             <div class="row">
-                <div class="col-md-4">
+                <table style="width:800px;">
+                    <td style="width:400px;">
+                        <table class="page_content">
+                            <tr ng-show="popmodel.program.ProjectPosition!==null">
+                                <td > <div class="page_content_item">项目位置 : {{popmodel.program.ProjectPosition}}</div></td>
+                            </tr>
+                             <tr ng-show="popmodel.program.ProjectType!==null">
+                                <td><div class="page_content_item">项目性质 : {{popmodel.program.ProjectType}}</div></td>
+                            </tr>
+                             <tr  ng-show="popmodel.program.AreaCovered!==null" >
+                                <td><div class="page_content_item">占地面积 : {{popmodel.program.AreaCovered}}</div></td>
+                            </tr>
+                             <tr ng-show="popmodel.program.BuildingArea!==null">
+                                <td><div class="page_content_item">建筑面积 : {{popmodel.program.BuildingArea}}</div></td>
+                            </tr>
+                             <tr ng-show="popmodel.program.VolumeRatio!==null">
+                                <td><div class="page_content_item">容 积 率 : {{popmodel.program.VolumeRatio}}</div></td>
+                            </tr>
+                             <tr ng-show="popmodel.program.DesignTime!==null">
+                                <td><div class="page_content_item">设计时间 : {{popmodel.program.DesignTime}}</div></td>
+                            </tr>
+                             <tr ng-show="popmodel.program.ProjectEntrust!==null">
+                                <td><div class="page_content_item">项目备注 : {{popmodel.program.ProjectEntrust}}</div></td>
+                            </tr>
+                        </table>
+                    </td>
+                     <td style="width:400px;">
+                      <div class="row mainbuilding_intro">
+                            <span class="explain">设计简介：</span>
+                            <div class="modal-body">
+                            <div class="page_content_intro"  ng-bind-html="popmodel.program.DesignDes | htmlize">
+                            </div>
+                     
+                            </div>
+                    </div>
+                    </td>
+                   
+                </table>
+               <!-- <div class="col-sm-5">
                     <div >
                        <div ng-show="popmodel.program.ProjectPosition!==null" class="page_content_item">项目位置 : {{popmodel.program.ProjectPosition}}</div>
                         <div ng-show="popmodel.program.ProjectType!==null" class="page_content_item">项目性质 : {{popmodel.program.ProjectType}}</div>
@@ -204,7 +240,7 @@
                         <div ng-show="popmodel.program.DesignTime!==null"class="page_content_item">设计时间 : {{popmodel.program.DesignTime}}</div>
                     </div>
                 </div>
-                 <div class="col-md-8">
+                 <div class="col-sm-7">
                     <div class="row mainbuilding_intro">
                             <span class="explain">设计简介：</span>
                             <div class="modal-body">
@@ -213,7 +249,7 @@
                      
                             </div>
                     </div>
-                </div>
+                </div>  -->
             </div>
            
         </div>
@@ -228,9 +264,12 @@
             $(window).ready(function(){
                 
                 $("#myModal .modal-body").mCustomScrollbar({
-                    setHeight:140,
+                    setHeight:140,setWidth:400,
                     theme:"minimal-dark"
-                });  
+                });
+
+                 $(".mCSB_container").attr("style","height:380px; margin-top:-20px;");
+                 
             });
         })(jQuery);
     </script>

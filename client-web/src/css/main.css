@@ -1,37 +1,3 @@
-/*.clare_margin_left {margin-left: -30px;}
-.clare_padding_left {padding-left: -15px;}
-.left_line_1_image img{ width:544px; height:240px;}
-
-.left_line_2_image_1 img{width:133px;height:80px; display:inline; margin-top:4px;cursor: pointer; }
-.left_line_2_image_2 img{width:133px;height:80px; float: left; display:inline; margin-left:8px; margin-top:4px;cursor: pointer; }
-.left_line_2_image_3 img{width:133px;height:80px; float: left; display:inline; margin-left:8px; margin-top:4px;cursor: pointer; }
-.left_line_2_image_4 img{width:133px;height:80px; float: left; display:inline; margin-left:8px; margin-top:4px;cursor: pointer; }
-
-.left_line_3_image_1 img{width:310px;height:130px; float:left; display:inline; margin-left:4px; margin-top:4px;cursor: pointer; }
-.left_line_3_image_2 img{width:305px;height:130px; float:left; display:inline; margin-left:4px; margin-top:4px;cursor: pointer;}
-
-.right_line_1_right_image{ height: 261px; margin-left:4px; float:left; display:inline;cursor: pointer;}
-
-.right_line_1_left_image_1 { width:206px; height:142px; display:inline;cursor: pointer;overflow:hidden}
-.right_line_1_left_image_1 img{width: 206px;height: 142px; display:inline; overflow:hidden;cursor: pointer;}
-.right_line_1_left_image_2 img{width: 101px;height: 144px; margin-top:4px; float:left; display:inline; overflow:hidden;cursor: pointer;}
-.right_line_1_left_image_3 img{width: 101px;height: 144px; margin-top:4px; margin-left:4px; float:left; display:inline;cursor: pointer;}
-
-
-
-.right_line_2_image_1 img{width: 101px;height: 82px; float:left;cursor: pointer;}
-.right_line_2_image_2 img{width: 101px;height: 82px; margin-left:4px; float:left;cursor: pointer;}
-.right_line_2_image_3 img{width: 102px;height: 82px; margin-left:4px; float:left; cursor: pointer;}
-
-
-.right_line_3_image_1 img{width:65px;height:70px;float:left; display:inline;cursor: pointer;}
-.right_line_3_image_2 img{width:65px;height:70px;float:left; margin-left:4px; display:inline;cursor: pointer;}
-.right_line_3_image_2 img{width:65px;height:70px;float:left; margin-left:4px; display:inline;cursor: pointer;}
-.right_line_3_image_2 img{width:65px;height:70px;float:left; margin-left:4px; display:inline;cursor: pointer;}
-
-
-
-*/
 
 .clear{content:".";display:block;font-size:0px;line-height:0px;height:0px;clear:both;visibility:hidden;}
 .main{ width:1000px; height: auto; margin:0 auto;margin-top: 5px; background-color: #f2f2f2;}
@@ -41,7 +7,7 @@ a:hover{color:#d30000;text-decoration:none;}
 .top ul li{ display:block; float:left; text-align:center;}
 .top ul li b{ font-size:14px;}
 .top ul li a{ display:block; }
-.top ul li a span{padding:10px;  color:#b2b2b2; font-family:Arial, Helvetica, sans-serif; line-height:24px; font-size:15px;}
+.top ul li a span{padding:10px;  color:#868686; font-family:'微软雅黑'; line-height:24px; font-size:15px;}
 .top ul li a:hover li{ background-color:#990309;}
 .top ul li a:hover span{ color:#ffffff; background-color:#990309 }
 
@@ -118,6 +84,8 @@ ul{list-style:none;}
 #marquee{margin-top:10px;margin-left:50px; margin-bottom: 10px; width:800px;height:300px;overflow:hidden;}
 #marquee ul li{float:left; padding:0 1px;}
 #marquee ul li img{display:block;}
+
+
 /* ---------------------------------------------------------------------- */
 /*  Links
 /* ---------------------------------------------------------------------- */
@@ -1133,6 +1101,7 @@ nav.links a {
   background-image:         linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#00000000', GradientType=1);
   background-repeat: repeat-x;
+  width: 300px;
 }
 .carousel-control.right {
   right: 0;
@@ -1143,18 +1112,19 @@ nav.links a {
   background-image:         linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#00000000', GradientType=1);
   background-repeat: repeat-x;
+   width: 300px;
 }
 
 .carousel-control .icon-prev,
 .carousel-control .glyphicon-chevron-left {
   left: 50%;
-  margin-left: -80px;
+  margin-left: -185px;
   color: #565454;
 }
 .carousel-control .icon-next,
 .carousel-control .glyphicon-chevron-right {
   right: 50%;
-  margin-right: -80px;
+  margin-right: -185px;
   color: #565454;
 }
 .modal-header {
@@ -1242,17 +1212,17 @@ nav.links a {
 }
 
 .page_content {
-    width: 310px;
+    width: 400px;
     height: 191px;
     display: inline;
-    margin-left: 40px;
+   
 }
 
 .page_content_item {
     height: 25px;
     line-height: 24px;
-    overflow: hidden;
-    width: 282px;
+    max-width: 350px;
+  
     font-size: 16px;
     color: #696969;
     font-family: '微软雅黑';
@@ -1260,7 +1230,7 @@ nav.links a {
 
 .mainbuilding_intro {
     height: 175px;
-    width: 523px;
+   
     display: inline;
     margin-left: 5px;
 }
@@ -1275,14 +1245,14 @@ nav.links a {
 
 .page_content_intro {
     color: #696969;
-    width: 485px;
+    margin-top: -20px;
     display: inline;
     padding-right: 35px;
-    font-size: 14px;
+    font-size: 12px;
     letter-spacing: 0;
     line-height: 20px;
     overflow: auto;
-  
+   font-family: '微软雅黑';
     background-image: url(../images/system/building_bgimg.jpg);
   
 }
